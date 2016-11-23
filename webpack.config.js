@@ -16,7 +16,7 @@ module.exports = {
             {test: /\.tsx?$/, loader: 'tslint', exclude: /node_modules/}
         ],
         loaders: [
-            {test: /\.tsx?$/, exclude: /node_modules/, loaders: ['react-hot-loader/webpack', 'ts-loader']},
+            {test: /\.tsx?$/, exclude: /node_modules/, loaders: ['ts-loader']},
             {test: /\.css$/, loader: 'style!css'},
             {test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'},
             {test: /\.(jpg|jpeg|gif|png)$/, loader: 'url-loader?limit=10&mimetype=image/(jpg|jpeg|gif|png)&name=images/[name].[ext]'},

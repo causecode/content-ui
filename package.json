@@ -4,7 +4,13 @@
   "description": "React version of static-content",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run clean && webpack-dev-server --port 7777 --display-error-details --content-base src --inline --hot",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf public"
+  },
+  "reactHero": {
+    "serverUrl": "http://localhost:8080",
+    "APIUrl": "http://localhost:8080/api/v1/"
   },
   "repository": {
     "type": "git",
@@ -12,5 +18,15 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/causecode/content-ui#readme"
+  "homepage": "https://bitbucket.org/causecode/content-ui#readme",
+  "dependencies": {
+    "axios": "^0.15.2",
+    "react": "^15.4.0",
+    "react-bootstrap": "^0.30.6",
+    "react-dom": "^15.4.0",
+    "react-redux": "^4.4.6",
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.7",
+    "redux": "^3.6.0"
+  }
 }
