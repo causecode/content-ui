@@ -4,9 +4,9 @@
     "react": "registry:dt/react#0.14.0+20161117000655",
     "react-bootstrap": "registry:dt/react-bootstrap#0.0.0+20161107151335",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
-    "react-redux": "registry:dt/react-redux#4.4.0+20160908183346",
+    "react-redux": "registry:dt/react-redux#4.4.0+20160501125835",
     "react-router": "registry:dt/react-router#2.0.0+20160928130202",
-    "react-router-redux": "registry:dt/react-router-redux#4.0.0+20160930121107",
-    "redux": "registry:dt/redux#3.5.2+20160703092728"
+    "react-router-redux": "registry:npm/react-router-redux#4.0.0+20160602212457",
+    "redux": "registry:dt/redux#3.3.1+20160326112656"
   }
 }
