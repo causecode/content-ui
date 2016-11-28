@@ -3,7 +3,6 @@ import {render} from 'react-dom';
 import {store} from './store/index';
 import {hashHistory, Router, Route} from 'react-router';
 import {Provider,} from 'react-redux';
-import {TinyMCEEditor} from './default/components/TinyMCEEditor';
 import {BasePage} from './default/components/BasePage';
 import {Navbar} from './default/components/Navbar';
 import {Footer} from './default/components/Footer';
@@ -22,11 +21,6 @@ store.dispatch(addTheme('testTheme'));
 
 registerModels();
 registerComponents();
-// var fs = require('fs');
-// declare let process: any;
-// console.log(`Current directory: ${process}`);
-// console.log(`require('app-root-dir').get()`, require<any>('app-root-dir').get());
-// const TestPage: React.ComponentClass<void> = getThemedComponent('components/TestPage', 'TestPage');
 
 export interface IHeaderFooterLayoutStylesInterface {
     header: React.CSSProperties;
@@ -70,7 +64,6 @@ render(
                 <Router history={hashHistory}>
                     <Route path="/" component={BasePage}>
                         <Route path="/:resource/list" component={ListPage}/>
-                        <Route path="/:resource/inList" component={ListPage}/>
                         <Route path="/:resource/create" component={EditPage}/>
                         <Route path="/:resource/show/:resourceID" component={ShowPage} />
                         <Route path="/:resource/edit/:resourceID" component={EditPage} />
