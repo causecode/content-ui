@@ -48,6 +48,9 @@ module.exports = {
             {test: /\.json$/, loader: 'json-loader' }
         ],
     },
+    externals: {
+        fs: '{}'
+    },
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
