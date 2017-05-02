@@ -11,7 +11,7 @@ export class FaqModel extends BaseModel {
         publish: ModelPropTypes.BOOLEAN(),
         publishDate: ModelPropTypes.DATE(),
         subTitle: ModelPropTypes.STRING(),
-        title: ModelPropTypes.STRING()
+        title: ModelPropTypes.STRING(),
 
     };
 
@@ -25,15 +25,19 @@ export class FaqModel extends BaseModel {
         publish: false,
         publishDate: '',
         subTitle: '',
-        title: ''
+        title: '',
     };
 
     static resourceName: string = 'faq';
 
     static columnNames: string[] = [
-            'title',
-            'subTitle',
-            'body',
-            'publish'
+        'title',
+        'subTitle',
+        'body',
+        'publish',
     ];
+
+    constructor(properties) {
+        super(properties);
+    }
 }

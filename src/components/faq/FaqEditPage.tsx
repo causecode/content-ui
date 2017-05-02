@@ -1,22 +1,22 @@
 import * as React from 'react';
-import {NewsModel} from '../../../models/NewsModel';
-import {ControlLabel, FormGroup, Col, Button, Grid} from 'react-bootstrap';
+import {FaqModel} from '../../models/FaqModel';
+import {FormGroup, Col, Button, Grid} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {FormInput, IInstancePageProps, initializeFormWithInstance} from 'react-hero';
-import {store} from '../../../store';
+import {FormInput, IInstancePageProps} from 'react-hero';
+import {store} from '../../store';
 
-export interface INewsEditPageProps extends IInstancePageProps {
-    handleSubmit: (instance: NewsModel) => void;
-    handleDelete: (instance: NewsModel) => void;
-    instance: NewsModel;
+export interface IFaqEditPageProps extends IInstancePageProps {
+    handleSubmit: (instance: FaqModel) => void;
+    handleDelete: (instance: FaqModel) => void;
+    instance: FaqModel;
     isCreatePage: boolean;
 }
 
-export class NewsEditPage extends React.Component<INewsEditPageProps, void> { 
+export class FaqEditPage extends React.Component<IFaqEditPageProps, void> { 
 
-    static resourceName: string = 'news';
+    static resourceName: string = 'faq';
     
-    fetchStoreInstance = (): NewsModel => {
+    fetchStoreInstance = (): FaqModel => {
         let instance = this.props.instance;
         let instanceKey = this.props.isCreatePage ? `${instance.resourceName}Create` : `${instance.resourceName}Edit`;
         instance.properties = store.getState().forms[`RHForms`][instanceKey].properties; 
@@ -43,55 +43,55 @@ export class NewsEditPage extends React.Component<INewsEditPageProps, void> {
                 <FormInput 
                         type="number" 
                         propertyName="id"
-                        model="RHForms.newsEdit.properties.id"    
+                        model="RHForms.faqEdit.properties.id"    
                 />
                 
                 <FormInput 
                         type="text" 
                         propertyName="author"
-                        model="RHForms.newsEdit.properties.author"    
+                        model="RHForms.faqEdit.properties.author"    
                 />
                 
                 <FormInput 
                         type="text" 
                         propertyName="body"
-                        model="RHForms.newsEdit.properties.body"    
+                        model="RHForms.faqEdit.properties.body"    
                 />
                 
                 <FormInput 
                         type="date" 
                         propertyName="dateCreated"
-                        model="RHForms.newsEdit.properties.dateCreated"    
+                        model="RHForms.faqEdit.properties.dateCreated"    
                 />
                 
                 <FormInput 
                         type="date" 
                         propertyName="lastUpdated"
-                        model="RHForms.newsEdit.properties.lastUpdated"    
+                        model="RHForms.faqEdit.properties.lastUpdated"    
                 />
                 
                 <FormInput 
                         type="boolean" 
                         propertyName="publish"
-                        model="RHForms.newsEdit.properties.publish"    
+                        model="RHForms.faqEdit.properties.publish"    
                 />
                 
                 <FormInput 
                         type="date" 
                         propertyName="publishDate"
-                        model="RHForms.newsEdit.properties.publishDate"    
+                        model="RHForms.faqEdit.properties.publishDate"    
                 />
                 
                 <FormInput 
                         type="text" 
                         propertyName="subTitle"
-                        model="RHForms.newsEdit.properties.subTitle"    
+                        model="RHForms.faqEdit.properties.subTitle"    
                 />
                 
                 <FormInput 
                         type="text" 
                         propertyName="title"
-                        model="RHForms.newsEdit.properties.title"    
+                        model="RHForms.faqEdit.properties.title"    
                 />
                 
                 <FormGroup>
@@ -102,7 +102,7 @@ export class NewsEditPage extends React.Component<INewsEditPageProps, void> {
                         <Button style={{margin: '0px 10px'}} bsStyle="danger" onClick={this.handleDelete}>
                             Delete
                         </Button>
-                        <Link style={{margin: '0px 10px'}} className="btn btn-default" to={'/news/list'}>
+                        <Link style={{margin: '0px 10px'}} className="btn btn-default" to={'/faq/list'}>
                             Cancel
                         </Link>
                     </Col>

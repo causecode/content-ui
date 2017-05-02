@@ -8,26 +8,25 @@ export class MenuModel extends BaseModel {
         lastUpdated: ModelPropTypes.DATE(),
         name: ModelPropTypes.STRING(),
         roles: ModelPropTypes.STRING(),
-        showOnlyWhenLoggedIn: ModelPropTypes.BOOLEAN()
+        showOnlyWhenLoggedIn: ModelPropTypes.BOOLEAN(),
     };
 
     static defaultProps = {
         id: 0,
         name: '',
         dateCreated: '',
-        lastUpdated: ''
+        lastUpdated: '',
     };
 
     static resourceName: string = 'menu';
 
-    static columnNames: string[] =[
-            'name',
-            'dateCreated',
-            'lastUpdated'
+    static columnNames: string[] = [
+        'name',
+        'dateCreated',
+        'lastUpdated',
     ];
 
-    constructor(properties: any) {
+    constructor(properties) {
         super(properties);
-        this.properties = properties;
     }
 }

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {PageModel} from '../../../models/PageModel';
-import {ControlLabel, FormGroup, Col, Button, Grid} from 'react-bootstrap';
+import * as Radium from 'radium';
+import {PageModel} from '../../models/PageModel';
+import {FormGroup, Col, Button, Grid} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {FormInput, IInstancePageProps, initializeFormWithInstance} from 'react-hero';
-import {store} from '../../../store';
+import {FormInput, IInstancePageProps} from 'react-hero';
+import {store} from '../../store';
 
 export interface IPageEditPageProps extends IInstancePageProps {
     handleSubmit: (instance: PageModel) => void;
@@ -12,6 +13,7 @@ export interface IPageEditPageProps extends IInstancePageProps {
     isCreatePage: boolean;
 }
 
+@Radium
 export class PageEditPage extends React.Component<IPageEditPageProps, void> { 
 
     static resourceName: string = 'page';

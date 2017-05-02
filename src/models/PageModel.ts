@@ -12,7 +12,7 @@ export class PageModel extends BaseModel {
         publish: ModelPropTypes.BOOLEAN(),
         publishedDate: ModelPropTypes.DATE(),
         subTitle: ModelPropTypes.STRING(),
-        title: ModelPropTypes.STRING()
+        title: ModelPropTypes.STRING(),
     };
 
     static defaultProps = {
@@ -25,19 +25,18 @@ export class PageModel extends BaseModel {
         publish: false,
         publishDate: '',
         subTitle: '',
-        title: ''
+        title: '',
     };
 
     static resourceName: string = 'page';
 
-    static columnNames: string[] =[
-            'title',
-            'subtitle',
-            'publish'
+    static columnNames: string[] = [
+        'title',
+        'subtitle',
+        'publish',
     ];
 
-    constructor(properties: any) {
+    constructor(properties) {
         super(properties);
-        this.properties = properties;
     }
 }

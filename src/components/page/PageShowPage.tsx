@@ -1,15 +1,12 @@
 import * as React from 'react';
+import * as Radium from 'radium';
 import {Table} from 'react-bootstrap';
-import {ModelPropTypes, IInstancePageProps} from 'react-hero';
-import {PageModel} from '../../../models/PageModel';
+import {IInstancePageProps} from 'react-hero';
 
+@Radium
 export class PageShowPage extends React.Component<IInstancePageProps, void> {
 
     static resourceName: string = 'page';
-    
-    static defaultProps: IInstancePageProps = {
-        instance: new PageModel({})
-    };
 
     render(): JSX.Element {
         const {instance} =  this.props;

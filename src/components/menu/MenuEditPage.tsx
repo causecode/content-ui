@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {MenuModel} from '../../../models/MenuModel';
-import {ControlLabel, FormGroup, Col, Button, Grid} from 'react-bootstrap';
+import {MenuModel} from '../../models/MenuModel';
+import {FormGroup, Col, Button, Grid} from 'react-bootstrap';
 import {Link} from 'react-router';
-import {FormInput, IInstancePageProps, initializeFormWithInstance} from 'react-hero';
-import {store} from '../../../store';
+import {FormInput, IInstancePageProps} from 'react-hero';
+import {store} from '../../store';
 
 export interface IMenuEditPageProps extends IInstancePageProps {
     handleSubmit: (instance: MenuModel) => void;

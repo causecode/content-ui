@@ -1,15 +1,10 @@
 import * as React from 'react';
 import {Table} from 'react-bootstrap';
-import {ModelPropTypes, IInstancePageProps} from 'react-hero';
-import {MenuModel} from '../../../models/MenuModel';
+import {IInstancePageProps} from 'react-hero';
 
 export class MenuShowPage extends React.Component<IInstancePageProps, void> {
 
     static resourceName: string = 'menu';
-    
-    static defaultProps: IInstancePageProps = {
-        instance: new MenuModel({})
-    };
 
     render(): JSX.Element {
         const {instance} =  this.props;

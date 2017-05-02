@@ -11,7 +11,7 @@ export class NewsModel extends BaseModel {
         publish: ModelPropTypes.BOOLEAN(),
         publishDate: ModelPropTypes.DATE(),
         subTitle: ModelPropTypes.STRING(),
-        title: ModelPropTypes.STRING()
+        title: ModelPropTypes.STRING(),
 
     };
 
@@ -25,14 +25,18 @@ export class NewsModel extends BaseModel {
         publish: false,
         publishDate: '',
         subTitle: '',
-        title: ''
+        title: '',
     };
 
     static resourceName: string = 'news';
 
     static columnNames: string[] = [
-            'title',
-            'subTitle',
-            'publish'
+        'title',
+        'subTitle',
+        'publish',
     ];
+
+    constructor(properties) {
+        super(properties);
+    }
 }

@@ -1,15 +1,10 @@
 import * as React from 'react';
 import {Table} from 'react-bootstrap';
-import {ModelPropTypes, IInstancePageProps} from 'react-hero';
-import {NewsModel} from '../../../models/NewsModel';
+import {IInstancePageProps} from 'react-hero';
 
 export class NewsShowPage extends React.Component<IInstancePageProps, void> {
 
     static resourceName: string = 'news';
-    
-    static defaultProps: IInstancePageProps = {
-        instance: new NewsModel({})
-    };
 
     render(): JSX.Element {
         const {instance} =  this.props;

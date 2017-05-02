@@ -1,15 +1,10 @@
 import * as React from 'react';
 import {Table} from 'react-bootstrap';
-import {ModelPropTypes, IInstancePageProps} from 'react-hero';
-import {FaqModel} from '../../../models/FaqModel';
+import {IInstancePageProps} from 'react-hero';
 
 export class FaqShowPage extends React.Component<IInstancePageProps, void> {
 
     static resourceName: string = 'faq';
-    
-    static defaultProps: IInstancePageProps = {
-        instance: new FaqModel({})
-    };
 
     render(): JSX.Element {
         const {instance} =  this.props;
