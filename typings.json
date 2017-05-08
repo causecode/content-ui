@@ -2,6 +2,7 @@
   "name": "content-ui",
   "globalDependencies": {
     "axios": "registry:dt/axios#0.9.1+20161016142654",
+    "dompurify": "registry:dt/dompurify#0.0.0+20160316155526",
     "enzyme": "registry:dt/enzyme#2.5.1+20161025153540",
     "es6-promise": "registry:dt/es6-promise#0.0.0+20160614011821",
     "jest": "registry:dt/jest#16.0.0+20161130222235",

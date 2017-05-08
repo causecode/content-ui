@@ -1,77 +1,47 @@
 import * as React from 'react';
 import * as Radium from 'radium';
-import {Table} from 'react-bootstrap';
+import * as DOMPurify from 'dompurify';
 import {IInstancePageProps} from 'react-hero';
+import {CSS} from '../../interfaces';
+import {Grid} from '../reusableComponents';
+import {IPage} from '../../models/PageModel';
+import {fontSize, fontWeight, defaultFont, title} from '../../constants';
 
 @Radium
 export class PageShowPage extends React.Component<IInstancePageProps, void> {
 
     static resourceName: string = 'page';
 
+    htmlToText = (data: string): {__html : string} => {
+        if (data && data.length) {
+            return {__html: `${DOMPurify.sanitize(data)}`};
+        }
+
+        return null;
+    }
+
     render(): JSX.Element {
-        const {instance} =  this.props;
+        const page: IPage = this.props && this.props.instance && this.props.instance.properties;
+        if (!page) {
+            return null;
+        }
+
         return (
-            <Table responsive bordered>
-                <thead>
-                    <tr>
-                        <th>Property</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        <td><strong>id</strong></td>
-                        <td>{instance.properties.id.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>author</strong></td>
-                        <td>{instance.properties.author.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>body</strong></td>
-                        <td>{instance.properties.body.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>dateCreated</strong></td>
-                        <td>{instance.properties.dateCreated.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>lastUpdated</strong></td>
-                        <td>{instance.properties.lastUpdated.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>pageLayout</strong></td>
-                        <td>{instance.properties.pageLayout.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>publish</strong></td>
-                        <td>{instance.properties.publish.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>publishedDate</strong></td>
-                        <td>{instance.properties.publishedDate.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>subTitle</strong></td>
-                        <td>{instance.properties.subTitle.toString()}</td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>title</strong></td>
-                        <td>{instance.properties.title.toString()}</td>
-                    </tr>
-                    
-                </tbody>
-            </Table>
+            <div style={container}>
+                <Grid style={[defaultFont]}>
+                    <h1 style={[title, fontWeight(600), fontSize(32)]}>{page.title}</h1>
+                    <h2 style={[fontSize(26), fontWeight(400), subtitle]}>{page.subTitle}</h2>
+                    <div dangerouslySetInnerHTML={this.htmlToText(page.body)} />
+                </Grid>
+            </div>
         );
     }
 }
+
+const container: CSS = {
+    marginTop: '30px',
+};
+
+const subtitle: CSS = {
+    paddingTop: '30px',
+};

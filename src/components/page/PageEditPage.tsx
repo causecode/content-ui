@@ -1,122 +1,167 @@
 import * as React from 'react';
-import * as Radium from 'radium';
-import {PageModel} from '../../models/PageModel';
+import * as Axios from 'axios';
+import {FormInput, IInstancePageProps, AlertDismissable, showAlert, hideAlert, TinyMCEWrapper} from 'react-hero';
 import {FormGroup, Col, Button, Grid} from 'react-bootstrap';
-import {Link} from 'react-router';
-import {FormInput, IInstancePageProps} from 'react-hero';
+import {setMargin, defaultFont, title, fontSize, fontWeight} from '../../constants';
+import {Link, browserHistory} from 'react-router';
 import {store} from '../../store';
+import {PageModel} from '../../models/PageModel';
+import {Row, Panel} from '../reusableComponents';
 
 export interface IPageEditPageProps extends IInstancePageProps {
-    handleSubmit: (instance: PageModel) => void;
-    handleDelete: (instance: PageModel) => void;
+    handleSubmit: (
+        instance: PageModel, 
+        successCallBack?: (response?: Axios.AxiosXHR<{message?: string}>) => void, 
+        failureCallBack?: () => void
+    ) => void;
+    handleDelete: (
+        instance: PageModel,
+        successCallBack?: (response?: Axios.AxiosXHR<{message?: string}>) => void, 
+        failureCallBack?: () => void
+    ) => void;
     instance: PageModel;
     isCreatePage: boolean;
 }
 
-@Radium
-export class PageEditPage extends React.Component<IPageEditPageProps, void> { 
+export class PageEditPage extends React.Component<IPageEditPageProps, void> {
 
     static resourceName: string = 'page';
-    
+
+    componentWillMount = (): void => {
+        hideAlert();
+    }
+
+    goToListingPage = (): void => {
+        browserHistory.push('/page/list');
+    }
+
     fetchStoreInstance = (): PageModel => {
-        let instance = this.props.instance;
-        let instanceKey = this.props.isCreatePage ? `${instance.resourceName}Create` : `${instance.resourceName}Edit`;
-        instance.properties = store.getState().forms[`RHForms`][instanceKey].properties; 
+        let {instance} = this.props;
+        let instanceKey: string = this.getFormKey();
+        if (store.getState() && store.getState().forms) {
+            instance.properties = store.getState().forms[`rhForms`][instanceKey].properties;
+        }
         return instance;
     }
 
-    handleSubmit = (e: React.FormEvent) => {
+    handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
         // Not using connect here to avoid rerendering of component on change of instance properties.
-        this.props.handleSubmit(this.fetchStoreInstance());
+        this.props.handleSubmit(
+                this.fetchStoreInstance(),
+                (response: Axios.AxiosXHR<{message: string}>): void => {
+                    showAlert('success', `Page ${this.props.isCreatePage ? 'created' : 'updated'} successfully`, 7000);
+                    this.goToListingPage();
+                },
+                (): void => {
+                    showAlert('warning', 'Something went wrong while saving the data.');
+                }
+        );
     }
 
-    handleDelete = (e: React.FormEvent) => {
-        if (this.props.handleDelete && this.props.handleDelete instanceof Function) {
-            this.props.handleDelete(this.fetchStoreInstance()); 
+    renderButton = (buttonText: string, submit: boolean = false): JSX.Element => {
+        let buttonProps: {id?: string, bsStyle?: string, type?: string, onClick?: (e: React.FormEvent) => void} = {};
+
+        if (submit) {
+            buttonProps.type = 'submit';
+            buttonProps.bsStyle = 'primary';
+        } else {
+            buttonProps.bsStyle = 'danger';
+            buttonProps.id = 'delete';
         }
+
+        return (
+            <Button style={setMargin('0px 10px')} {...buttonProps}>
+                {buttonText}
+            </Button>
+        );
+    }
+
+    getFormKey = (): string => {
+        return `${PageEditPage.resourceName}${this.props.isCreatePage ? 'Create' : 'Edit'}`;
     }
 
     render(): JSX.Element {
+        let {isCreatePage} = this.props;
+        let modelInstanceKey: string = `rhForms.${this.getFormKey()}.properties`;
+
         return (
-            <form onSubmit={this.handleSubmit}>
-            <Grid>
-                
-                <FormInput 
-                        type="number" 
-                        propertyName="id"
-                        model="RHForms.pageEdit.properties.id"    
-                />
-                
-                <FormInput 
-                        type="text" 
-                        propertyName="author"
-                        model="RHForms.pageEdit.properties.author"    
-                />
-                
-                <FormInput 
-                        type="text" 
-                        propertyName="body"
-                        model="RHForms.pageEdit.properties.body"    
-                />
-                
-                <FormInput 
-                        type="date" 
-                        propertyName="dateCreated"
-                        model="RHForms.pageEdit.properties.dateCreated"    
-                />
-                
-                <FormInput 
-                        type="date" 
-                        propertyName="lastUpdated"
-                        model="RHForms.pageEdit.properties.lastUpdated"    
-                />
-                
-                <FormInput 
-                        type="text" 
-                        propertyName="pageLayout"
-                        model="RHForms.pageEdit.properties.pageLayout"    
-                />
-                
-                <FormInput 
-                        type="boolean" 
-                        propertyName="publish"
-                        model="RHForms.pageEdit.properties.publish"    
-                />
-                
-                <FormInput 
-                        type="date" 
-                        propertyName="publishedDate"
-                        model="RHForms.pageEdit.properties.publishedDate"    
-                />
-                
-                <FormInput 
-                        type="text" 
-                        propertyName="subTitle"
-                        model="RHForms.pageEdit.properties.subTitle"    
-                />
-                
-                <FormInput 
-                        type="text" 
-                        propertyName="title"
-                        model="RHForms.pageEdit.properties.title"    
-                />
-                
-                <FormGroup>
-                    <Col sm={4} smOffset={3}>
-                        <Button style={{margin: '0px 10px'}} bsStyle="primary" type="submit">
-                            Update
-                        </Button>
-                        <Button style={{margin: '0px 10px'}} bsStyle="danger" onClick={this.handleDelete}>
-                            Delete
-                        </Button>
-                        <Link style={{margin: '0px 10px'}} className="btn btn-default" to={'/page/list'}>
-                            Cancel
-                        </Link>
-                    </Col>
-                </FormGroup>
-                </Grid>
-            </form>
+            <div>
+                <AlertDismissable alertFontStyle={defaultFont}/>
+                <form onSubmit={this.handleSubmit} style={setMargin('80px auto')}>
+                    <Grid>
+                        <Row>
+                            <h1 style={[title, fontWeight(600), fontSize(32), defaultFont]}>
+                                {isCreatePage ? 'New page form' : ''}
+                            </h1>
+                        </Row>
+                        <FormInput 
+                                type="text" 
+                                propertyName="Title"
+                                model={`${modelInstanceKey}.title`}
+                                fieldSize={5}
+                                labelSize={1}
+                        />
+                        <FormInput 
+                                type="text" 
+                                propertyName="Subtitle"
+                                model={`${modelInstanceKey}.subTitle`}
+                                fieldSize={5}
+                                labelSize={1}
+                        />
+                        <FormInput 
+                                type="boolean" 
+                                propertyName="Publish"
+                                model={`${modelInstanceKey}.publish`}
+                                fieldSize={5}
+                                labelSize={1}
+                        />
+                        <Row>
+                            <Panel
+                                    header={<strong>{`${isCreatePage ? 'Add' : 'Update'}`} the page content:</strong>} 
+                                    style={setMargin('15px 13px 15px 54px')}>
+                                <ul style={[{color: '#444'}, defaultFont]}>
+                                    <li>
+                                        Please {`${isCreatePage ? 'add' : 'update'}`} the content 
+                                        of the {`${isCreatePage ? 'new' : ''}`} page in the field provided below.
+                                    </li>
+                                    <li>
+                                        To see the preview click on <strong>View</strong> from the toolbar and
+                                         select <strong>Preview</strong>.
+                                    </li>
+                                </ul>
+                            </Panel>
+                        </Row>
+                        <TinyMCEWrapper
+                                model={`${modelInstanceKey}.body`}
+                                config={{
+                                    plugins:[
+                                        'advlist autolink lists link image charmap print',
+                                        'preview hr anchor pagebreak searchreplace wordcount visualblocks',
+                                        'insertdatetime media nonbreaking save table contextmenu directionality',
+                                        'emoticons template paste textcolor colorpicker textpattern imagetools',
+                                        'codesample toc visualchars code',
+                                    ],
+                                    toolbar: [
+                                        `undo redo | styleselect | bold italic | alignleft aligncenter alignright
+                                        alignjustify | bullist numlist outdent indent | link, code preview fullscreen |
+                                        forecolor backcolor`,
+                                    ],
+                                    height: '300px',
+                                }}
+                                style={setMargin('15px 0px 15px 40px')}
+                        />
+                        <FormGroup>
+                            <Col sm={4}>
+                                {this.renderButton(isCreatePage ? 'Create' : 'Update', true)}
+                                <Link style={{margin: '0px 10px'}} className="btn btn-default" to="/page/list">
+                                    Cancel
+                                </Link>
+                            </Col>
+                        </FormGroup>
+                    </Grid>
+                </form>
+            </div>
         );    
     }
 };

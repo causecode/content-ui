@@ -1,42 +1,41 @@
 import {BaseModel, ModelPropTypes} from 'react-hero';
 
+export interface IPage {
+    id?: number;
+    body?: string;
+    publish?: boolean;
+    publishedDate?: Date;
+    subTitle?: string;
+    title?: string;
+}
+
 export class PageModel extends BaseModel {
-    
+
+    static resourceName: string = 'page';
+
     static propTypes = {
-        id: ModelPropTypes.NUMBER(),
-        author: ModelPropTypes.STRING(),
-        body: ModelPropTypes.STRING(),
-        dateCreated: ModelPropTypes.DATE(),
-        lastUpdated: ModelPropTypes.DATE(),
-        pageLayout: ModelPropTypes.STRING(),
-        publish: ModelPropTypes.BOOLEAN(),
-        publishedDate: ModelPropTypes.DATE(),
-        subTitle: ModelPropTypes.STRING(),
-        title: ModelPropTypes.STRING(),
+        body: ModelPropTypes.STRING,
+        publish: ModelPropTypes.BOOLEAN,
+        publishedDate: ModelPropTypes.DATE,
+        subTitle: ModelPropTypes.STRING,
+        title: ModelPropTypes.STRING,
     };
 
-    static defaultProps = {
-        id: 0,
-        author: '',
+    static defaultProps: IPage = {
         body: '',
-        dateCreated: '',
-        lastUpdated: '',
-        pageLayout: '',
         publish: false,
-        publishDate: '',
+        publishedDate: new Date(),
         subTitle: '',
         title: '',
     };
 
-    static resourceName: string = 'page';
-
     static columnNames: string[] = [
         'title',
-        'subtitle',
-        'publish',
+        'subTitle',
+        'publishedDate',
     ];
 
-    constructor(properties) {
+    constructor(properties: IPage) {
         super(properties);
     }
 }
