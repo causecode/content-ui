@@ -3,11 +3,9 @@ import {StyleRoot} from 'radium';
 
 export class BasePage extends React.Component<void, void> {
     render(): JSX.Element {
-        return(
+        return (
             <StyleRoot>
-                <div>
-                    {this.props.children}
-                </div>
+                {this.props.children}
             </StyleRoot>
         );
     }

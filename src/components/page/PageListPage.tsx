@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Radium from 'radium';
 import {PagedList, DropDownFilter, AlertDismissable} from 'react-hero';
 import {CSS} from '../../interfaces';
-import {PageAction} from './PageActions';
+import {PageAction} from './PageAction';
 import {fontWeight, fontSize, title} from '../../constants';
 
 @Radium

@@ -59,19 +59,9 @@ export class PageEditPage extends React.Component<IPageEditPageProps, void> {
         );
     }
 
-    renderButton = (buttonText: string, submit: boolean = false): JSX.Element => {
-        let buttonProps: {id?: string, bsStyle?: string, type?: string, onClick?: (e: React.FormEvent) => void} = {};
-
-        if (submit) {
-            buttonProps.type = 'submit';
-            buttonProps.bsStyle = 'primary';
-        } else {
-            buttonProps.bsStyle = 'danger';
-            buttonProps.id = 'delete';
-        }
-
+    renderButton = (buttonText: string): JSX.Element => {
         return (
-            <Button style={setMargin('0px 10px')} {...buttonProps}>
+            <Button style={setMargin('0px 10px')} type="submit" bsStyle="primary">
                 {buttonText}
             </Button>
         );
@@ -153,7 +143,7 @@ export class PageEditPage extends React.Component<IPageEditPageProps, void> {
                         />
                         <FormGroup>
                             <Col sm={4}>
-                                {this.renderButton(isCreatePage ? 'Create' : 'Update', true)}
+                                {this.renderButton(isCreatePage ? 'Create' : 'Update')}
                                 <Link style={{margin: '0px 10px'}} className="btn btn-default" to="/page/list">
                                     Cancel
                                 </Link>
