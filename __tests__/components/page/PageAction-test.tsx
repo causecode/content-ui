@@ -4,6 +4,7 @@ import * as React from 'react';
 import {shallow, ShallowWrapper} from 'enzyme';
 import {PageAction, IPageActionProps} from '../../../src/components/page/PageAction';
 import {IPage} from '../../../src/models/PageModel';
+import {Link} from 'react-router';
 import FontAwesome = require('react-fontawesome');
 const unroll: any = require('unroll');
 
@@ -26,13 +27,13 @@ describe('PageAction page test cases', (): void => {
 
     unroll('It should render the #elementName correctly.', (
             done: () => void,
-            args: {elementName: string, element: JSX.Element | React.ComponentClass<any>, count: number}
+            args: {elementName: string, element: React.ComponentClass<any>, count: number}
         ): void => {
         expect(componentTree.find(args.element).length).toBe(args.count);
         done();
     }, [
         ['elementName', 'element', 'count'],
         ['icons', FontAwesome, 2],
-        ['anchor tags', 'a', 2],
+        ['router links', Link, 2],
     ]);
 });
