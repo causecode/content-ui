@@ -52,13 +52,10 @@ describe('Page edit test cases', (): void => {
         success();
     });
 
-    let handleDelete: jest.Mock<void> = jest.fn<void>();
-
     describe('When the edit page is rendered.', (): void => {
         let componentTree: ShallowWrapper<void, void> = shallow<void, void>(
                 <PageEditPage
                         handleSubmit={handleSubmit}
-                        handleDelete={handleDelete}
                         instance={pageInstance}
                         isCreatePage={false}
                 />
@@ -70,7 +67,7 @@ describe('Page edit test cases', (): void => {
 
         unroll('It should render the #elementName correctly.', (
                 done: () => void,
-                args: {elementName: string, element: JSX.Element | React.ComponentClass<any>, count: number}
+                args: {elementName: string, element: React.ComponentClass<any>, count: number}
             ): void => {
             expect(componentTree.find(args.element).length).toBe(args.count);
             done();
@@ -104,7 +101,6 @@ describe('Page edit test cases', (): void => {
         let componentTree: ShallowWrapper<void, void> = shallow<void, void>(
                 <PageEditPage
                         handleSubmit={handleSubmit}
-                        handleDelete={handleDelete}
                         instance={new PageModel({})}
                         isCreatePage={true}
                 />

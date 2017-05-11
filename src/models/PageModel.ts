@@ -24,7 +24,6 @@ export class PageModel extends BaseModel {
     static defaultProps: IPage = {
         body: '',
         publish: false,
-        publishedDate: new Date(),
         subTitle: '',
         title: '',
     };

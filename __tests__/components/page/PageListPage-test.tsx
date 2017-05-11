@@ -19,7 +19,7 @@ describe('Page List test cases', (): void => {
 
     unroll('It should render the #elementName correctly.', (
             done: () => void,
-            args: {elementName: string, element: JSX.Element | React.ComponentClass<any>, count: number}
+            args: {elementName: string, element: string | React.ComponentClass<any>, count: number}
         ): void => {
         expect(componentTree.find(args.element).length).toBe(args.count);
         done();
@@ -28,6 +28,6 @@ describe('Page List test cases', (): void => {
         ['alert', AlertDismissable, 1],
         ['div tags', 'div', 2],
         ['Paged list', PagedList, 1],
-        ['dropdown filter', DropDownFilter, 2],
+        ['dropdown filter', DropDownFilter, 3],
     ]);
 });

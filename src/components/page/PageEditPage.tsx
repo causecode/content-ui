@@ -14,11 +14,6 @@ export interface IPageEditPageProps extends IInstancePageProps {
         successCallBack?: (response?: Axios.AxiosXHR<{message?: string}>) => void, 
         failureCallBack?: () => void
     ) => void;
-    handleDelete: (
-        instance: PageModel,
-        successCallBack?: (response?: Axios.AxiosXHR<{message?: string}>) => void, 
-        failureCallBack?: () => void
-    ) => void;
     instance: PageModel;
     isCreatePage: boolean;
 }
@@ -35,12 +30,13 @@ export class PageEditPage extends React.Component<IPageEditPageProps, void> {
         browserHistory.push('/page/list');
     }
 
-    fetchStoreInstance = (): PageModel => {
+    fetchPageInstance = (): PageModel => {
         let {instance} = this.props;
         let instanceKey: string = this.getFormKey();
         if (store.getState() && store.getState().forms) {
             instance.properties = store.getState().forms[`rhForms`][instanceKey].properties;
         }
+        
         return instance;
     }
 
@@ -48,7 +44,7 @@ export class PageEditPage extends React.Component<IPageEditPageProps, void> {
         e.preventDefault();
         // Not using connect here to avoid rerendering of component on change of instance properties.
         this.props.handleSubmit(
-                this.fetchStoreInstance(),
+                this.fetchPageInstance(),
                 (response: Axios.AxiosXHR<{message: string}>): void => {
                     showAlert('success', `Page ${this.props.isCreatePage ? 'created' : 'updated'} successfully`, 7000);
                     this.goToListingPage();

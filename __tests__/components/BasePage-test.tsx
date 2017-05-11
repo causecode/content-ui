@@ -12,7 +12,7 @@ export interface IShallowWrapperProps {
 describe('BasePage Tests', (): void => {
     let testString: string = 'some string';
 
-    it('It renders the children correctly.', (): void => {
+    it('renders the children correctly.', (): void => {
         const componentTree: ShallowWrapper<IShallowWrapperProps, void> = shallow<IShallowWrapperProps, void>(
             <BasePage>{testString}</BasePage>
         );

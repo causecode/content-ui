@@ -61,7 +61,7 @@ var config = {
         filename: isProduction ? 'bundle.[hash].min.js' : 'bundle.js',
         publicPath: '/'
     },
-    devtool: 'source-map',
+    devtool: isProduction ? false : 'source-map',
     devServer: {
 		historyApiFallback: true
 	},

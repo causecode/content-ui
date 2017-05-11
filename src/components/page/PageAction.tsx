@@ -11,15 +11,16 @@ export class PageAction extends React.Component<IPageActionProps, void> {
 
     render(): JSX.Element {
         let {instance} = this.props;
+
         return (
-            <td>
+            <span>
                 <Link to={`/page/edit/${instance.id}`}>
                     <FontAwesome name="pencil" />
                 </Link>
                 <Link to={`/page/show/${instance.id}`}>
                     <FontAwesome name="location-arrow" />
                 </Link>
-            </td>
+            </span>
         );
     }
 }

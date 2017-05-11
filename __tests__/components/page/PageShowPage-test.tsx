@@ -39,7 +39,7 @@ describe('Page show test cases', (): void => {
 
         unroll('It should render the #elementName correctly.', (
                 done: () => void,
-                args: {elementName: string, element: JSX.Element | React.ComponentClass<any>, count: number}
+                args: {elementName: string, element: string | React.ComponentClass<any>, count: number}
             ): void => {
             expect(componentTree.find(args.element).length).toBe(args.count);
             done();
@@ -73,18 +73,10 @@ describe('Page show test cases', (): void => {
                 <PageShowPage />
         );
 
-        unroll('It should not render the #elementName.', (
-                done: () => void,
-                args: {elementName: string, element: JSX.Element | React.ComponentClass<any>, count: number}
-            ): void => {
-            expect(componentTree.find(args.element).length).toBe(args.count);
-            done();
-        }, [
-            ['elementName', 'element', 'count'],
-            ['div tags', 'div', 0],
-            ['bootstrap grid', Grid, 0],
-            ['title', 'h1', 0],
-            ['subtitle', 'h2', 0],
-        ]);
+        it('should not render the elements.', (): void => {
+            ['div', Grid, 'h1', 'h2'].forEach((item: string | React.ComponentClass<any>): void => {
+                expect(componentTree.find(item).length).toBe(0);
+            });
+        });
     });
 });

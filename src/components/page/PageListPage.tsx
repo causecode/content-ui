@@ -52,6 +52,14 @@ export class PageListPage extends React.Component<void, void> {
                                     {label: 'Descending', value: 'desc'},
                                 ]}
                         />
+                        <DropDownFilter
+                                label="Published"
+                                paramName="publish"
+                                possibleValues={[
+                                    {label: 'True', value: 'true'},
+                                    {label: 'False', value: 'false'},
+                                ]}
+                        />
                     </PagedList>
                 </div>
             </div>

@@ -7,6 +7,5 @@
 *.iml
 /dist
 /.vscode
-/.babelrc
 localConfig.json
 .DS_Store
