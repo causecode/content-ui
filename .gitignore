@@ -1,7 +1,6 @@
 /node_modules
 /typings
 /coverage
-/public
 /build
 /.idea
 *.iml
