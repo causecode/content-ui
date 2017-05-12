@@ -1,16 +1,28 @@
 var webpack = require('webpack');
-var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var isProduction = process.argv.indexOf('--production') != -1;
+var isProduction = process.argv.indexOf('-p') != -1;
+var path = require('path');
+
+var plugins = [];
+
+var entryPoints = [
+    './src/devIndex.tsx'
+];
 
 if (isProduction) {
     // Adding Production environment specific features.
+
     plugins.push(
-        new webpack.optimize.UglifyJsPlugin({  // Used for minification of .js and .css files.
-            minimize: true,
+        new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
+            },
+            sourceMap: true
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
         }),
         new webpack.DefinePlugin({
             'process.env': {
@@ -19,6 +31,11 @@ if (isProduction) {
         })
     );
 } else {
+    // Adding Development environment specific features.
+    entryPoints.push(
+        'webpack/hot/only-dev-server'  // Used to enable hot reloading in webpack.
+    );
+
     new webpack.DefinePlugin({
         'process.env': {
             'NODE_ENV': JSON.stringify('development')
@@ -26,32 +43,67 @@ if (isProduction) {
     })
 }
 
-module.exports = {
-    entry: './src/index.tsx',
+plugins.push(
+    new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'index.ejs'
+    }),
+    new ExtractTextPlugin({
+        filename: 'style.css',
+        allChunks: true
+    })
+);
+
+var config = {
+    entry: entryPoints,
     output: {
-        filename: 'bundle.js',
-        path: path.join(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        filename: isProduction ? 'bundle.[hash].min.js' : 'bundle.js',
+        publicPath: '/'
     },
-    devtool: 'source-map',
+    devtool: isProduction ? false : 'source-map',
+    devServer: {
+		historyApiFallback: true
+	},
     resolve: {
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.json']
+        modules: [
+            path.resolve(__dirname, './src'),
+            'node_modules'
+        ],
+        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.json']
     },
     module: {
-        preLoaders: [
-            {test: /\.tsx?$/, loader: 'tslint', exclude: /node_modules/}
-        ],
-        loaders: [
-            {test: /\.tsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'ts-loader']},
-            {test: /\.css$/, loader: 'style!css'},
-            {test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'},
-            {test: /\.(jpg|jpeg|gif|png)$/, loader: 'url-loader?limit=10&mimetype=image/(jpg|jpeg|gif|png)&name=images/[name].[ext]'},
-            {test: /\.json$/, loader: 'json-loader' }
-        ],
+        rules: [
+            {
+                test: /\.tsx?$/,
+                enforce: "pre",
+                loader: 'tslint-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: [
+                    'react-hot-loader',
+                    'ts-loader'
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
+            },
+            {
+                test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
+                use: [
+                    'url-loader?limit=10&mimetype=image/(jpg|jpeg|gif|png)&name=assets/images/[name].[ext]'
+                ]
+            }
+        ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'index.ejs'
-        })
-    ]
-}
+    plugins: plugins
+};
+
+module.exports = config;
