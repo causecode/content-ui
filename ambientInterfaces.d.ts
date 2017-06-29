@@ -6,8 +6,6 @@ declare var require: {
 
 declare interface Window {
     devToolsExtension: any,
-    DISQUSWIDGETS: any,
-	trackUrl: string,
     FB: any,
     fbAsyncInit: any
 }

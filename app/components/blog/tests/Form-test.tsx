@@ -1,21 +1,19 @@
-jest.unmock('../Form/Form');
+jest.unmock('../Form');
 
 import * as React from 'react';
 import {StyleRoot} from 'radium';
 import {Provider} from 'react-redux';
 import {MemoryRouter} from 'react-router';
 import {ShallowWrapper, shallow, ReactWrapper, mount} from 'enzyme';
-import {AlertDismissable, FormInput, showAlert, configureStore, hasAnyRole} from 'react-hero';
+import {AlertDismissable, FormInput, showAlert, configureStore, hasAnyRole, RawContentWrapper, MarkdownWrapper} from 'react-hero';
 import {IAxiosResponse} from '../../../interfaces';
 import {BlogModel} from '../../../models/BlogModel';
-import {Link, Button} from '../../reusableComponents/reusableComponents';
-import {TinyMCEWrapper} from '../../common/TinyMCEWrapper/TinyMCEWrapper';
-import {ImageUploader} from '../../common/ImageUploader/ImageUploader';
-import {MarkdownWrapper} from '../../common/MarkdownWrapper/MarkdownWrapper';
+import {Link, Button} from '../../../components/reusable-components/reusableComponents';
+import {TinyMCEWrapper} from '../../../containers/common/TinyMCEWrapper';
+import {ImageUploader} from '../../../components/common/ImageUploader';
 import {blogModelInstance, blogInstance} from '../../../tests/BlogTestData';
 import {ALERT_INFO, ALERT_DANGER, ALERT_SUCCESS} from '../../../constants';
-import {RawContentWrapper} from '../../common/RawContentWrapper/RawContentWrapper';
-import {IFormProps, IFormState, FormImpl, Form} from '../Form/Form';
+import {IFormProps, IFormState, FormImpl, Form} from '../Form';
 import {mockStore, handleSubmitSuccess, getSuccessResponse} from '../../../tests/testUtils';
 
 const unroll: any = require<any>('unroll');

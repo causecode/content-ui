@@ -1,9 +1,9 @@
-jest.unmock('../BlogCommentCount/BlogCommentCount');
+jest.unmock('../BlogCommentCount');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow} from 'enzyme';
 import {IInstanceDataSmall} from '../../../interfaces/blogInterfaces';
-import {BlogCommentCount, IBlogCommentCountProps} from '../BlogCommentCount/BlogCommentCount';
+import {BlogCommentCount, IBlogCommentCountProps} from '../BlogCommentCount';
 const unroll = require<any>('unroll');
 
 unroll.use(it);

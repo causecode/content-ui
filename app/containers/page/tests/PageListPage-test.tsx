@@ -1,9 +1,9 @@
-jest.unmock('../PageListPage/PageListPage');
+jest.unmock('../PageListPage');
 
 import * as React from 'react';
 import * as Radium from 'radium';
 import {shallow, ShallowWrapper} from 'enzyme';
-import {PageListPage} from '../PageListPage/PageListPage';
+import {PageListPage} from '../PageListPage';
 import {AlertDismissable, PagedList, DropDownFilter} from 'react-hero';
 const unroll: any = require('unroll');
 

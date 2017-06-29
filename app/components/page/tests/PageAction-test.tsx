@@ -1,8 +1,8 @@
-jest.unmock('../PageAction/PageAction');
+jest.unmock('../PageAction');
 
 import * as React from 'react';
 import {shallow, ShallowWrapper} from 'enzyme';
-import {PageAction, IPageActionProps} from '../PageAction/PageAction';
+import {PageAction, IPageActionProps} from '../PageAction';
 import {IPage} from '../../../models/PageModel';
 const unroll: any = require('unroll');
 

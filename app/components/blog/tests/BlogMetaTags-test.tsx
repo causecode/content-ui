@@ -1,8 +1,8 @@
-jest.unmock('../BlogMetaTags/BlogMetaTags');
+jest.unmock('../BlogMetaTags');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow} from 'enzyme';
-import {BlogMetaTagsImpl, IBlogMetaTagProps, IBlogMetaTagsState} from '../BlogMetaTags/BlogMetaTags';
+import {BlogMetaTagsImpl, IBlogMetaTagProps, IBlogMetaTagsState} from '../BlogMetaTags';
 const unroll = require<any>('unroll');
 
 unroll.use(it);

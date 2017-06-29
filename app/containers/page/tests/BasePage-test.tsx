@@ -1,8 +1,8 @@
-jest.unmock('../BasePage/BasePage');
+jest.unmock('../BasePage');
 
 import * as React from 'react';
 import {shallow, ShallowWrapper} from 'enzyme';
-import {BasePage} from '../BasePage/BasePage';
+import {BasePage} from '../BasePage';
 
 export interface IShallowWrapperProps {
     children: JSX.Element;

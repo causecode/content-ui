@@ -1,8 +1,8 @@
-jest.unmock('../BlogArchiveSection/BlogArchiveSection');
+jest.unmock('../BlogArchiveSection');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow} from 'enzyme';
-import {BlogArchiveSection, IBlogArchiveSectionProps} from '../BlogArchiveSection/BlogArchiveSection';
+import {BlogArchiveSection, IBlogArchiveSectionProps} from '../BlogArchiveSection';
 import {BlogModel} from '../../../models';
 
 let monthList: string[] = ['2103-04', '2014-06', '2015-07'];

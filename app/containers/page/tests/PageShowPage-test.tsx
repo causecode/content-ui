@@ -1,12 +1,12 @@
-jest.unmock('../PageShowPage/PageShowPage');
+jest.unmock('../PageShowPage');
 
 import * as React from 'react';
 import * as Radium from 'radium';
 import * as DOMPurify from 'dompurify';
 import {shallow, ShallowWrapper} from 'enzyme';
-import {PageShowPage} from '../PageShowPage/PageShowPage';
+import {PageShowPage} from '../PageShowPage';
 import {IInstancePageProps} from 'react-hero';
-import {Grid} from '../../../components/reusableComponents/reusableComponents';
+import {Grid} from '../../../components/reusable-components/reusableComponents';
 import {PageModel, IPage} from '../../../models/PageModel';
 const unroll: any = require('unroll');
 

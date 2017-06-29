@@ -1,8 +1,8 @@
-jest.unmock('../BlogSearchBar/BlogSearchBar');
+jest.unmock('../BlogSearchBar');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow} from 'enzyme';
-import {BlogSearchBarImpl, IBlogSearchState} from '../BlogSearchBar/BlogSearchBar';
+import {BlogSearchBarImpl, IBlogSearchState} from '../BlogSearchBar';
 import {BlogModel} from '../../../models/BlogModel';
 
 describe('Test cases for BlogSearchBar', (): void => {

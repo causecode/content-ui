@@ -1,8 +1,8 @@
-jest.unmock('../BlogSummary/BlogSummary');
+jest.unmock('../BlogSummary');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow} from 'enzyme';
-import {BlogSummary, IBlogSummaryProps} from '../BlogSummary/BlogSummary';
+import {BlogSummary, IBlogSummaryProps} from '../BlogSummary';
 import {blogInstance} from '../../../tests/BlogTestData';
 
 describe('Test cases for BlogSumamry', (): void => {

@@ -1,8 +1,8 @@
-jest.unmock('../BlogComment/BlogComment');
+jest.unmock('../BlogComment');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow} from 'enzyme';
-import {BlogComment} from '../BlogComment/BlogComment';
+import {BlogComment} from '../BlogComment';
 import {blogInstance} from '../../../tests/BlogTestData';
 const unroll = require<any>('unroll');
 

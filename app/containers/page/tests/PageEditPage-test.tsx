@@ -1,13 +1,13 @@
-jest.unmock('../PageEditPage/PageEditPage');
+jest.unmock('../PageEditPage');
 
 import * as React from 'react';
 import * as Radium from 'radium';
 import {shallow, ShallowWrapper} from 'enzyme';
-import {PageEditPage} from '../PageEditPage/PageEditPage';
+import {PageEditPage} from '../PageEditPage';
 import {hideAlert, AlertDismissable, TinyMCEWrapper, FormInput, showAlert} from 'react-hero';
 import {PageModel, IPage} from '../../../models/PageModel';
 import {properties} from './PageShowPage-test';
-import {Row, Panel} from '../../../components/reusableComponents/reusableComponents';
+import {Row, Panel} from '../../../components/reusable-components/reusableComponents';
 import {Button} from 'react-bootstrap';
 import {store} from '../../../store';
 const unroll: any = require('unroll');

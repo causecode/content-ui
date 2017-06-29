@@ -1,8 +1,8 @@
-jest.unmock('../BlogInstanceTags/BlogInstanceTags');
+jest.unmock('../BlogInstanceTags');
 
 import * as React from 'react';
 
-import {BlogInstanceTags, IBlogInstanceTagsProps} from '../BlogInstanceTags/BlogInstanceTags';
+import {BlogInstanceTags, IBlogInstanceTagsProps} from '../BlogInstanceTags';
 import {ShallowWrapper, shallow} from 'enzyme';
 import {blogInstance} from '../../../tests/BlogTestData';
 

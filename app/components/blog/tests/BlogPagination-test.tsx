@@ -1,8 +1,8 @@
-jest.unmock('../BlogPagination/BlogPagination');
+jest.unmock('../BlogPagination');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow} from 'enzyme';
-import {BlogPaginationImpl, IBlogPaginationProps,  IBlogPaginationState} from '../BlogPagination/BlogPagination';
+import {BlogPaginationImpl, IBlogPaginationProps,  IBlogPaginationState} from '../BlogPagination';
 import {BlogModel} from '../../../models/BlogModel';
 
 describe('Test cases for BlogPagination', (): void => {

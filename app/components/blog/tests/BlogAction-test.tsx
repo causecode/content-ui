@@ -1,8 +1,8 @@
-jest.unmock('../BlogAction/BlogAction');
+jest.unmock('../BlogAction');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow} from 'enzyme';
-import {BlogAction, IBlogActionProps} from '../BlogAction/BlogAction';
+import {BlogAction, IBlogActionProps} from '../BlogAction';
 import {blogInstance} from '../../../tests/BlogTestData';
 const unroll = require<any>('unroll');
 

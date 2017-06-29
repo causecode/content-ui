@@ -1,7 +1,7 @@
-jest.unmock('../BlogGetConnectedBar/BlogGetConnectedBar');
+jest.unmock('../BlogGetConnectedBar');
 
 import * as React from 'react';
-import {BlogGetConnectedBar} from '../BlogGetConnectedBar/BlogGetConnectedBar';
+import {BlogGetConnectedBar} from '../BlogGetConnectedBar';
 import {socialList, ISocialList} from '../../../constants';
 import {ShallowWrapper, shallow} from 'enzyme';
 
