@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as Radium from 'radium';
+import {RouteComponentProps, withRouter} from 'react-router';
 import {Link, FontAwesomeRadium} from '../reusable-components/reusableComponents';
 import {linkStyle} from '../../constants';
 import {CSS} from '../../interfaces';
-import {RouteComponentProps, withRouter} from 'react-router';
 import {BlogModel} from '../../models';
 
 export interface IBlogTagsProps {
@@ -40,10 +40,6 @@ export class BlogTagsImpl extends React.Component<IBlogTagsProps & RouteComponen
         });
     }
 
-    getTagsList() {
-        return this.list;
-    }
-
     applyTagFilter = (tag): void => {
         BlogModel.list({max: 10, offset: 0, tag: tag});
     }
@@ -62,7 +58,7 @@ export class BlogTagsImpl extends React.Component<IBlogTagsProps & RouteComponen
                     <Link style={[linkStyle, list]} onClick={() => this.removeTagFilter()} to={'/blogs'}>
                         ALL
                     </Link>
-                    {this.getTagsList()}
+                    {this.list}
                 </ul>
             </section>
         );

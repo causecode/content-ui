@@ -35,5 +35,6 @@ export function mockStore (type: string, instance: any): {forms: {rhForms: any}}
             forms: {rhForms: {[type]: {properties: instance.properties}}},
         };
     });
+    
     return null;
 }

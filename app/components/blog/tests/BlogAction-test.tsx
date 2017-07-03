@@ -1,9 +1,10 @@
 jest.unmock('../BlogAction');
 
 import * as React from 'react';
-import {ShallowWrapper, shallow} from 'enzyme';
+import {ShallowWrapper, shallow, EnzymePropSelector} from 'enzyme';
 import {BlogAction, IBlogActionProps} from '../BlogAction';
-import {blogInstance} from '../../../tests/BlogTestData';
+import { blogInstance } from '../../../tests/BlogTestData';
+import {Link} from "../../reusable-components/reusableComponents";
 const unroll = require<any>('unroll');
 
 unroll.use(it);
@@ -20,14 +21,14 @@ describe('Tests for BlogActions', (): void => {
 
     unroll('should render #element when instance is not null', (
         done: () => void,
-        args: {elementName: string, element: string, count: number}
+        args: {element: EnzymePropSelector, count: number}
     ): void => {
         blogActions.setProps({instance: blogInstance});
         expect(blogActions.find(args.element).length).toBe(args.count);
         done();
     }, [
         ['element', 'count'],
-        ['Link', 2],
+        [Link, 2],
         ['a', 1],
     ]);
 

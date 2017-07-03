@@ -13,18 +13,18 @@ export interface IBlogCommentConfig {
 
 export class BlogComment extends React.Component<IBlogComment, void> {
     createBlogCommentCountUrl = (): IBlogCommentConfig => {
-        let {id, title} = this.props.blogInstance;
+        const {id, title} = this.props.blogInstance;
         /**
          * Using location.protocol and location.host to make sure that
          * FBComments uses fully qualified url.
          */
-        let url: string = `${location.protocol}//${location.host}/blog/${id}/${convertToFriendlyUrl(title)}`;
+        const url: string = `${location.protocol}//${location.host}/blog/${id}/${convertToFriendlyUrl(title)}`;
 
         return {url, title};
     }
 
     render(): JSX.Element {
-        let blogCommentUrl: {
+        const blogCommentUrl: {
             url: string,
             title: string
         } = this.createBlogCommentCountUrl();

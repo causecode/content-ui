@@ -94,7 +94,7 @@ export class BlogListPage extends React.Component<void, void> {
     }
 }
 
-export const listContainer: CSS = {
+const listContainer: CSS = {
     padding: '0px 30px',
     margin: '0px 10%',
 };

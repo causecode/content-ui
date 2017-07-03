@@ -18,7 +18,7 @@ describe('Test cases for BlogPagination', (): void => {
 
     let blogPagination: ShallowWrapper<IBlogPaginationProps, IBlogPaginationState> = 
         shallow<IBlogPaginationProps, IBlogPaginationState>(
-        <BlogPaginationImpl history={{push:push}} show={true} match={{params: {}}} />
+            <BlogPaginationImpl history={{push:push}} show={true} match={{params: {}}} />
     );
 
     blogPagination.setState({ activePage: 1, size: 4});

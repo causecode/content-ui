@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import {connect, MapStateToProps} from 'react-redux';
 import {BlogSearchBar} from '../../components/blog/BlogSearchBar';
 import {BlogGetConnectedBar} from '../../components/blog/BlogGetConnectedBar';
 import {BlogArchiveSection} from '../../components/blog/BlogArchiveSection';
@@ -23,7 +23,8 @@ export class BlogSideBarImpl extends React.Component<IBlogSideBarProps, void> {
     }
 }
 
-function mapStateToProps (state) {
+const mapStateToProps: MapStateToProps<{}, IBlogSideBarProps> =
+        (state) : {monthList : string[], tagList: (string | number)[][]} => {
     const mutableState = state.data.toJS  ? state.data.toJS() : state.data;
     let monthList = [];
     let tagList = [];

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Radium from 'radium';
 import {BlogSummary} from './BlogSummary';
-import {IInstanceList} from '../../interfaces/blogInterfaces';
+import {IInstanceList} from '../../interfaces';
 import {defaultTextColor} from '../../constants';
 import {CSS} from '../../interfaces';
 

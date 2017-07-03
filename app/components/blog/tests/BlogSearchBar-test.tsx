@@ -10,7 +10,7 @@ describe('Test cases for BlogSearchBar', (): void => {
     let push: jest.Mock<void> = jest.fn<void>();
 
     let blogSearchBar: ShallowWrapper<void, IBlogSearchState> = shallow<void, IBlogSearchState>(
-        <BlogSearchBarImpl history={{push: push}}/>
+            <BlogSearchBarImpl history={{push: push}}/>
     );
 
     it('should render search box and search button', (): void => {

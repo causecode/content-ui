@@ -1,17 +1,17 @@
 import * as React from 'react';
 import * as Radium from 'radium';
 import * as DOMPurify from 'dompurify';
+const moment = require<any>('moment');
+import { connect, MapStateToProps } from 'react-redux';
 import {BlogComment} from '../../components/blog/BlogComment';
 import {BlogCommentCount} from '../../components/blog/BlogCommentCount';
 import {BlogInstanceTags} from '../../components/blog/BlogInstanceTags';
 import {IBlog} from '../../models/BlogModel';
-import {connect} from 'react-redux';
 import {isLoggedIn, convertToFriendlyUrl} from '../../utils';
 import {FontAwesomeLink} from '../../components/layout/FontAwesomeLink';
 import {CSS} from '../../interfaces';
 import {Button, FontAwesomeRadium} from '../../components/reusable-components/reusableComponents';
 import {firstThemeColor, defaultTextColor, linkStyle} from '../../constants';
-const moment = require<any>('moment');
 import {ReactHelmet} from '../../components/common/ReactHelmet';
 
 export interface IBlogInstanceFullProps {
@@ -161,9 +161,11 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
                                 color: '#a26f02',
                             },
                         }}
-                        />
-                    <div className="divContent"
-                            dangerouslySetInnerHTML={this.htmlToText(blog ? blog.body : 'Loading...') } />
+                    />
+                    <div
+                            className="divContent"
+                            dangerouslySetInnerHTML={this.htmlToText(blog ? blog.body : 'Loading...') }
+                    />
                 </section>
                 <section>
                     <BlogInstanceTags blogInstanceTagList={blog ? blog.blogInstanceTags : []} />
@@ -176,8 +178,8 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
         );
     }
 }
-
-let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>((store, ownProps) => {
+const mapStateToProps: MapStateToProps<{}, IBlogInstanceFullProps> =
+    (store, ownProps : IBlogInstanceFullProps) : {blogInstance : IBlog, metaTags: any} => {
     const mutableState = store.data.toJS ? store.data.toJS() : store.data;
     let instanceData: IBlog;
     let metaList: string[];
@@ -189,6 +191,7 @@ let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>((store, ownProps)
                 metaList = instance.properties.metaList;
                 return false;
             }
+
             return true;
         });
     }
@@ -197,14 +200,15 @@ let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>((store, ownProps)
         blogInstance: instanceData ? instanceData : [],
         metaTags: metaList ? metaList : [],
     };
-    
-})(BlogInstanceFullImpl);
+}
+let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>(mapStateToProps)(BlogInstanceFullImpl);
 
 export {BlogInstanceFull};
 
 const blogInstanceFullStyle: CSS = {
     marginBottom: '60px',
 };
+
 const title: CSS = {
     margin: '0px 0px 15px 0px',
     fontSize: '28px',
@@ -212,12 +216,14 @@ const title: CSS = {
     fontWeight: 700,
     color: defaultTextColor,
 };
+
 const metaList: CSS = {
     color: '#adadad',
     fontFamily: 'Lato,arial,sans-serif',
     fontSize: '13px',
     padding: '5px 0px',
 };
+
 const socialShare: CSS = {
     fontSize: '22px',
     textAlign: 'center',
@@ -227,6 +233,7 @@ const socialShare: CSS = {
     marginRight: '5px',
     borderRadius: '0px',
 };
+
 const fbShare: CSS = {
     background: '#3b5998',
     border: '1px solid rgb(53, 126, 189)',
@@ -236,6 +243,7 @@ const fbShare: CSS = {
         border: '1px solid #285e8e',
     },
 };
+
 const twitterShare: CSS = {
     background: '#5bc0de',
     border: '1px solid rgb(70, 184, 218)',
@@ -245,6 +253,7 @@ const twitterShare: CSS = {
         border: '1px solid #269abc',
     },
 };
+
 const linkedinShare: CSS = {
     background: '#1b86bc',
     border: '1px solid rgba(0, 0, 0, 0)',
@@ -253,4 +262,3 @@ const linkedinShare: CSS = {
         background: '#286090',
     },
 };
-

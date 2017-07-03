@@ -153,6 +153,7 @@ export const BlogPagination: React.ComponentClass<IBlogPaginationProps> = withRo
 const paginationContainer: CSS = {
     margin: '45px 0px',
 };
+
 const paginationStyle: CSS = {
     listStyle: 'none',
     display: 'inline-block',

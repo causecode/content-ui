@@ -80,7 +80,6 @@ export const centerStyle: CSS = {
     textAlign: 'center',
 };
 
-
 // Blog Page - Social Buttons
 export interface ISocialList {
     url: string;

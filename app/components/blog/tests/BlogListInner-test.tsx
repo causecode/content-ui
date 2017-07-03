@@ -18,7 +18,7 @@ describe('Test cases for BlogListInner', (): void => {
     };
     
     let blogListInner: ShallowWrapper<IBlogListInnerProps, void> = shallow<IBlogListInnerProps, void>(
-        <BlogListInner />
+            <BlogListInner />
     );
 
     

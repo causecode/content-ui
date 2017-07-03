@@ -5,13 +5,14 @@ import {ShallowWrapper, shallow} from 'enzyme';
 import {BlogArchiveSection, IBlogArchiveSectionProps} from '../BlogArchiveSection';
 import {BlogModel} from '../../../models';
 
-let monthList: string[] = ['2103-04', '2014-06', '2015-07'];
+const monthList: string[] = ['2103-04', '2014-06', '2015-07'];
+
 describe('Test cases for Blog Archive Section', (): void => {
 
     BlogModel.list = jest.fn();
 
     let blogArchiveSection: ShallowWrapper<IBlogArchiveSectionProps, void> = shallow<IBlogArchiveSectionProps, void>(
-        <BlogArchiveSection monthList={monthList} />
+            <BlogArchiveSection monthList={monthList} />
     );
 
     it('should render blog archives', (): void => {
@@ -20,10 +21,14 @@ describe('Test cases for Blog Archive Section', (): void => {
 
     it('When any blog archive is clicked', (): void => {
 
-        blogArchiveSection.find('Link').forEach((node, index) => {
-            node.simulate('click');
+        blogArchiveSection.find('Link').forEach((archiveLink: ShallowWrapper, index: number) => {
+            archiveLink.simulate('click');
             if (index != 0) {
-                expect(BlogModel.list).toHaveBeenCalledWith({max: 10, offset: 0, monthFilter: node.prop('children')});
+                expect(BlogModel.list).toHaveBeenCalledWith({
+                        max: 10,
+                        offset: 0,
+                        monthFilter: archiveLink.prop('children')
+                    });
             } else {
                 expect(BlogModel.list).toHaveBeenCalledWith({max: 10, offset: 0});
             }

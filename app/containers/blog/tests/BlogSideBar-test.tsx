@@ -12,7 +12,7 @@ import {configureStore} from 'react-hero';
 
 describe('Test cases for BlogSideBar', (): void => {
     let blogSideBarImpl: ShallowWrapper<IBlogSideBarProps, void> = shallow<IBlogSideBarProps, void>(
-        <BlogSideBarImpl />
+            <BlogSideBarImpl />
     );
 
     it('should render components', (): void => {
@@ -26,20 +26,17 @@ describe('Test cases for BlogSideBar', (): void => {
         let mutableStore = configureStore({
         data: {
             blogList: {
-                instanceList: [
-                {
+                instanceList: [{
                     properties: { 
                     monthFilterList: ['2013-04', '2016-07'],
-                        tagList: [
-                            [1, 'grails'],
-                            [2, 'javascript'],
-                        ]},
+                        tagList: [[1, 'grails'], [2, 'javascript'],
+                    ]},
                 }],
             },
         }});
         
         let blogSideBar: ShallowWrapper<IBlogSideBarProps, void> = shallow<IBlogSideBarProps, void>(
-            <BlogSideBar store={mutableStore}/>
+                <BlogSideBar store={mutableStore}/>
         );
         expect(blogSideBar.prop('monthList').length).toBe(2);
         expect(blogSideBar.prop('tagList').length).toBe(2);

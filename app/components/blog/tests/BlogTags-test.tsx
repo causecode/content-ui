@@ -9,7 +9,7 @@ describe('Test cases for BlogSumamry', (): void => {
     let push: jest.Mock<void> = jest.fn<void>();
     let tagList: (number | string)[][] = [[1, 'algorithms'], [2, 'competitive programming']];
     let blogTags: ShallowWrapper<IBlogTagsProps, void> = shallow<IBlogTagsProps, void>(
-        <BlogTagsImpl tagList={tagList} history={{push: push}} />
+            <BlogTagsImpl tagList={tagList} history={{push: push}} />
     );
 
     BlogModel.list = jest.fn();

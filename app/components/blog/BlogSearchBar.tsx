@@ -59,6 +59,7 @@ export const BlogSearchBar: React.ComponentClass<void> = withRouter(BlogSearchBa
 const blogSearchBarStyle: CSS = {
     marginBottom: '60px',
 };
+
 const buttonStyle: CSS = {
     height: '36px',
     padding: '6px 12px',
@@ -67,10 +68,12 @@ const buttonStyle: CSS = {
         margin: '5px 0px 0px 0px',
     },
 };
+
 const form: CSS = {
     display: 'inline',
     marginBottom: '0px',
 };
+
 const input: CSS = {
     ':focus': {
         borderColor: buttonDefault,

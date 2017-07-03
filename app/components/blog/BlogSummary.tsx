@@ -6,7 +6,7 @@ import {BlogCommentCount} from './BlogCommentCount';
 import {Link, FontAwesomeRadium} from '../reusable-components/reusableComponents';
 import {linkStyle, firstThemeColor, defaultTextColor, causecodeOrange} from '../../constants';
 import {CSS} from '../../interfaces';
-import {convertToFriendlyUrl} from '../../utils';
+import {convertToFriendlyUrl, htmlToText} from '../../utils';
 const moment = require<any>('moment');
 
 export interface IBlogSummaryProps {
@@ -16,9 +16,6 @@ export interface IBlogSummaryProps {
 
 @Radium
 export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
-    htmlToText = (html: string): {__html: string} => {
-        return {__html: DOMPurify.sanitize(html)};
-    }
     
     getBlogUrl = (blog: IBlog): string => {
         let friendlyUrl: string = convertToFriendlyUrl(blog.title);
@@ -32,8 +29,9 @@ export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
                     <h2 style={heading}>
                         <Link
                                 style={headerLink}
-                                to={`/blog/${this.getBlogUrl(this.props.instanceData)}`}>
-                                {this.props.instanceData.title}
+                                to={`/blog/${this.getBlogUrl(this.props.instanceData)}`}
+                        >
+                            {this.props.instanceData.title}
                         </Link>
                     </h2>
                     <div>
@@ -43,8 +41,8 @@ export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
                             <li>{this.props.instanceData.author}</li>
                             <li className="pull-right">
                                 <BlogCommentCount
-                                    blogInstance={this.props.instanceData}
-                                    loadCommentCount={this.props.loadCommentCount}
+                                        blogInstance={this.props.instanceData}
+                                        loadCommentCount={this.props.loadCommentCount}
                                 />
                             </li>
                         </ul>
@@ -78,11 +76,12 @@ export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
                                     },
                                 }}/>
                             <span className="summaryContent"
-                                    dangerouslySetInnerHTML={this.htmlToText(this.props.instanceData.body)} /> ...
+                                    dangerouslySetInnerHTML={htmlToText(this.props.instanceData.body)} /> ...
                         </span>
                         <Link
                                 style={[linkStyle, readMore]}
-                                to={`/blog/${this.getBlogUrl(this.props.instanceData)}`}>&nbsp;Read more
+                                to={`/blog/${this.getBlogUrl(this.props.instanceData)}`}>
+                            &nbsp;Read more
                             <FontAwesomeRadium style={paddingStyle} name="long-arrow-right" />
                         </Link>
                     </div>

@@ -45,7 +45,6 @@ export interface IFormProps extends IInstancePageProps, IFormStateProps, IDispat
         successCallBack?: ((args: any) => void),
         failureCallBack?: ((args: any) => void),
     ) => void;
-
     handleDelete?: (
         instance: BlogModel,
         successCallBack?: ((args: any) => void),
@@ -200,10 +199,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
         this.props.handleSubmit(this.fetchStoreInstance(), this.handleSuccess, this.handleFailure);
     }
 
-    saveUploadedImageData = (key: string, value: any): void => {
-        /* Explicit cast to any is required to avoid type warning. Typescript 2.2 introduces functionality
-         * to assign type to dynamic keys
-         */
+    saveUploadedImageData = (key: string, value): void => {
         this.setState({
             [key]: value,
         } as any);

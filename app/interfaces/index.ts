@@ -1,6 +1,6 @@
+import {IBlog} from '../models/BlogModel';
 import {BaseModel} from 'react-hero';
 export {CSSProperties as CSS} from 'react';
-export * from './blogInterfaces';
 
 export interface IHelmetMeta {
     title: string;
@@ -36,4 +36,22 @@ export interface IStoreInstanceType {
     instanceList?: BaseModel[];
     activePage?: number;
     properties?: any;
+}
+
+export interface IInstanceList {
+    instanceList: IBlog[];
+    monthFilterList: string[];
+    tagList: (string|number)[][];
+    totalCount: number;
+}
+
+export interface IInstanceDataSmall {
+    author?: string;
+    blogImgSrc?: string;
+    id?: number;
+    lastUpdated?: string;
+    numberOfComments?: number;
+    publishedDate?: string;
+    title?: string;
+    body?: string;
 }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Radium from 'radium';
 import {IBlog} from '../../models/BlogModel';
 import {FontAwesomeRadium} from '../reusable-components/reusableComponents';
 import {linkStyle} from '../../constants';
@@ -12,7 +11,7 @@ export interface IBlogCommentCountProps {
     style?: CSS;
     loadCommentCount?: boolean;
 }
-export interface IBlogCommentConfig {
+export interface IBlogCommentCountConfig {
     url: string;
     title: string;
 }
@@ -20,19 +19,19 @@ export interface IBlogCommentConfig {
 export class BlogCommentCount extends React.Component<IBlogCommentCountProps, void> {
 
 
-    createBlogCommentCountUrl = (): IBlogCommentConfig => {
-        let {id, title} = this.props.blogInstance;
+    createBlogCommentCountUrl = (): IBlogCommentCountConfig => {
+        const {id, title} = this.props.blogInstance;
         /**
          * Using location.protocol and location.host to make sure that
          * FBCommentsCount uses fully qualified url.
          */
-        let url: string = `${location.protocol}//${location.host}/blog/${id}/${convertToFriendlyUrl(title)}`;
+        const url: string = `${location.protocol}//${location.host}/blog/${id}/${convertToFriendlyUrl(title)}`;
 
         return {url, title};
     }
 
     render(): JSX.Element {
-            let blogCommentUrl: {
+            const blogCommentUrl: {
             url: string,
             title: string,
         } = this.createBlogCommentCountUrl();

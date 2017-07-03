@@ -14,9 +14,9 @@ export class BasePage extends React.Component<void, void> {
                 <StyleRoot>
                     <Route path="/blogs/:filter?/:value?" component={BlogList}></Route>
                     <Route path="/blog/:article/:title" component={BlogShow}></Route>
-                    <Route path=":resource/list" component={ListPage}/>
+                    <Route path="/:resource/list" component={ListPage}/>
                     <Route path="/:resource/show/:resourceID" component={ShowPage} />
-                    <Route path=":resource/edit/:resourceID" component={EditPage} />
+                    <Route path="/:resource/edit/:resourceID" component={EditPage} />
                 </StyleRoot>
             </Switch>
         );

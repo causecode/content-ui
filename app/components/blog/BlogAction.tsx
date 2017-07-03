@@ -15,6 +15,7 @@ export class BlogAction extends React.Component<IBlogActionProps, void> {
 
     render(): JSX.Element {
         const {instance, deleteBlog} = this.props;
+        
         if (instance) {
             return (
                 <span>

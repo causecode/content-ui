@@ -33,7 +33,7 @@ describe('Test cases for Blog Instance', (): void => {
         }});
     
     let blogInstaceFull: ShallowWrapper<IBlogInstanceFullProps, void> = shallow<IBlogInstanceFullProps, void>(
-        <BlogInstanceFullImpl id={1} blogInstance={blog} metaTags={[]} />
+            <BlogInstanceFullImpl id={1} blogInstance={blog} metaTags={[]} />
     );
 
     unroll('sohould render #count #element', (

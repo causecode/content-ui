@@ -17,17 +17,13 @@ export class BlogInstanceTags extends React.Component<IBlogInstanceTagsProps, vo
         });
     }
 
-    getBlogTagList = (): JSX.Element[] => {
-        return this.list;
-    }
-
     render(): JSX.Element {
         return (
             <div style={outerDivStyle}>
                 <h2 style={headerStyle}>Tags</h2>
                 <hr style={hrStyle}/>
                 <div style={divStyle}>
-                    {this.getBlogTagList()}
+                    {this.list}
                 </div>
             </div>
         );
@@ -40,19 +36,23 @@ const headerStyle: CSS = {
     fontSize: '28px',
     color: defaultTextColor,
 };
+
 const hrStyle: CSS = {
     color: '#444',
     borderTop: '1px solid #eee',
     margin: '20px 0px',
 };
+
 const outerDivStyle: CSS = {
     display: 'block',
     marginBottom: '35px',
 };
+
 const divStyle: CSS = {
     paddingLeft: '10px',
     color: defaultTextColor,
 };
+
 const tagStyle: CSS = {
     color: '#fff',
     textAlign: 'center',

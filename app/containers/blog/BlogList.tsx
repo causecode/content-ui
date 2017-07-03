@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {scrollToTop} from 'react-hero';
-import {connect} from 'react-redux';
+import {connect, MapStateToProps} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {CSS} from '../../interfaces';
 import {getMonthFromNumber, isEmpty} from '../../utils';
 import {Grid, Row, Col} from '../../components/reusable-components/reusableComponents';
 import {BlogListInner} from '../../components/blog/BlogListInner';
-import {IInstanceList} from '../../interfaces/blogInterfaces';
+import {IInstanceList} from '../../interfaces';
 import {BlogSideBar} from './BlogSideBar';
 import {BlogPagination} from '../../components/blog/BlogPagination';
 import {ReactHelmet} from '../../components/common/ReactHelmet';
@@ -108,7 +108,7 @@ class BlogListImpl extends React.Component<IBlogListProps, IBlogListState> {
     }
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps: MapStateToProps<{}, {}> = (state) =>  {
     const mutableState = state.data.toJS ? state.data.toJS() : state.data;
     
     return {

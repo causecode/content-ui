@@ -9,7 +9,6 @@ export interface IBlogEditPageProps extends IInstancePageProps {
         successCallBack?: ((args: any) => {}),
         failureCallBack?: ((args: any) => {}),
     ) => void;
-
     handleDelete: (
         instance: BlogModel,
         successCallBack?: ((args: any) => {}),

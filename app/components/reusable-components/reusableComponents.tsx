@@ -27,6 +27,3 @@ export const ControlLabel = Radium(Bootstrap.ControlLabel);
 export const Link = Radium(Router.Link);
 export const FontAwesomeRadium = Radium(FontAwesome);
 export const Pagination  = Radium(Bootstrap.Pagination);
-
-// React-Router components
-export const RouteLink = Radium(Link);

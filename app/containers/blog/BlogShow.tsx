@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import {connect, MapStateToProps} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
+import {scrollToTop} from 'react-hero';
 import {Grid, Row, Col} from '../../components/reusable-components/reusableComponents';
 import {BlogInstanceFull} from './BlogInstanceFull';
 import {BlogSideBar} from './BlogSideBar';
 import {CSS} from '../../interfaces';
-import {scrollToTop} from 'react-hero';
 import {BlogModel} from '../../models';
 
 export interface IBlogShowProps {
@@ -45,7 +45,8 @@ class BlogShowImpl extends React.Component<IBlogShowProps & RouteComponentProps<
     }
 }
 
-function mapStateToProps(state, props) {
+const mapStateToProps: MapStateToProps<{}, IBlogShowProps> = 
+    (state, props: IBlogShowProps & RouteComponentProps<IBlogShowRouteProps>): {params: IBlogShowRouteProps} => {
     return {
         params: props.match.params,
     };

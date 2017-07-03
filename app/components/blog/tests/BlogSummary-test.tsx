@@ -8,7 +8,7 @@ import {blogInstance} from '../../../tests/BlogTestData';
 describe('Test cases for BlogSumamry', (): void => {
 
     let blogSummary: ShallowWrapper<IBlogSummaryProps, void> = shallow<IBlogSummaryProps, void>(
-        <BlogSummary instanceData={blogInstance} />
+            <BlogSummary instanceData={blogInstance} />
     );
 
     it('should render all the fields', (): void => {

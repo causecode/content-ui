@@ -1,8 +1,9 @@
 jest.unmock('../BlogMetaTags');
 
 import * as React from 'react';
-import {ShallowWrapper, shallow} from 'enzyme';
-import {BlogMetaTagsImpl, IBlogMetaTagProps, IBlogMetaTagsState} from '../BlogMetaTags';
+import {ShallowWrapper, shallow, EnzymePropSelector} from 'enzyme';
+import { BlogMetaTagsImpl, IBlogMetaTagProps, IBlogMetaTagsState } from '../BlogMetaTags';
+import {Grid, FormControl, HelpBlock} from '../../reusable-components/reusableComponents';
 const unroll = require<any>('unroll');
 
 unroll.use(it);
@@ -10,20 +11,20 @@ unroll.use(it);
 describe('Tests for BlogMetaTags', (): void => {
     let blogMetaTagsImpl: ShallowWrapper<IBlogMetaTagProps, IBlogMetaTagsState> =
             shallow<IBlogMetaTagProps, IBlogMetaTagsState>(
-                <BlogMetaTagsImpl metaTypeList={['keywords', 'title']} />
+                    <BlogMetaTagsImpl metaTypeList={['keywords', 'title']} />
             );
 
     unroll('should render #count #component', (
         done: () => void,
-        args: {component: string, count: number}
+        args: {component: EnzymePropSelector, count: number}
     ): void => {
         expect(blogMetaTagsImpl.find(args.component).length).toBe(args.count);
         done();
     }, [
         ['component', 'count'],
-        ['Grid', 1],
-        ['FormControl', 1],
-        ['HelpBlock', 1],
+        [Grid, 1],
+        [FormControl, 1],
+        [HelpBlock, 1],
     ]);
 
     it('should set selectedValue field when value is selected from dropdown', (): void => {

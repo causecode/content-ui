@@ -79,11 +79,13 @@ export class BlogArchiveSection extends React.Component<IBlogArchiveSectionProps
 const blogArchiveSectionStyle: CSS = {
     marginBottom: '60px',
 };
+
 const title: CSS = {
     margin: '0px 0px 15px',
     color: '#666',
     font: 'normal normal 400 22px normal Monyserrat,sans-serif',
 };
+
 const archivesList: CSS = {
     paddingLeft: '0px',
     listStyle: 'none',

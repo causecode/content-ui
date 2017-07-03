@@ -151,6 +151,7 @@ export const BlogMetaTags: React.ComponentClass<IBlogMetaTagProps> = ReduxForm.r
 const selectStyle: CSS = {
     margin: '10% 0px 0% 1%',
 };
+
 const addStyle: CSS = {
     color: firstThemeColor,
     fontSize: '25px',
@@ -161,18 +162,23 @@ const addStyle: CSS = {
         background: 'initial',
     },
 };
+
 const topMargin: CSS = {
     margin: '40px 0px 0px',
 };
+
 const bottomMargin: CSS = {
     margin: '0px 0px 10%',
 };
+
 const fieldStyle: CSS = {
     margin: '0% 0% 3%',
 };
+
 const taStyle: CSS = {
     width: '100%',
 };
+
 const closeBtnStyle: CSS = {
     float: 'right',
     fontSize: '14px',
@@ -187,6 +193,7 @@ const closeBtnStyle: CSS = {
         opacity: .5,
     },
 };
+
 const headerStyle: CSS = {
     fontWeight: 700,
 };

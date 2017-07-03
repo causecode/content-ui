@@ -5,7 +5,15 @@ import {StyleRoot} from 'radium';
 import {Provider} from 'react-redux';
 import {MemoryRouter} from 'react-router';
 import {ShallowWrapper, shallow, ReactWrapper, mount} from 'enzyme';
-import {AlertDismissable, FormInput, showAlert, configureStore, hasAnyRole, RawContentWrapper, MarkdownWrapper} from 'react-hero';
+import {
+    AlertDismissable,
+    FormInput,
+    showAlert,
+    configureStore,
+    hasAnyRole,
+    RawContentWrapper,
+    MarkdownWrapper,
+} from 'react-hero';
 import {IAxiosResponse} from '../../../interfaces';
 import {BlogModel} from '../../../models/BlogModel';
 import {Link, Button} from '../../../components/reusable-components/reusableComponents';
@@ -170,7 +178,7 @@ describe('Test cases for Form', () => {
             });
 
         let blogEdit: ReactWrapper<IFormProps, IFormState> = mount<IFormProps, IFormState>(
-            <MemoryRouter>
+                <MemoryRouter>
                     <StyleRoot>
                         <Provider store={configureStore({
                             forms: {rhForms: {blogEdit: blogModelInstance}},
@@ -183,8 +191,8 @@ describe('Test cases for Form', () => {
                                     history={{push: push}}
                             />
                         </Provider>
-                </StyleRoot>
-            </MemoryRouter>
+                    </StyleRoot>
+                </MemoryRouter>
         );
 
         it('should fetch metaTypeList when component mounts', (): void => {
