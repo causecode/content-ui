@@ -18,6 +18,7 @@ export interface IBlogInstanceFullProps {
     blogInstance?: IBlog;
     metaTags?: {content: string}[];
     id: string;
+    appId: string;
 }
 
 @Radium
@@ -76,7 +77,11 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
                             <li>/</li>
                             <li>{blog ? blog.author : 'Loading...'}</li>
                             <li className="pull-right">
-                                <BlogCommentCount blogInstance={blog} loadCommentCount={true} />
+                                <BlogCommentCount
+                                        blogInstance={blog}
+                                        loadCommentCount={true}
+                                        appId={this.props.appId}
+                                />
                             </li>
                         </ul>
                     </div>
@@ -172,7 +177,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
                 </section>
                 <section>
                     <h2 style={title}>Comments</h2>
-                    <BlogComment blogInstance={this.props.blogInstance} />
+                    <BlogComment blogInstance={this.props.blogInstance} appId={this.props.appId} />
                 </section>
             </section>
         );

@@ -3,15 +3,16 @@ import {IBlog} from '../../models/BlogModel';
 import {convertToFriendlyUrl} from '../../utils';
 import {FBComments} from './FBComments';
 
-export interface IBlogComment {
+export interface IBlogCommentProps {
     blogInstance: IBlog;
+    appId: string;
 }
 export interface IBlogCommentConfig {
     url: string;
     title: string;
 }
 
-export class BlogComment extends React.Component<IBlogComment, void> {
+export class BlogComment extends React.Component<IBlogCommentProps, void> {
     createBlogCommentCountUrl = (): IBlogCommentConfig => {
         const {id, title} = this.props.blogInstance;
         /**
@@ -32,7 +33,7 @@ export class BlogComment extends React.Component<IBlogComment, void> {
         return (
             <div>
                 <FBComments
-                        appId="235916853233988"
+                        appId={this.props.appId}
                         width={750}
                         numPosts={5}
                         mobile={true}

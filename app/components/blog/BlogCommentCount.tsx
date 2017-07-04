@@ -10,6 +10,7 @@ export interface IBlogCommentCountProps {
     blogInstance: IBlog;
     style?: CSS;
     loadCommentCount?: boolean;
+    appId: string;
 }
 export interface IBlogCommentCountConfig {
     url: string;
@@ -41,7 +42,7 @@ export class BlogCommentCount extends React.Component<IBlogCommentCountProps, vo
                 <a href={blogCommentUrl.url} style={this.props.style || linkStyle}>
                     <FontAwesomeRadium name="comments" style={[this.props.style || linkStyle, paddingStyle]} />
                     <FBCommentsCount
-                            appId="235916853233988"
+                            appId={this.props.appId}
                             href={blogCommentUrl.url}
                             locale="en_US"
                             loadCommentCount={this.props.loadCommentCount}

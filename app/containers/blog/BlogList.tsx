@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {scrollToTop} from 'react-hero';
 import {connect, MapStateToProps} from 'react-redux';
-import {RouteComponentProps} from 'react-router';
+import {RouteComponentProps, withRouter} from 'react-router';
 import {CSS} from '../../interfaces';
 import {getMonthFromNumber, isEmpty} from '../../utils';
 import {Grid, Row, Col} from '../../components/reusable-components/reusableComponents';
@@ -19,9 +19,9 @@ export interface IBlogRouteParams {
 }
 
 export interface IBlogListProps extends RouteComponentProps<IBlogRouteParams> {
-    blogList: IInstanceList;
-    currentPage: number;
-    fetched: boolean;
+    blogList?: IInstanceList;
+    fetched?: boolean;
+    appId: string;
 }
 
 export interface IBlogListState {
@@ -89,7 +89,11 @@ class BlogListImpl extends React.Component<IBlogListProps, IBlogListState> {
                 <h1 style={title}>Blogs</h1>
                 <Row style={rowStyle}>
                     <Col md={8} sm={8} xs={12}>
-                        <BlogListInner fetched={this.props.fetched} blogList={this.props.blogList} />
+                        <BlogListInner
+                                fetched={this.props.fetched}
+                                blogList={this.props.blogList}
+                                appId={this.props.appId}
+                        />
                         <BlogPagination
                                 currentPage={
                                     this.props.match.params.filter && this.props.match.params.filter === 'page' 
@@ -115,9 +119,9 @@ const mapStateToProps: MapStateToProps<{}, {}> = (state) =>  {
         blogList: mutableState.blogList ? mutableState.blogList : [],
         fetched: mutableState.blogList ? !mutableState.blogList.isLoading : false,
     };
-}
+};
 
-let BlogList = connect<{}, {}, {IBlogListProps}>(mapStateToProps)(BlogListImpl);
+let BlogList = withRouter(connect<{}, {}, IBlogListProps>(mapStateToProps)(BlogListImpl));
 
 export {BlogList};
 

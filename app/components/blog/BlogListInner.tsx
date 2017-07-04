@@ -8,6 +8,7 @@ import {CSS} from '../../interfaces';
 export interface IBlogListInnerProps {
     blogList: IInstanceList;
     fetched: boolean;
+    appId: string;
 }
 
 @Radium
@@ -26,6 +27,7 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
                             key={index}
                             instanceData={instance.properties}
                             loadCommentCount={loadCommentCount}
+                            appId={this.props.appId}
                         />;
             });
         }

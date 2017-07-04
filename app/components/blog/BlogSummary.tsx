@@ -12,7 +12,8 @@ const moment = require<any>('moment');
 export interface IBlogSummaryProps {
     instanceData: IBlog;
     loadCommentCount?: boolean;
-};
+    appId: string;
+}
 
 @Radium
 export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
@@ -43,6 +44,7 @@ export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
                                 <BlogCommentCount
                                         blogInstance={this.props.instanceData}
                                         loadCommentCount={this.props.loadCommentCount}
+                                        appId={this.props.appId}
                                 />
                             </li>
                         </ul>
