@@ -7,7 +7,7 @@ var path = require('path');
 var plugins = [];
 
 var entryPoints = [
-    './src/devIndex.tsx'
+    './app/devIndex.tsx'
 ];
 
 if (isProduction) {
@@ -67,7 +67,7 @@ var config = {
 	},
     resolve: {
         modules: [
-            path.resolve(__dirname, './src'),
+            path.resolve(__dirname, './app'),
             'node_modules'
         ],
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.json']
@@ -78,11 +78,11 @@ var config = {
                 test: /\.tsx?$/,
                 enforce: "pre",
                 loader: 'tslint-loader',
-                exclude: /node_modules/
+                exclude: [/node_modules/,/tests/]
             },
             {
                 test: /\.tsx?$/,
-                exclude: /node_modules/,
+                exclude: [/node_modules/,/tests/],
                 use: [
                     'react-hot-loader',
                     'ts-loader'
