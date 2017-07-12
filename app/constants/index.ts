@@ -34,6 +34,7 @@ export const causecodeOrange: string = '#F58A1F';
 export const firstThemeColor: string = '#FED587';
 export const buttonDefault: string = '#57BB89';
 export const buttonShadow: string = '#4DA67A';
+export const blogLinksOrange: string = '#eea303';
 
 export const blogMetaData: IHelmetMeta = {
     title: 'Blog - CauseCode Technologies Pvt. Ltd.',

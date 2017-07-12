@@ -11,7 +11,7 @@ import {isLoggedIn, convertToFriendlyUrl} from '../../utils';
 import {FontAwesomeLink} from '../../components/layout/FontAwesomeLink';
 import {CSS} from '../../interfaces';
 import {Button, FontAwesomeRadium} from '../../components/reusable-components/reusableComponents';
-import {firstThemeColor, defaultTextColor, linkStyle} from '../../constants';
+import {blogLinksOrange, causecodeOrange, defaultTextColor, linkStyle} from '../../constants';
 import {ReactHelmet} from '../../components/common/ReactHelmet';
 
 export interface IBlogInstanceFullProps {
@@ -156,14 +156,14 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
                                 color: defaultTextColor,
                             },
                             a: {
-                                color: firstThemeColor,
+                                color: blogLinksOrange,
                                 fontSize: '16px',
                                 fontFamily: 'Lato, arial, sans-serif',
                             },
                             'a:hover': {
                                 transition: '0.4s all ease-in-out',
                                 textDecoration: 'none',
-                                color: '#a26f02',
+                                color: causecodeOrange,
                             },
                         }}
                     />

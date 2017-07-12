@@ -1,4 +1,4 @@
-/src
+/app
 /__mocks__
 /__tests__
 /.idea
@@ -6,3 +6,8 @@
 /node_modules
 /typings
 /.vscode
+/webpack.config.js
+/localConfig.json
+/tsconfig.json
+/typings.json
+/tslint.json
