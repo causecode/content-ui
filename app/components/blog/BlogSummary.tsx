@@ -4,7 +4,7 @@ import * as DOMPurify from 'dompurify';
 import {IBlog} from '../../models/BlogModel';
 import {BlogCommentCount} from './BlogCommentCount';
 import {Link, FontAwesomeRadium} from '../reusable-components/reusableComponents';
-import {linkStyle, firstThemeColor, defaultTextColor, causecodeOrange} from '../../constants';
+import {linkStyle, defaultTextColor, causecodeOrange, blogLinksOrange} from '../../constants';
 import {CSS} from '../../interfaces';
 import {convertToFriendlyUrl, htmlToText} from '../../utils';
 const moment = require<any>('moment');
@@ -64,14 +64,14 @@ export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
                                         fontSize: '16px',
                                     },
                                     a: {
-                                        color: firstThemeColor,
+                                        color: blogLinksOrange,
                                         fontSize: '16px',
                                         fontFamily: 'Lato, arial, sans-serif',
                                     },
                                     'a:hover': {
                                         transition: '0.4s all ease-in-out',
                                         textDecoration: 'none',
-                                        color: '#a26f02',
+                                        color: causecodeOrange,
                                     },
                                     span: {
                                         color: defaultTextColor,

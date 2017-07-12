@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Radium from 'radium';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {CSS} from '../../interfaces';
-import {firstThemeColor} from '../../constants';
+import {causecodeOrange, blogLinksOrange} from '../../constants';
 import {BlogModel} from '../../models';
 import {Pagination} from '../reusable-components/reusableComponents';
 import {IBlogRouteParams} from '../../containers/blog/BlogList';
@@ -98,28 +98,28 @@ IBlogPaginationState> {
                     scopeSelector=".pagination>.active"
                     rules={{
                         span: {
-                            backgroundColor: firstThemeColor,
-                            borderColor: firstThemeColor,
+                            backgroundColor: blogLinksOrange,
+                            borderColor: blogLinksOrange,
                         },
                         a: {
-                            backgroundColor: firstThemeColor,
-                            borderColor: firstThemeColor,
+                            backgroundColor: blogLinksOrange,
+                            borderColor: blogLinksOrange,
                         },
                         'a:hover': {
-                            backgroundColor: firstThemeColor,
-                            borderColor: firstThemeColor,
+                            backgroundColor: causecodeOrange,
+                            borderColor: causecodeOrange,
                         },
                         'a:focus': {
-                            backgroundColor: firstThemeColor,
-                            borderColor: firstThemeColor,
+                            backgroundColor: causecodeOrange,
+                            borderColor: causecodeOrange,
                         },
                         'span:focus': {
-                            backgroundColor: firstThemeColor,
-                            borderColor: firstThemeColor,
+                            backgroundColor: causecodeOrange,
+                            borderColor: causecodeOrange,
                         },
                         'span:hover': {
-                            backgroundColor: firstThemeColor,
-                            borderColor: firstThemeColor,
+                            backgroundColor: causecodeOrange,
+                            borderColor: causecodeOrange,
                         },
                     }}
                 />
@@ -127,19 +127,19 @@ IBlogPaginationState> {
                     scopeSelector=".pagination>li"
                     rules={{
                         a: {
-                            color: firstThemeColor,
+                            color: blogLinksOrange,
                         },
                         'a:hover': {
-                            color: firstThemeColor,
+                            color: causecodeOrange,
                         },
                         span: {
-                            color: firstThemeColor,
+                            color: blogLinksOrange,
                         },
                         'span:hover': {
-                            color: firstThemeColor,
+                            color: causecodeOrange,
                         },
                         'span:focus': {
-                            color: firstThemeColor,
+                            color: causecodeOrange,
                         },
                     }}
                 />
