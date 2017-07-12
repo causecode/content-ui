@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Radium from 'radium';
 import {FontAwesomeRadium} from '../reusable-components/reusableComponents';
 import {CSS} from '../../interfaces';
-import {socialList, firstThemeColor, ISocialList} from '../../constants';
+import {socialList, blogLinksOrange, ISocialList} from '../../constants';
 
 @Radium
 export class BlogGetConnectedBar extends React.Component<void, void> {
@@ -53,6 +53,6 @@ const icon: CSS = {
     fontSize: '32px',
     color: '#999',
     ':hover': {
-        color: firstThemeColor,
+        color: blogLinksOrange,
     },
 };
