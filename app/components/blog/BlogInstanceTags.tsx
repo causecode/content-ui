@@ -28,7 +28,7 @@ export class BlogInstanceTags extends React.Component<IBlogInstanceTagsProps, vo
             </div>
         );
     }
-};
+}
 
 const headerStyle: CSS = {
     marginBottm: '15px',

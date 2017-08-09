@@ -17,7 +17,7 @@ export interface IBlogSummaryProps {
 
 @Radium
 export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
-    
+
     getBlogUrl = (blog: IBlog): string => {
         let friendlyUrl: string = convertToFriendlyUrl(blog.title);
         return `${blog.id}/${friendlyUrl}`;
@@ -91,7 +91,7 @@ export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
             </article>
         );
     }
-};
+}
 
 const blogSummaryStyle: CSS = {
     marginBottom: '60px',

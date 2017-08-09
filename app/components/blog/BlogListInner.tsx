@@ -4,6 +4,7 @@ import {BlogSummary} from './BlogSummary';
 import {IInstanceList} from '../../interfaces';
 import {defaultTextColor} from '../../constants';
 import {CSS} from '../../interfaces';
+import FontAwesome = require('react-fontawesome');
 
 export interface IBlogListInnerProps {
     blogList: IInstanceList;
@@ -45,7 +46,15 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
         }
         return (
             <div style={container}>
-                {this.props.fetched ? this.getBlogInstanceList() : <h3>Loading...</h3>}
+                {this.props.fetched ? this.getBlogInstanceList() :
+                    <div style={loaderContainer}>
+                        <FontAwesome
+                            name="circle-o-notch"
+                            spin={true}
+                            size="2x"
+                            style={{ textAlign: 'center'}}
+                        />
+                    </div>}
             </div>
         );
     }
@@ -53,4 +62,8 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
 
 const container: CSS = {
     color: defaultTextColor,
+};
+const loaderContainer: CSS = {
+    paddingTop: '30vh',
+    textAlign: 'center',
 };
