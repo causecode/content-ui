@@ -31,6 +31,7 @@ import {
     ALERT_DANGER,
     IMAGE_SIZE_GT_LIMIT,
 } from '../../constants';
+import {FontAwesome} from 'react-hero/public/components/ReusableComponents';
 const {actions} = require<any>('react-redux-form');
 const getFormValues = require<any>('redux-form').getFormValues;
 
@@ -214,6 +215,18 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
 
     render(): JSX.Element {
         this.generateModelKey();
+        if (!(this.modelStoreKey)) {
+            return(
+                    <div style={loaderContainer}>
+                            <FontAwesome
+                                name="circle-o-notch"
+                                spin={true}
+                                size="2x"
+                                style={{ textAlign: 'center'}}
+                            />
+                        </div>
+            );
+        }
         return (
             <div>
                 <AlertDismissable alertStyle={alertStyle}/>
@@ -349,5 +362,10 @@ const alertStyle: CSS = {
     margin: '65px 0px 0px 0px',
     position: 'fixed',
     width: '100%',
+    textAlign: 'center',
+};
+
+const loaderContainer: CSS = {
+    paddingTop: '30vh',
     textAlign: 'center',
 };
