@@ -27,6 +27,10 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     private twitterUrl: string = 'https://twitter.com/intent/tweet?text=';
     private linkedinUrl: string = 'https://www.linkedin.com/shareArticle?url=';
 
+    componentDidMount = (): void => {
+        window.scrollTo(0, 0);
+    }
+
     htmlToText = (html: string): {__html : string} => {
         return {__html: DOMPurify.sanitize(html)};
     }
@@ -52,7 +56,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     }
 
     renderEditButton = (id: number, title: string): JSX.Element => {
-        return isLoggedIn() ? <FontAwesomeLink 
+        return isLoggedIn() ? <FontAwesomeLink
                                 style={[linkStyle, {fontSize: '20px'}]}
                                 to={`/admin/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
                                 iconName="edit" /> : null;
@@ -60,6 +64,11 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
 
     render(): JSX.Element {
         let blog: IBlog = this.props.blogInstance;
+        if (!blog) {
+            return (
+                <h4>Not Found</h4>
+            );
+        }
         let keywords: string = (this.props.metaTags && this.props.metaTags[0] &&
                 this.props.metaTags[0].content) || 'CauseCode, Blog';
         return (
@@ -191,7 +200,7 @@ const mapStateToProps: MapStateToProps<{}, IBlogInstanceFullProps> =
     if (mutableState.blogList && mutableState.blogList.instanceList) {
         mutableState.blogList.instanceList.every((instance, i) => {
             let properties = instance[`properties`];
-            if (properties.id == ownProps.id) {
+            if (properties.id === parseInt(ownProps.id, 10)) {
                 instanceData = instance.properties;
                 metaList = instance.properties.metaList;
                 return false;
@@ -202,10 +211,10 @@ const mapStateToProps: MapStateToProps<{}, IBlogInstanceFullProps> =
     }
 
     return {
-        blogInstance: instanceData ? instanceData : [],
+        blogInstance: instanceData,
         metaTags: metaList ? metaList : [],
     };
-}
+};
 let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>(mapStateToProps)(BlogInstanceFullImpl);
 
 export {BlogInstanceFull};
