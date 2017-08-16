@@ -49,10 +49,10 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
                 {this.props.fetched ? this.getBlogInstanceList() :
                     <div style={loaderContainer}>
                         <FontAwesome
-                            name="circle-o-notch"
-                            spin={true}
-                            size="2x"
-                            style={{ textAlign: 'center'}}
+                                name="circle-o-notch"
+                                spin={true}
+                                size="2x"
+                                style={{ textAlign: 'center'}}
                         />
                     </div>}
             </div>
@@ -63,6 +63,7 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
 const container: CSS = {
     color: defaultTextColor,
 };
+
 const loaderContainer: CSS = {
     paddingTop: '30vh',
     textAlign: 'center',

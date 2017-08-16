@@ -13,7 +13,7 @@ render(
     <Provider store={store}>
         <BrowserRouter>
             <Switch>
-            <Route path="/" component={BasePage} />
+                <Route path="/" component={BasePage} />
             </Switch>
         </BrowserRouter>
     </Provider>,

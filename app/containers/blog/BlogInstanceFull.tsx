@@ -6,7 +6,7 @@ import { connect, MapStateToProps } from 'react-redux';
 import {BlogComment} from '../../components/blog/BlogComment';
 import {BlogCommentCount} from '../../components/blog/BlogCommentCount';
 import {BlogInstanceTags} from '../../components/blog/BlogInstanceTags';
-import {IBlog} from '../../models/BlogModel';
+import {BlogModel, IBlog} from '../../models/BlogModel';
 import {isLoggedIn, convertToFriendlyUrl} from '../../utils';
 import {FontAwesomeLink} from '../../components/layout/FontAwesomeLink';
 import {CSS} from '../../interfaces';
@@ -28,7 +28,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     private linkedinUrl: string = 'https://www.linkedin.com/shareArticle?url=';
 
     componentDidMount = (): void => {
-        window.scrollTo(0, 0);
+        scroll(0, 0);
     }
 
     htmlToText = (html: string): {__html : string} => {
@@ -57,9 +57,9 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
 
     renderEditButton = (id: number, title: string): JSX.Element => {
         return isLoggedIn() ? <FontAwesomeLink
-                                style={[linkStyle, {fontSize: '20px'}]}
-                                to={`/admin/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
-                                iconName="edit" /> : null;
+                style={[linkStyle, {fontSize: '20px'}]}
+                to={`/admin/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
+                iconName="edit" /> : null;
     }
 
     render(): JSX.Element {
@@ -194,25 +194,12 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
 }
 const mapStateToProps: MapStateToProps<{}, IBlogInstanceFullProps> =
     (store, ownProps : IBlogInstanceFullProps) : {blogInstance : IBlog, metaTags: any} => {
-    const mutableState = store.data.toJS ? store.data.toJS() : store.data;
-    let instanceData: IBlog;
-    let metaList: string[];
-    if (mutableState.blogList && mutableState.blogList.instanceList) {
-        mutableState.blogList.instanceList.every((instance, i) => {
-            let properties = instance[`properties`];
-            if (properties.id === parseInt(ownProps.id, 10)) {
-                instanceData = instance.properties;
-                metaList = instance.properties.metaList;
-                return false;
-            }
 
-            return true;
-        });
-    }
+    const blogInstance = BlogModel.get(ownProps.id, true);
 
     return {
-        blogInstance: instanceData,
-        metaTags: metaList ? metaList : [],
+        blogInstance: blogInstance.properties || [],
+        metaTags: blogInstance.properties.metaList || [],
     };
 };
 let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>(mapStateToProps)(BlogInstanceFullImpl);

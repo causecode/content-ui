@@ -8,7 +8,6 @@ import {BlogMetaTags} from '../../components/blog/BlogMetaTags';
 import {ImageUploader} from '../../components/common/ImageUploader';
 import {BlogModel, IBlog} from '../../models/BlogModel';
 import {TinyMCEWrapper} from '../../containers/common/TinyMCEWrapper';
-import {MarkdownWrapper, RawContentWrapper} from 'react-hero';
 import {Link, Col, Button, Grid, Row, ControlLabel} from '../../components/reusable-components/reusableComponents';
 import {IFileUploadResponse, IAxiosResponse, IDispatchProps, IAxiosError, CSS} from '../../interfaces';
 import {
@@ -18,6 +17,8 @@ import {
     AlertDismissable,
     IInstancePageProps,
     initializeFormWithInstance,
+    MarkdownWrapper,
+    RawContentWrapper,
 } from 'react-hero';
 import {
     header,
@@ -31,7 +32,7 @@ import {
     ALERT_DANGER,
     IMAGE_SIZE_GT_LIMIT,
 } from '../../constants';
-import {FontAwesome} from 'react-hero/public/components/ReusableComponents';
+import FontAwesome = require('react-fontawesome');
 const {actions} = require<any>('react-redux-form');
 const getFormValues = require<any>('redux-form').getFormValues;
 
@@ -217,14 +218,14 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
         this.generateModelKey();
         if (!(this.modelStoreKey)) {
             return(
-                    <div style={loaderContainer}>
-                            <FontAwesome
-                                name="circle-o-notch"
-                                spin={true}
-                                size="2x"
-                                style={{ textAlign: 'center'}}
-                            />
-                        </div>
+                <div style={loaderContainer}>
+                    <FontAwesome
+                            name="circle-o-notch"
+                            spin={true}
+                            size="2x"
+                            style={{ textAlign: 'center'}}
+                    />
+                </div>
             );
         }
         return (
@@ -297,13 +298,13 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
                                             style={btnStyle}
                                             bsStyle="primary"
                                             type="submit">
-                                        {this.props.isCreatePage ? 'Create' : 'Update'}
+                                            {this.props.isCreatePage ? 'Create' : 'Update'}
                                     </Button>
                                     <Link
                                             style={btnStyle}
                                             className="btn btn-default"
                                             to={'/blog/list'}>
-                                        Cancel
+                                            Cancel
                                     </Link>
                                 </Col>
                             </Row>
@@ -316,48 +317,52 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
 }
 
 let mapStateToProps: MapStateToProps<IFormStateProps, IFormProps> =
-        (state: IState, ownProps: IFormProps): IFormStateProps => {
+    (state: IState, ownProps: IFormProps): IFormStateProps => {
 
-    let rhForms: {blogCreate?: {properties: BlogModel}, blogEdit?: {properties: BlogModel}} =
+        let rhForms: {blogCreate?: {properties: BlogModel}, blogEdit?: {properties: BlogModel}} =
             state.forms && state.forms.rhForms;
-    let modelKey: string = ownProps.isCreatePage ? 'blogCreate' : 'blogEdit';
-    let blogInstance: IBlog;
+        let modelKey: string = ownProps.isCreatePage ? 'blogCreate' : 'blogEdit';
+        let blogInstance: IBlog;
 
-    if (rhForms && rhForms[modelKey] && rhForms[modelKey][`properties`]) {
-        blogInstance = rhForms[modelKey][`properties`];
-    }
+        if (rhForms && rhForms[modelKey] && rhForms[modelKey][`properties`]) {
+            blogInstance = rhForms[modelKey][`properties`];
+        }
 
-    return {
-        blogInstance,
+        return {
+            blogInstance,
+        };
     };
-};
 
 let mapDispatchToProps: MapDispatchToPropsFunction<IDispatchProps, IFormProps> =
-        (dispatch: IDispatch) : IDispatchProps => {
-    return {
-        saveData: (model: string, value: any) => {
-            dispatch(actions.change(model, value));
-        },
+    (dispatch: IDispatch) : IDispatchProps => {
+        return {
+            saveData: (model: string, value: any) => {
+                dispatch(actions.change(model, value));
+            },
+        };
     };
-};
 
 export const Form = withRouter(connect(mapStateToProps, mapDispatchToProps)(FormImpl));
 
 const rowStyle : CSS = {
     margin: '0px',
 };
+
 const rowStyleBottom : CSS = {
     margin: '0px',
     padding: '15px',
 };
+
 const contentGrid : CSS = {
     '@media (maxWidth: 767px)': {
         padding: '0px',
     },
 };
+
 const btnStyle: CSS = {
     margin: '10px 10px 10px 0px',
 };
+
 const alertStyle: CSS = {
     margin: '65px 0px 0px 0px',
     position: 'fixed',

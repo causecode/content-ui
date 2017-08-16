@@ -19,7 +19,7 @@ export interface IBlogSummaryProps {
 export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
 
     getBlogUrl = (blog: IBlog): string => {
-        let friendlyUrl: string = convertToFriendlyUrl(blog.title);
+        const friendlyUrl: string = convertToFriendlyUrl(blog.title);
         return `${blog.id}/${friendlyUrl}`;
     }
 
