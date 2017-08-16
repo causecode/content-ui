@@ -1,6 +1,6 @@
 {
   "name": "content-ui",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "React version of static-content",
   "main": "public/index.js",
   "typings": "public/index.d.ts",
