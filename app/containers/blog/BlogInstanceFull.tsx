@@ -58,7 +58,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     renderEditButton = (id: number, title: string): JSX.Element => {
         return isLoggedIn() ? <FontAwesomeLink
                 style={[linkStyle, {fontSize: '20px'}]}
-                to={`/admin/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
+                to={`/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
                 iconName="edit" /> : null;
     }
 
@@ -198,8 +198,8 @@ const mapStateToProps: MapStateToProps<{}, IBlogInstanceFullProps> =
     const blogInstance = BlogModel.get(ownProps.id, true);
 
     return {
-        blogInstance: blogInstance.properties || [],
-        metaTags: blogInstance.properties.metaList || [],
+        blogInstance: (blogInstance && blogInstance.properties) || [],
+        metaTags: (blogInstance && blogInstance.properties.metaList) || [],
     };
 };
 let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>(mapStateToProps)(BlogInstanceFullImpl);

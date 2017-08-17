@@ -4,3 +4,6 @@ export {PageShowPage} from './page/PageShowPage';
 export {BlogShow} from './blog/BlogShow';
 export {BlogInstanceFull} from './blog/BlogInstanceFull';
 export {BlogSideBar} from './blog/BlogSideBar';
+export {BlogEdit} from '../components';
+export {BlogListPage} from '../components';
+export {BlogCreate} from '../components';
