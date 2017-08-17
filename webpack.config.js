@@ -7,6 +7,7 @@ var path = require('path');
 var plugins = [];
 
 var entryPoints = [
+    'react-hot-loader/patch',
     './app/devIndex.tsx'
 ];
 
@@ -84,7 +85,7 @@ var config = {
                 test: /\.tsx?$/,
                 exclude: [/node_modules/,/tests/],
                 use: [
-                    'react-hot-loader',
+                    'react-hot-loader/webpack',
                     'ts-loader'
                 ]
             },
