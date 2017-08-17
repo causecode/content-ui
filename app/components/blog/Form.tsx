@@ -3,13 +3,6 @@ import * as Axios from 'axios';
 import * as Radium from 'radium';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {connect, MapStateToProps, MapDispatchToPropsFunction} from 'react-redux';
-import {store} from '../../store';
-import {BlogMetaTags} from '../../components/blog/BlogMetaTags';
-import {ImageUploader} from '../../components/common/ImageUploader';
-import {BlogModel, IBlog} from '../../models/BlogModel';
-import {TinyMCEWrapper} from '../../containers/common/TinyMCEWrapper';
-import {Link, Col, Button, Grid, Row, ControlLabel} from '../../components/reusable-components/reusableComponents';
-import {IFileUploadResponse, IAxiosResponse, IDispatchProps, IAxiosError, CSS} from '../../interfaces';
 import {
     showAlert,
     FormInput,
@@ -20,6 +13,13 @@ import {
     MarkdownWrapper,
     RawContentWrapper,
 } from 'react-hero';
+import {store} from '../../store';
+import {BlogMetaTags} from '../../components/blog/BlogMetaTags';
+import {ImageUploader} from '../../components/common/ImageUploader';
+import {BlogModel, IBlog} from '../../models/BlogModel';
+import {TinyMCEWrapper} from '../../containers/common/TinyMCEWrapper';
+import {Link, Col, Button, Grid, Row, ControlLabel} from '../../components/reusable-components/reusableComponents';
+import {IFileUploadResponse, IAxiosResponse, IDispatchProps, IAxiosError, CSS} from '../../interfaces';
 import {
     header,
     editorTypes,
@@ -33,8 +33,8 @@ import {
     IMAGE_SIZE_GT_LIMIT,
 } from '../../constants';
 import FontAwesome = require('react-fontawesome');
-const {actions} = require<any>('react-redux-form');
 const getFormValues = require<any>('redux-form').getFormValues;
+const {actions} = require<any>('react-redux-form');
 
 export interface IFormStateProps {
     blogInstance?: IBlog;
