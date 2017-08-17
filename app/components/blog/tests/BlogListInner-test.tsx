@@ -16,15 +16,20 @@ describe('Test cases for BlogListInner', (): void => {
         ],
         totalCount: 1,
     };
-    
+
     let blogListInner: ShallowWrapper<IBlogListInnerProps, void> = shallow<IBlogListInnerProps, void>(
             <BlogListInner />
     );
 
-    
+
     it('should render components', (): void => {
         blogListInner.setProps({blogList: blogList, fetched: true});
         expect(blogListInner.find('BlogSummary').length).toBe(1);
+    });
+
+    it('should render spinner', (): void => {
+        blogListInner.setProps({blogList: '', fetched: false});
+        expect(blogListInner.find('BlogSummary').length).toBe(0);
     });
 
     it('should render nothing if blogCount is 0', (): void => {
