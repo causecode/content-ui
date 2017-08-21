@@ -198,8 +198,8 @@ const mapStateToProps: MapStateToProps<{}, IBlogInstanceFullProps> =
     const blogInstance = BlogModel.get(ownProps.id, true);
 
     return {
-        blogInstance: (blogInstance && blogInstance.properties) || [],
-        metaTags: (blogInstance && blogInstance.properties.metaList) || [],
+        blogInstance: (blogInstance && blogInstance.properties) || null,
+        metaTags: (blogInstance && blogInstance.properties.metaList) || null,
     };
 };
 let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>(mapStateToProps)(BlogInstanceFullImpl);

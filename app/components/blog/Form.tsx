@@ -216,7 +216,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
 
     render(): JSX.Element {
         this.generateModelKey();
-        if (!(this.modelStoreKey)) {
+        if (!(this.props.blogInstance)) {
             return(
                 <div style={loaderContainer}>
                     <FontAwesome
@@ -245,7 +245,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
                                     type="text"
                                     propertyName="Title"
                                     propertyValue="Enter Title"
-                                    model={`${this.modelStoreKey}.title`}
+                                    model={`${this.modelStoreKey}.subTitle`}
                             />
                             <FormInput
                                     type="text"
@@ -371,6 +371,6 @@ const alertStyle: CSS = {
 };
 
 const loaderContainer: CSS = {
-    paddingTop: '30vh',
+    paddingTop: '40vh',
     textAlign: 'center',
 };
