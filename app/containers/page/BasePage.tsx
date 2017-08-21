@@ -5,7 +5,7 @@ import {BlogList} from '../blog/BlogList';
 import {BlogShow} from '../blog/BlogShow';
 import {BlogListPage} from '../../components/blog/BlogListPage';
 import {BlogEdit} from '../../components/blog/BlogEditPage';
-import {BlogCreate} from "../../components/blog/BlogCreatePage";
+import {BlogCreate} from '../../components/blog/BlogCreatePage';
 const reactRouterDom = require<any>('react-router-dom');
 
 export class BasePage extends React.Component<void, void> {

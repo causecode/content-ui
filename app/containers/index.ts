@@ -7,3 +7,4 @@ export {BlogSideBar} from './blog/BlogSideBar';
 export {BlogEdit} from '../components';
 export {BlogListPage} from '../components';
 export {BlogCreate} from '../components';
+export {BlogList} from './blog/BlogList';
