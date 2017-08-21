@@ -6,4 +6,4 @@
 2. Added scroll to top.
 3. Updated documentation for the navigation menu.
 4. Added checks for the boolean type input label.
-5. Updated route for blogEdit `/blog/edit/:resourceID` -> `/blog/edit/:resourceID`
+5. Updated route for blogEdit `/admin/:resource/edit/:resourceID` -> `/blog/edit/:resourceID`
