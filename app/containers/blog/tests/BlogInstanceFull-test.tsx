@@ -50,11 +50,4 @@ describe('Test cases for Blog Instance', (): void => {
         ['Blog Instance Tags Component', BlogInstanceTags, 1],
     ]);
 
-    it('should fetch data from redux store', (): void => {
-
-        let blogInstaceFull: ShallowWrapper<IBlogInstanceFullProps, void> = shallow<IBlogInstanceFullProps, void>(
-            <BlogInstanceFull store={mutableStore} id={1} />
-        );
-        expect(blogInstaceFull.prop('blogInstance').title).toBe(blog.properties.title);
-    });
 });

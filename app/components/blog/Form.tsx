@@ -245,7 +245,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
                                     type="text"
                                     propertyName="Title"
                                     propertyValue="Enter Title"
-                                    model={`${this.modelStoreKey}.subTitle`}
+                                    model={`${this.modelStoreKey}.title`}
                             />
                             <FormInput
                                     type="text"
