@@ -16,7 +16,7 @@ export interface IBlogListInnerProps {
 export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
     private list: Element[];
 
-    componentDidMount = (): void => {
+    componentWillMount = (): void => {
         window.scrollTo(0, 0);
     }
 
