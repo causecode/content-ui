@@ -1,6 +1,7 @@
 # ChangeLog
 
-## [1.1.4] - 2017-08-21
+## [0.0.5]-2017-08-21
+
 ### Changed
 1. Added loader in blog list page and blog edit page.
 2. Added scroll to top.

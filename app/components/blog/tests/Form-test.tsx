@@ -53,29 +53,36 @@ describe('Test cases for Form', () => {
                     isCreatePage={false}
                     saveData={saveData}
                     history={{push: push}}
-        />
+            />
     );
 
-    unroll(`blogCreate should render #count #elementName`, (
-        done: () => void,
-        args: {elementName: string, element: React.ComponentClass<any>, count: number}
-    ): void => {
-        expect(blogCreate.find(args.element).length).toBe(args.count);
-        done();
-    }, [
-        ['elementName', 'element', 'count'],
-        ['form', 'form', 1],
-        ['AlertDismissable', AlertDismissable, 1],
-        ['h1', 'h1', 1],
-        ['FormInput', FormInput, 5],
-        ['ImageUploader', ImageUploader, 1],
-        ['Button', Button, 1],
-        ['Link', Link, 1],
+    [blogCreate, blogEdit].forEach((parentComponent: ShallowWrapper<IFormProps, IFormState>, index: number): void => {
+        let component: string = index === 0 ? 'BlogCreatePage' : 'BlogEditPage';
 
-    ]);
+        unroll(`${component} should render #count #elementName`, (
+            done: () => void,
+            args: {elementName: string, element: React.ComponentClass<any>, count: number}
+        ): void => {
+            const blogInstanceMock = jest.fn();
+            blogEdit.setProps({blogInstance: blogInstanceMock});
+            expect(parentComponent.find(args.element).length).toBe(args.count);
+            done();
+        }, [
+            ['elementName', 'element', 'count'],
+            ['form', 'form', 1],
+            ['AlertDismissable', AlertDismissable, 1],
+            ['h1', 'h1', 1],
+            ['FormInput', FormInput, 5],
+            ['ImageUploader', ImageUploader, 1],
+            ['Button', Button, 1],
+            ['Link', Link, 1],
+        ]);
+    });
 
-    it('blogCreate test', () => {
-        expect(blogEdit.find('div').length).toBe(1);
+    it('Should render spinner', () => {
+        const blogInstanceMock = jest.fn();
+        blogEdit.setProps({blogInstance: ''});
+        expect(blogEdit.find('FontAwesome').length).toBe(1);
     });
     unroll('should render #editorName when editor type is #editorType', (
         done: () => void,
@@ -170,7 +177,7 @@ describe('Test cases for Form', () => {
 
     describe('When the form is connected to redux store', (): void => {
 
-        BlogModel.fetchMetaTypeList = jest.fn()
+         BlogModel.fetchMetaTypeList = jest.fn()
             .mockImplementationOnce((): Promise<IAxiosResponse> => {
                 return new Promise((resolve, reject): void => {
                     resolve({data: {metaTypeList: ['keywords', 'description']}});
@@ -178,21 +185,21 @@ describe('Test cases for Form', () => {
             });
 
         let blogEdit: ReactWrapper<IFormProps, IFormState> = mount<IFormProps, IFormState>(
-            <MemoryRouter>
-                <StyleRoot>
-                    <Provider store={configureStore({
-                        forms: {rhForms: {blogEdit: blogModelInstance}},
-                        alertDismissable: {show: false, type: '', message: ''},
-                    })}>
-                        <Form
-                            instance={blogModelInstance}
-                            isCreatePage={false}
-                            saveData={saveData}
-                            history={{push: push}}
-                        />
-                    </Provider>
-                </StyleRoot>
-            </MemoryRouter>
+                <MemoryRouter>
+                    <StyleRoot>
+                        <Provider store={configureStore({
+                            forms: {rhForms: {blogEdit: blogModelInstance}},
+                            alertDismissable: {show: false, type: '', message: ''},
+                        })}>
+                            <Form
+                                    instance={blogModelInstance}
+                                    isCreatePage={false}
+                                    saveData={saveData}
+                                    history={{push: push}}
+                            />
+                        </Provider>
+                    </StyleRoot>
+                </MemoryRouter>
         );
 
         it('should fetch metaTypeList when component mounts', (): void => {
