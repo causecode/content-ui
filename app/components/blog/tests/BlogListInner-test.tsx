@@ -29,7 +29,7 @@ describe('Test cases for BlogListInner', (): void => {
 
     it('should render spinner', (): void => {
         blogListInner.setProps({blogList: '', fetched: false});
-        expect(blogListInner.find('BlogSummary').length).toBe(0);
+        expect(blogListInner.find('FontAwesome').length).toBe(1);
     });
 
     it('should render nothing if blogCount is 0', (): void => {

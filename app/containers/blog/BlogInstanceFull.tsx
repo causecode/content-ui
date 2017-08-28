@@ -27,7 +27,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     private twitterUrl: string = 'https://twitter.com/intent/tweet?text=';
     private linkedinUrl: string = 'https://www.linkedin.com/shareArticle?url=';
 
-    componentDidMount = (): void => {
+    componentWillMount = (): void => {
         scroll(0, 0);
     }
 
