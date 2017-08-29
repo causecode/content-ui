@@ -1,28 +1,31 @@
 jest.unmock('../BlogInstanceFull');
+jest.mock('../../../components/blog/FBCommentsCount');
+jest.mock('../../../components/blog/FBComments');
 
 import * as React from 'react';
-import {ShallowWrapper, shallow} from 'enzyme';
+import {ShallowWrapper, shallow, ReactWrapper, mount} from 'enzyme';
 import {
+    BlogInstanceFull,
     BlogInstanceFullImpl,
     IBlogInstanceFullProps,
-    BlogInstanceFull,
-} 
-from '../../../containers/blog/BlogInstanceFull';
+}
+    from '../../../containers/blog/BlogInstanceFull';
 import {blogInstance} from '../../../tests/BlogTestData';
 import {Button} from '../../../components/reusable-components/reusableComponents';
 import {BlogCommentCount} from '../../../components/blog/BlogCommentCount';
 import {BlogComment} from '../../../components/blog/BlogComment';
 import {BlogInstanceTags} from '../../../components/blog/BlogInstanceTags';
-import {IBlog} from '../../../models/BlogModel';
+import {IBlog, BlogModel} from '../../../models/BlogModel';
 import {configureStore} from 'react-hero';
-
+import {process} from 'ts-jest/dist/preprocessor';
+import {Provider} from 'react-redux';
 const unroll: any = require<any>('unroll');
 unroll.use(it);
 
 describe('Test cases for Blog Instance', (): void => {
 
     let blog: {properties: IBlog} = { properties: blogInstance};
-
+    let id = jest.fn();
     let mutableStore = configureStore({
         data: {
             blogList: {
@@ -31,9 +34,29 @@ describe('Test cases for Blog Instance', (): void => {
                 ],
             },
         }});
-    
-    let blogInstaceFull: ShallowWrapper<IBlogInstanceFullProps, void> = shallow<IBlogInstanceFullProps, void>(
-            <BlogInstanceFullImpl id={1} blogInstance={blog} metaTags={[]} />
+
+    BlogModel.get = jest.fn((input) => {
+        return new Promise((resolve, reject) => {
+            process.nextTick(() => {
+                resolve('success');
+                reject('failed');
+            });
+        });
+    });
+
+    BlogModel.get = jest.fn((id, valueInStore) => {
+        return {
+            properties: blogInstance,
+        };
+    })
+    let blogInstaceFull: ReactWrapper<IBlogInstanceFullProps, void> = mount<IBlogInstanceFullProps, void>(
+        <Provider store={mutableStore}>
+            <BlogInstanceFull id={1} />
+        </Provider>
+    );
+
+    let blogInstaceFullImpl: ShallowWrapper<IBlogInstanceFullProps, void> = shallow<IBlogInstanceFullProps, void>(
+        <BlogInstanceFullImpl id={1} blogInstance={blog} metaTags={[]} />
     );
 
     unroll('sohould render #count #element', (
@@ -49,5 +72,15 @@ describe('Test cases for Blog Instance', (): void => {
         ['Blog Comment Component', BlogComment, 1],
         ['Blog Instance Tags Component', BlogInstanceTags, 1],
     ]);
+
+    it('check if blog Instance is not present', () => {
+
+        blogInstaceFullImpl.setProps({blogInstance: ''});
+        expect(blogInstaceFullImpl.find('h4').length).toBe(1);
+    });
+
+    it('Test for displayPopup', () => {
+        expect(blogInstaceFullImpl.instance().displayPopup('')).toBe(false);
+    });
 
 });
