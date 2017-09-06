@@ -56,10 +56,16 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     }
 
     renderEditButton = (id: number, title: string): JSX.Element => {
-        return isLoggedIn() ? <FontAwesomeLink
+        return (
+            <FontAwesomeLink
                 style={[linkStyle, {fontSize: '20px'}]}
                 to={`/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
-                iconName="edit" /> : null;
+                iconName="edit" />
+        );
+    }
+
+    renderEditButtonWithCheck = (id: number, title: string): JSX.Element => {
+        return isLoggedIn() ? this.renderEditButton(id, title) : null;
     }
 
     render(): JSX.Element {
@@ -79,7 +85,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
                 />
                 <section>
                     <h1 style={title}>{blog ? blog.title : 'Loading...'}</h1>
-                    {this.renderEditButton(blog.id, blog.title)}
+                    {this.renderEditButtonWithCheck(blog.id, blog.title)}
                     <div>
                         <ul style={metaList} className="list-inline">
                             <li>{blog ? moment(blog.publishedDate).format('MMM D, YYYY') : 'Loading...'}</li>

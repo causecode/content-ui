@@ -79,7 +79,7 @@ describe('Test cases for Form', () => {
         ]);
     });
 
-    it('Should render spinner', () => {
+    it('should render spinner when blogInstance is empty', (): void => {
         const blogInstanceMock = jest.fn();
         blogEdit.setProps({blogInstance: ''});
         expect(blogEdit.find('FontAwesome').length).toBe(1);

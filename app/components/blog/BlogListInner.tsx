@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as Radium from 'radium';
 import {BlogSummary} from './BlogSummary';
+import {Spinner} from '../common/Spinner';
 import {IInstanceList} from '../../interfaces';
 import {defaultTextColor} from '../../constants';
 import {CSS} from '../../interfaces';
-import FontAwesome = require('react-fontawesome');
 
 export interface IBlogListInnerProps {
     blogList: IInstanceList;
@@ -46,15 +46,7 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
         }
         return (
             <div style={container}>
-                {this.props.fetched ? this.getBlogInstanceList() :
-                    <div style={loaderContainer}>
-                        <FontAwesome
-                                name="circle-o-notch"
-                                spin={true}
-                                size="2x"
-                                style={{ textAlign: 'center'}}
-                        />
-                    </div>}
+                {this.props.fetched ? this.getBlogInstanceList() : <Spinner />}
             </div>
         );
     }
@@ -62,9 +54,4 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
 
 const container: CSS = {
     color: defaultTextColor,
-};
-
-const loaderContainer: CSS = {
-    paddingTop: '30vh',
-    textAlign: 'center',
 };

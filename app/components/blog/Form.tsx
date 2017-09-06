@@ -13,6 +13,7 @@ import {
     MarkdownWrapper,
     RawContentWrapper,
 } from 'react-hero';
+import {Spinner} from '../common/Spinner';
 import {store} from '../../store';
 import {BlogMetaTags} from '../../components/blog/BlogMetaTags';
 import {ImageUploader} from '../../components/common/ImageUploader';
@@ -217,16 +218,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
     render(): JSX.Element {
         this.generateModelKey();
         if (!(this.props.blogInstance)) {
-            return(
-                <div style={loaderContainer}>
-                    <FontAwesome
-                            name="circle-o-notch"
-                            spin={true}
-                            size="2x"
-                            style={{ textAlign: 'center'}}
-                    />
-                </div>
-            );
+            return <Spinner/> ;
         }
         return (
             <div>
@@ -367,10 +359,5 @@ const alertStyle: CSS = {
     margin: '65px 0px 0px 0px',
     position: 'fixed',
     width: '100%',
-    textAlign: 'center',
-};
-
-const loaderContainer: CSS = {
-    paddingTop: '40vh',
     textAlign: 'center',
 };

@@ -3,6 +3,9 @@ jest.mock('../../../components/blog/FBCommentsCount');
 jest.mock('../../../components/blog/FBComments');
 
 import * as React from 'react';
+import {configureStore} from 'react-hero';
+import {process} from 'ts-jest/dist/preprocessor';
+import {Provider} from 'react-redux';
 import {ShallowWrapper, shallow, ReactWrapper, mount} from 'enzyme';
 import {
     BlogInstanceFull,
@@ -16,16 +19,12 @@ import {BlogCommentCount} from '../../../components/blog/BlogCommentCount';
 import {BlogComment} from '../../../components/blog/BlogComment';
 import {BlogInstanceTags} from '../../../components/blog/BlogInstanceTags';
 import {IBlog, BlogModel} from '../../../models/BlogModel';
-import {configureStore} from 'react-hero';
-import {process} from 'ts-jest/dist/preprocessor';
-import {Provider} from 'react-redux';
 const unroll: any = require<any>('unroll');
 unroll.use(it);
 
 describe('Test cases for Blog Instance', (): void => {
 
     let blog: {properties: IBlog} = { properties: blogInstance};
-    let id = jest.fn();
     let mutableStore = configureStore({
         data: {
             blogList: {
@@ -35,20 +34,12 @@ describe('Test cases for Blog Instance', (): void => {
             },
         }});
 
-    BlogModel.get = jest.fn((input) => {
-        return new Promise((resolve, reject) => {
-            process.nextTick(() => {
-                resolve('success');
-                reject('failed');
-            });
-        });
-    });
-
-    BlogModel.get = jest.fn((id, valueInStore) => {
+    BlogModel.get = jest.fn((valueInStore) => {
         return {
             properties: blogInstance,
         };
-    })
+    });
+
     let blogInstaceFull: ReactWrapper<IBlogInstanceFullProps, void> = mount<IBlogInstanceFullProps, void>(
         <Provider store={mutableStore}>
             <BlogInstanceFull id={1} />
@@ -74,13 +65,13 @@ describe('Test cases for Blog Instance', (): void => {
     ]);
 
     it('check if blog Instance is not present', () => {
-
         blogInstaceFullImpl.setProps({blogInstance: ''});
+        blogInstaceFullImpl.instance().renderSpinner();
         expect(blogInstaceFullImpl.find('h4').length).toBe(1);
     });
 
-    it('Test for displayPopup', () => {
-        expect(blogInstaceFullImpl.instance().displayPopup('')).toBe(false);
+    it('Check if Popup is initially not displayed', () => {
+        expect(blogInstaceFullImpl.instance().displayPopup('Dummy URL')).toBe(false);
     });
 
 });
