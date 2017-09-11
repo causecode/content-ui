@@ -1,4 +1,5 @@
 jest.unmock('../Spinner');
+
 import * as React from 'react';
 import {ShallowWrapper, shallow, EnzymePropSelector} from 'enzyme';
 import {Spinner, ISpinnerProps} from '../Spinner';
@@ -9,12 +10,12 @@ unroll.use(it);
 
 describe('Test for spinner', (): void => {
     const componentTree: ShallowWrapper<ISpinnerProps, void> = shallow<ISpinnerProps, void>(
-        <Spinner/>,
+        <Spinner/>
     );
 
-    unroll('#title should render #count times', (
+    unroll('It should render the #title correctly.', (
         done: () => void,
-        args: {element: EnzymePropSelector, count: number},
+        args: {elementName: string, element: EnzymePropSelector, count: number},
     ) => {
         expect(componentTree.find(args.element).length).toBe(args.count);
         done();

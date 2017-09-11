@@ -23,6 +23,7 @@ import {blogModelInstance, blogInstance} from '../../../tests/BlogTestData';
 import {ALERT_INFO, ALERT_DANGER, ALERT_SUCCESS} from '../../../constants';
 import {IFormProps, IFormState, FormImpl, Form} from '../Form';
 import {mockStore, handleSubmitSuccess, getSuccessResponse} from '../../../tests/testUtils';
+import {Spinner} from '../../common/Spinner';
 
 const unroll: any = require<any>('unroll');
 
@@ -37,23 +38,23 @@ describe('Test cases for Form', () => {
     hasAnyRole = jest.fn();
     let blogCreate: ShallowWrapper<IFormProps, IFormState> = shallow<IFormProps, IFormState>(
         <FormImpl
-                    handleSubmit={handleSubmit}
-                    instance={blogModelInstance}
-                    blogInstance={blogInstance}
-                    isCreatePage={true}
-                    history={{push: push}}
+                handleSubmit={handleSubmit}
+                instance={blogModelInstance}
+                blogInstance={blogInstance}
+                isCreatePage={true}
+                history={{push: push}}
         />
     );
 
     let blogEdit: ShallowWrapper<IFormProps, IFormState> = shallow<IFormProps, IFormState>(
         <FormImpl
-                    handleDelete={handleSubmit}
-                    handleSubmit={handleSubmit}
-                    instance={blogModelInstance}
-                    isCreatePage={false}
-                    saveData={saveData}
-                    history={{push: push}}
-            />
+                handleDelete={handleSubmit}
+                handleSubmit={handleSubmit}
+                instance={blogModelInstance}
+                isCreatePage={false}
+                saveData={saveData}
+                history={{push: push}}
+        />
     );
 
     [blogCreate, blogEdit].forEach((parentComponent: ShallowWrapper<IFormProps, IFormState>, index: number): void => {
@@ -82,7 +83,7 @@ describe('Test cases for Form', () => {
     it('should render spinner when blogInstance is empty', (): void => {
         const blogInstanceMock = jest.fn();
         blogEdit.setProps({blogInstance: ''});
-        expect(blogEdit.find('FontAwesome').length).toBe(1);
+        expect(blogEdit.find(Spinner).length).toBe(1);
     });
     unroll('should render #editorName when editor type is #editorType', (
         done: () => void,
@@ -205,5 +206,6 @@ describe('Test cases for Form', () => {
         it('should fetch metaTypeList when component mounts', (): void => {
             expect(BlogModel.fetchMetaTypeList).toBeCalled();
         });
+
     });
 });

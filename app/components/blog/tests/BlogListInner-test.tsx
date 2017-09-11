@@ -4,7 +4,8 @@ import * as React from 'react';
 import {BlogListInner, IBlogListInnerProps} from '../BlogListInner';
 import {ShallowWrapper, shallow} from 'enzyme';
 import {blogInstance} from '../../../tests/BlogTestData';
-import {IInstanceList} from '../../../interfaces/blogInterfaces';
+import {IInstanceList} from '../../../interfaces';
+import {Spinner} from '../../common/Spinner';
 
 describe('Test cases for BlogListInner', (): void => {
 
@@ -29,7 +30,7 @@ describe('Test cases for BlogListInner', (): void => {
 
     it('should render spinner', (): void => {
         blogListInner.setProps({blogList: '', fetched: false});
-        expect(blogListInner.find('FontAwesome').length).toBe(1);
+        expect(blogListInner.find(Spinner).length).toBe(1);
     });
 
     it('should render nothing if blogCount is 0', (): void => {

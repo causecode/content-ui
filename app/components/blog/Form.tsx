@@ -296,7 +296,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
                                             style={btnStyle}
                                             className="btn btn-default"
                                             to={'/blog/list'}>
-                                            Cancel
+                                        Cancel
                                     </Link>
                                 </Col>
                             </Row>
@@ -309,30 +309,29 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
 }
 
 let mapStateToProps: MapStateToProps<IFormStateProps, IFormProps> =
-    (state: IState, ownProps: IFormProps): IFormStateProps => {
+        (state: IState, ownProps: IFormProps): IFormStateProps => {
+    let rhForms: {blogCreate?: {properties: BlogModel}, blogEdit?: {properties: BlogModel}} =
+        state.forms && state.forms.rhForms;
+    let modelKey: string = ownProps.isCreatePage ? 'blogCreate' : 'blogEdit';
+    let blogInstance: IBlog;
 
-        let rhForms: {blogCreate?: {properties: BlogModel}, blogEdit?: {properties: BlogModel}} =
-            state.forms && state.forms.rhForms;
-        let modelKey: string = ownProps.isCreatePage ? 'blogCreate' : 'blogEdit';
-        let blogInstance: IBlog;
+    if (rhForms && rhForms[modelKey] && rhForms[modelKey][`properties`]) {
+        blogInstance = rhForms[modelKey][`properties`];
+    }
 
-        if (rhForms && rhForms[modelKey] && rhForms[modelKey][`properties`]) {
-            blogInstance = rhForms[modelKey][`properties`];
-        }
-
-        return {
-            blogInstance,
-        };
+    return {
+        blogInstance,
     };
+};
 
 let mapDispatchToProps: MapDispatchToPropsFunction<IDispatchProps, IFormProps> =
-    (dispatch: IDispatch) : IDispatchProps => {
-        return {
-            saveData: (model: string, value: any) => {
-                dispatch(actions.change(model, value));
-            },
-        };
+        (dispatch: IDispatch) : IDispatchProps => {
+    return {
+        saveData: (model: string, value: any) => {
+            dispatch(actions.change(model, value));
+        },
     };
+};
 
 export const Form = withRouter(connect(mapStateToProps, mapDispatchToProps)(FormImpl));
 

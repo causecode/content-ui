@@ -17,5 +17,5 @@ render(
             </Switch>
         </BrowserRouter>
     </Provider>,
-    document.getElementById('container'),
+    document.getElementById('container')
 );

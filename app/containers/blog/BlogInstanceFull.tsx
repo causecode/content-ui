@@ -55,7 +55,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
         return `${this.linkedinUrl}${encodeURIComponent(window.location.href)}`;
     }
 
-    renderEditButton = (id: number, title: string): JSX.Element => {
+    renderEditLink = (id: number, title: string): JSX.Element => {
         return (
             <FontAwesomeLink
                 style={[linkStyle, {fontSize: '20px'}]}
@@ -64,16 +64,10 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
         );
     }
 
-    renderEditButtonWithCheck = (id: number, title: string): JSX.Element => {
-        return isLoggedIn() ? this.renderEditButton(id, title) : null;
-    }
-
     render(): JSX.Element {
         let blog: IBlog = this.props.blogInstance;
         if (!blog) {
-            return (
-                <h4>Not Found</h4>
-            );
+            return <h4>Not Found</h4>;
         }
         let keywords: string = (this.props.metaTags && this.props.metaTags[0] &&
                 this.props.metaTags[0].content) || 'CauseCode, Blog';
@@ -85,7 +79,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
                 />
                 <section>
                     <h1 style={title}>{blog ? blog.title : 'Loading...'}</h1>
-                    {this.renderEditButtonWithCheck(blog.id, blog.title)}
+                    {isLoggedIn() && this.renderEditLink(blog.id, blog.title)}
                     <div>
                         <ul style={metaList} className="list-inline">
                             <li>{blog ? moment(blog.publishedDate).format('MMM D, YYYY') : 'Loading...'}</li>
