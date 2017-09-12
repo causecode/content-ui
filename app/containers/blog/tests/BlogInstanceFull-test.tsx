@@ -24,8 +24,6 @@ unroll.use(it);
 describe('Test cases for Blog Instance', (): void => {
 
     let blog: {properties: IBlog} = { properties: blogInstance};
-
-
     BlogModel.get = jest.fn((valueInStore) => {
         return {
             properties: blogInstance,
@@ -60,7 +58,7 @@ describe('Test cases for Blog Instance', (): void => {
         },
     });
 
-    let blogInstaceFull: ReactWrapper<IBlogInstanceFullProps, void> = mount<IBlogInstanceFullProps, void>(
+    const blogInstaceFull: ReactWrapper<IBlogInstanceFullProps, void> = mount<IBlogInstanceFullProps, void>(
         <Provider store={mutableStore}>
             <BlogInstanceFull id={1} />
         </Provider>

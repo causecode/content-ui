@@ -217,7 +217,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
 
     render(): JSX.Element {
         this.generateModelKey();
-        if (!(this.props.blogInstance)) {
+        if (!this.props.blogInstance) {
             return <Spinner/> ;
         }
         return (
@@ -290,7 +290,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
                                             style={btnStyle}
                                             bsStyle="primary"
                                             type="submit">
-                                            {this.props.isCreatePage ? 'Create' : 'Update'}
+                                        {this.props.isCreatePage ? 'Create' : 'Update'}
                                     </Button>
                                     <Link
                                             style={btnStyle}

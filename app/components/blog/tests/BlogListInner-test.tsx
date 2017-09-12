@@ -1,8 +1,8 @@
 jest.unmock('../BlogListInner');
 
 import * as React from 'react';
-import {BlogListInner, IBlogListInnerProps} from '../BlogListInner';
 import {ShallowWrapper, shallow} from 'enzyme';
+import {BlogListInner, IBlogListInnerProps} from '../BlogListInner';
 import {blogInstance} from '../../../tests/BlogTestData';
 import {IInstanceList} from '../../../interfaces';
 import {Spinner} from '../../common/Spinner';

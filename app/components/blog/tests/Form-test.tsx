@@ -85,6 +85,7 @@ describe('Test cases for Form', () => {
         blogEdit.setProps({blogInstance: ''});
         expect(blogEdit.find(Spinner).length).toBe(1);
     });
+
     unroll('should render #editorName when editor type is #editorType', (
         done: () => void,
         args: {editorName: string, editorType: string, component: React.ComponentClass<any>}

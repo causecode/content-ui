@@ -27,7 +27,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     private twitterUrl: string = 'https://twitter.com/intent/tweet?text=';
     private linkedinUrl: string = 'https://www.linkedin.com/shareArticle?url=';
 
-    componentWillMount = (): void => {
+    componentDidMount = (): void => {
         scroll(0, 0);
     }
 
@@ -58,14 +58,15 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     renderEditLink = (id: number, title: string): JSX.Element => {
         return (
             <FontAwesomeLink
-                style={[linkStyle, {fontSize: '20px'}]}
-                to={`/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
-                iconName="edit" />
+                    style={[linkStyle, {fontSize: '20px'}]}
+                    to={`/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
+                    iconName="edit"
+            />
         );
     }
 
     render(): JSX.Element {
-        let blog: IBlog = this.props.blogInstance;
+        const blog: IBlog = this.props.blogInstance;
         if (!blog) {
             return <h4>Not Found</h4>;
         }

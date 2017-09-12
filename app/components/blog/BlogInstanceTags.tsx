@@ -6,14 +6,28 @@ export interface IBlogInstanceTagsProps {
     blogInstanceTagList: string[];
 }
 
-export class BlogInstanceTags extends React.Component<IBlogInstanceTagsProps, void> {
-    private list: JSX.Element[];
+export interface IBlogInstanceTagsState {
+    list: string[];
+}
+
+export class BlogInstanceTags extends React.Component<IBlogInstanceTagsProps, IBlogInstanceTagsState> {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            list: [],
+        };
+    }
 
     componentWillReceiveProps = (nextProps): void => {
-        this.list = nextProps.blogInstanceTagList.map((tag, index) => {
-            return (
-                <span key={index} style={tagStyle} >{tag}</span>
-            );
+        let list: string[];
+        list = nextProps.blogInstanceTagList.map((tag, index) => list.push(tag));
+        this.setState({list});
+    }
+
+    renderTags = () => {
+        return this.state.list.map((tag, index) => {
+            return <span key={index} style={tagStyle} >{tag}</span>;
         });
     }
 
@@ -23,7 +37,7 @@ export class BlogInstanceTags extends React.Component<IBlogInstanceTagsProps, vo
                 <h2 style={headerStyle}>Tags</h2>
                 <hr style={hrStyle}/>
                 <div style={divStyle}>
-                    {this.list}
+                    {this.renderTags()}
                 </div>
             </div>
         );
