@@ -19,7 +19,7 @@ export class BlogAction extends React.Component<IBlogActionProps, void> {
         if (instance) {
             return (
                 <span>
-                    <Link to={`/admin/blog/edit/${instance.id}/${convertToFriendlyUrl(instance.title)}`}>
+                    <Link to={`/blog/edit/${instance.id}/${convertToFriendlyUrl(instance.title)}`}>
                         <FontAwesomeRadium name="pencil" />
                     </Link>
                     <Link to={`/blog/${instance.id}/${convertToFriendlyUrl(instance.title)}`}>

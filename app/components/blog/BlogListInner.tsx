@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Radium from 'radium';
 import {BlogSummary} from './BlogSummary';
+import {Spinner} from '../common/Spinner';
 import {IInstanceList} from '../../interfaces';
 import {defaultTextColor} from '../../constants';
 import {CSS} from '../../interfaces';
@@ -15,7 +16,7 @@ export interface IBlogListInnerProps {
 export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
     private list: Element[];
 
-    componentDidMount = (): void => {
+    componentWillMount = (): void => {
         window.scrollTo(0, 0);
     }
 
@@ -45,7 +46,7 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
         }
         return (
             <div style={container}>
-                {this.props.fetched ? this.getBlogInstanceList() : <h3>Loading...</h3>}
+                {this.props.fetched ? this.getBlogInstanceList() : <Spinner />}
             </div>
         );
     }

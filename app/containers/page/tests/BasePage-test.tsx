@@ -14,7 +14,7 @@ describe('BasePage Tests', (): void => {
         const componentTree: ShallowWrapper<IShallowWrapperProps, void> = shallow<IShallowWrapperProps, void>(
             <BasePage />
         );
-        
-        expect(componentTree.find('Route').length).toBe(5);
+
+        expect(componentTree.find('Route').length).toBe(7);
     });
 });
