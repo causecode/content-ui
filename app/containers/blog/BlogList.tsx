@@ -18,7 +18,7 @@ export interface IBlogRouteParams {
     value: string;
 }
 
-export interface IBlogListProps extends RouteComponentProps<IBlogRouteParams> {
+export interface IBlogListProps {
     blogList?: IInstanceList;
     fetched?: boolean;
     appId: string;
@@ -28,7 +28,7 @@ export interface IBlogListState {
     filters: {queryFilter: string, monthFilter: string, tag: string};
 }
 
-class BlogListImpl extends React.Component<IBlogListProps, IBlogListState> {
+class BlogListImpl extends React.Component<IBlogListProps & RouteComponentProps<IBlogRouteParams>, IBlogListState> {
     constructor() {
         super();
         this.state = {filters: {queryFilter: '', monthFilter: '', tag: ''}};

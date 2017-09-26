@@ -8,7 +8,7 @@ import {BlogSideBar} from './BlogSideBar';
 import {CSS} from '../../interfaces';
 import {BlogModel} from '../../models';
 
-export interface IBlogShowProps extends RouteComponentProps<IBlogShowRouteProps> {
+export interface IBlogShowProps {
     params?: {article: string, title: string};
     appId: string;
 }
@@ -18,7 +18,7 @@ export interface IBlogShowRouteProps {
     title: string;
 }
 
-class BlogShowImpl extends React.Component<IBlogShowProps, void> {
+class BlogShowImpl extends React.Component<IBlogShowProps & RouteComponentProps<IBlogShowRouteProps>, void> {
     componentWillMount = (): void => {
         this.fetchBlog();
         document.cookie = `prevUrl=${window.location.href};path='/'`;
@@ -49,7 +49,7 @@ class BlogShowImpl extends React.Component<IBlogShowProps, void> {
 }
 
 const mapStateToProps: MapStateToProps<{}, IBlogShowProps> =
-    (state, props: IBlogShowProps): {params: IBlogShowRouteProps} => {
+    (state, props: IBlogShowProps & RouteComponentProps<IBlogShowRouteProps>): {params: IBlogShowRouteProps} => {
     return {
         params: props.match.params,
     };
