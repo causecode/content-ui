@@ -36,7 +36,7 @@ export class BlogCommentCount extends React.Component<IBlogCommentCountProps, vo
             url: string,
             title: string,
         } = this.createBlogCommentCountUrl();
-        
+
         return (
             <span style={this.props.style || linkStyle}>
                 <a href={blogCommentUrl.url} style={this.props.style || linkStyle}>
@@ -51,8 +51,8 @@ export class BlogCommentCount extends React.Component<IBlogCommentCountProps, vo
                 </a>
             </span>
         );
-    };
-};
+    }
+}
 
 const paddingStyle: CSS = {
     padding: '0px 5px 0px 0px',

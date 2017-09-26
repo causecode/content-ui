@@ -39,7 +39,7 @@ export interface IFormStateProps {
     instanceList?: BlogModel[];
 }
 
-export interface IFormProps extends IInstancePageProps, IFormStateProps, IDispatchProps, RouteComponentProps<void> {
+export interface IFormProps extends IInstancePageProps, IFormStateProps, IDispatchProps {
     handleSubmit?: (
         instance: BlogModel,
         successCallBack?: ((args: any) => void),
@@ -74,7 +74,7 @@ export interface IState {
 }
 
 @Radium
-export class FormImpl extends React.Component<IFormProps, IFormState> {
+export class FormImpl extends React.Component<IFormProps & RouteComponentProps<void>, IFormState> {
 
     static resourceName: string = 'blog';
     private modelKey: string;
@@ -153,6 +153,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
         if (store.getState() && store.getState().forms && store.getState().forms[`rhForms`][this.modelKey]) {
             instance.properties = store.getState().forms[`rhForms`][this.modelKey].properties;
         }
+
         return instance;
     }
 
@@ -166,7 +167,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
         showAlert(ALERT_DANGER, error.response && error.response.data.message || DEFAULT_ERROR_MESSAGE);
     }
 
-    handleSubmit = (e: React.FormEvent): void => {
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
         if (this.state.blogImage) {
@@ -328,7 +329,9 @@ let mapDispatchToProps: MapDispatchToPropsFunction<IDispatchProps, IFormProps> =
     };
 };
 
-export const Form = withRouter(connect(mapStateToProps, mapDispatchToProps)(FormImpl));
+// tslint:disable variable-name
+export const Form: React.ComponentClass<IFormProps> =
+        withRouter(connect(mapStateToProps, mapDispatchToProps)(FormImpl));
 
 const rowStyle : CSS = {
     margin: '0px',

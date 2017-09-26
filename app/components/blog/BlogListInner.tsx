@@ -23,12 +23,14 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
         if (nextProps.blogList && nextProps.blogList.instanceList) {
             this.list = nextProps.blogList.instanceList.map((instance, index) => {
                 let loadCommentCount: boolean = index === 0 ? true : false;
-                return <BlogSummary
+                return (
+                    <BlogSummary
                             key={index}
                             instanceData={instance.properties}
                             loadCommentCount={loadCommentCount}
                             appId={this.props.appId}
-                        />;
+                    />
+                );
             });
         }
     }
@@ -43,6 +45,7 @@ export class BlogListInner extends React.Component<IBlogListInnerProps, void> {
                 <h4>No results found</h4>
             );
         }
+
         return (
             <div style={container}>
                 {this.props.fetched ? this.getBlogInstanceList() : <h3>Loading...</h3>}

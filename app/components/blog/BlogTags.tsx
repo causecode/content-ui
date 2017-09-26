@@ -65,9 +65,8 @@ export class BlogTagsImpl extends React.Component<IBlogTagsProps & RouteComponen
     }
 }
 
-let BlogTags = withRouter(BlogTagsImpl);
-
-export {BlogTags};
+// tslint:disable variable-name
+export const BlogTags: React.ComponentClass<IBlogTagsProps> = withRouter(BlogTagsImpl);
 
 const blogTagsStyle: CSS = {
     marginBottom: '60px',

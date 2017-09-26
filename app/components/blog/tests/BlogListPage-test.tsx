@@ -28,12 +28,14 @@ unroll.use(it);
 describe('Test cases for BlogListPage', (): void => {
 
     let blogListPage: ShallowWrapper<IBlogListProps, void> = shallow<IBlogListProps, void>(
+            // tslint:disable trailing-comma
             <BlogListPage />
+            // tslint:enable trailing-comma
     );
 
     unroll('should render #count #element', (
-        done: () => void,
-        args: {element: string, selector: React.ComponentClass<any>, count: number}
+            done: () => void,
+            args: {element: string, selector: React.ComponentClass<any>, count: number},
     ): void => {
         expect(blogListPage.find(args.selector).length).toBe(args.count);
         done();
@@ -95,8 +97,8 @@ describe('Test cases for BlogListPage', (): void => {
         });
 
         unroll('should call showAlert function when delete #status', (
-            done: () => void,
-            args: {alertType: string, result: string, alertMessage: string}
+                done: () => void,
+                args: {alertType: string, result: string, alertMessage: string},
         ): void => {
             blogListPage.find(ConfirmationModal).props().onConfirm(this);
 

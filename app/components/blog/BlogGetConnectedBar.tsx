@@ -22,6 +22,7 @@ export class BlogGetConnectedBar extends React.Component<void, void> {
                 this.list.push(element);
             });
         }
+
         return this.list;
     }
 

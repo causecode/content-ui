@@ -12,6 +12,7 @@ describe('Test cases for Blog Archive Section', (): void => {
     BlogModel.list = jest.fn();
 
     let blogArchiveSection: ShallowWrapper<IBlogArchiveSectionProps, void> = shallow<IBlogArchiveSectionProps, void>(
+            // tslint:disable trailing-comma
             <BlogArchiveSection monthList={monthList} />
     );
 
@@ -23,7 +24,7 @@ describe('Test cases for Blog Archive Section', (): void => {
 
         blogArchiveSection.find('Link').forEach((archiveLink: ShallowWrapper, index: number) => {
             archiveLink.simulate('click');
-            if (index != 0) {
+            if (index !== 0) {
                 expect(BlogModel.list).toHaveBeenCalledWith({
                         max: 10,
                         offset: 0,

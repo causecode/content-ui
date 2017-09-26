@@ -16,6 +16,6 @@ render(
                 <Route path="/" component={BasePage} />
             </Switch>
         </BrowserRouter>
-    </Provider>
-    , document.getElementById('container')
+    </Provider>,
+    document.getElementById('container'),
 );

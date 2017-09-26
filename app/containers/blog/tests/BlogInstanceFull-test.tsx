@@ -6,7 +6,7 @@ import {
     BlogInstanceFullImpl,
     IBlogInstanceFullProps,
     BlogInstanceFull,
-} 
+}
 from '../../../containers/blog/BlogInstanceFull';
 import {blogInstance} from '../../../tests/BlogTestData';
 import {Button} from '../../../components/reusable-components/reusableComponents';
@@ -31,14 +31,16 @@ describe('Test cases for Blog Instance', (): void => {
                 ],
             },
         }});
-    
+
     let blogInstaceFull: ShallowWrapper<IBlogInstanceFullProps, void> = shallow<IBlogInstanceFullProps, void>(
+            // tslint:disable trailing-comma
             <BlogInstanceFullImpl id={1} blogInstance={blog} metaTags={[]} />
+            // tslint:enable trailing-comma
     );
 
     unroll('sohould render #count #element', (
-        done: () => void,
-        args: {element: string, selector: React.ComponentClass<any>, count: number}
+            done: () => void,
+            args: {element: string, selector: React.ComponentClass<any>, count: number},
     ): void => {
         expect(blogInstaceFull.find(args.selector).length).toBe(args.count);
         done();
@@ -52,8 +54,11 @@ describe('Test cases for Blog Instance', (): void => {
 
     it('should fetch data from redux store', (): void => {
 
+        // tslint:disable no-shadowed-variable
         let blogInstaceFull: ShallowWrapper<IBlogInstanceFullProps, void> = shallow<IBlogInstanceFullProps, void>(
+            // tslint:disable trailing-comma
             <BlogInstanceFull store={mutableStore} id={1} />
+            // tslint:enable trailing-comma
         );
         expect(blogInstaceFull.prop('blogInstance').title).toBe(blog.properties.title);
     });

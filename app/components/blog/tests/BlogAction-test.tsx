@@ -3,8 +3,8 @@ jest.unmock('../BlogAction');
 import * as React from 'react';
 import {ShallowWrapper, shallow, EnzymePropSelector} from 'enzyme';
 import {BlogAction, IBlogActionProps} from '../BlogAction';
-import { blogInstance } from '../../../tests/BlogTestData';
-import {Link} from "../../reusable-components/reusableComponents";
+import {blogInstance} from '../../../tests/BlogTestData';
+import {Link} from '../../reusable-components/reusableComponents';
 const unroll = require<any>('unroll');
 
 unroll.use(it);
@@ -12,6 +12,7 @@ unroll.use(it);
 describe('Tests for BlogActions', (): void => {
 
     let blogActions: ShallowWrapper<IBlogActionProps, void> = shallow<IBlogActionProps, void>(
+            // tslint:disable trailing-comma
             <BlogAction instance={null} />
     );
 
@@ -20,8 +21,8 @@ describe('Tests for BlogActions', (): void => {
     });
 
     unroll('should render #element when instance is not null', (
-        done: () => void,
-        args: {element: EnzymePropSelector, count: number}
+            done: () => void,
+            args: {element: EnzymePropSelector, count: number},
     ): void => {
         blogActions.setProps({instance: blogInstance});
         expect(blogActions.find(args.element).length).toBe(args.count);

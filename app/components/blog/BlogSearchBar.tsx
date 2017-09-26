@@ -17,14 +17,14 @@ export class BlogSearchBarImpl extends React.Component<RouteComponentProps<void>
         this.state = {query: ''};
     }
 
-    // TODO figure out a way to solve typings issue for event. 
+    // TODO figure out a way to solve typings issue for event.
     handleSearch = (event: any): void => {
         this.setState({
             query: event.target.value,
         });
     }
 
-    searchBlog = (e: React.SyntheticEvent): void => {
+    searchBlog = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         if (this.state.query && this.state.query.trim().length > 0)  {
             BlogModel.list({queryFilter: this.state.query, max: 10, offset: 0});
@@ -32,16 +32,16 @@ export class BlogSearchBarImpl extends React.Component<RouteComponentProps<void>
         } else {
             this.props.history.push('/blogs');
         }
-    };
+    }
 
     render(): JSX.Element {
         return (
             <section style={blogSearchBarStyle}>
                 <form onSubmit={this.searchBlog.bind(this)}>
                     <div style={form}>
-                        <FormControl 
+                        <FormControl
                                 type="text"
-                                style={input} 
+                                style={input}
                                 onChange={this.handleSearch}
                                 placeholder="Search blog..." />
                     </div>
@@ -54,6 +54,7 @@ export class BlogSearchBarImpl extends React.Component<RouteComponentProps<void>
     }
 }
 
+// tslint:disable variable-name
 export const BlogSearchBar: React.ComponentClass<void> = withRouter(BlogSearchBarImpl);
 
 const blogSearchBarStyle: CSS = {

@@ -8,7 +8,7 @@ import {BlogModel} from '../../models';
 
 export interface IBlogArchiveSectionProps {
     monthList: string[];
-};
+}
 
 @Radium
 export class BlogArchiveSection extends React.Component<IBlogArchiveSectionProps, void> {
@@ -26,6 +26,7 @@ export class BlogArchiveSection extends React.Component<IBlogArchiveSectionProps
         let filter: Array<string> = monthFilter.split('-');
         let year: number = parseInt(filter[1], 10);
         let month: number = getMonthFromString(filter[0]);
+
         return {year, month};
     }
 
@@ -47,7 +48,7 @@ export class BlogArchiveSection extends React.Component<IBlogArchiveSectionProps
                     <Link
                             key={index}
                             style={linkStyle}
-                            onClick={() => {this.applyMonthFilter(monthFilter);}}
+                            onClick={() => {this.applyMonthFilter(monthFilter); }}
                             to={`/blogs/${year}/${month}`}>{monthFilter}
                     </Link>
                  </li>

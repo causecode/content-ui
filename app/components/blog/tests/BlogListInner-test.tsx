@@ -16,12 +16,14 @@ describe('Test cases for BlogListInner', (): void => {
         ],
         totalCount: 1,
     };
-    
+
     let blogListInner: ShallowWrapper<IBlogListInnerProps, void> = shallow<IBlogListInnerProps, void>(
+            // tslint:disable trailing-comma
             <BlogListInner />
+            // tslint:enable trailing-comma
     );
 
-    
+
     it('should render components', (): void => {
         blogListInner.setProps({blogList: blogList, fetched: true});
         expect(blogListInner.find('BlogSummary').length).toBe(1);

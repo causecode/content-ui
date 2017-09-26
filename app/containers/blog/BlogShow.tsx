@@ -48,16 +48,16 @@ class BlogShowImpl extends React.Component<IBlogShowProps, void> {
     }
 }
 
-const mapStateToProps: MapStateToProps<{}, IBlogShowProps> = 
+const mapStateToProps: MapStateToProps<{}, IBlogShowProps> =
     (state, props: IBlogShowProps): {params: IBlogShowRouteProps} => {
     return {
         params: props.match.params,
     };
 };
 
-let BlogShow = withRouter(connect<{}, {}, IBlogShowProps>(mapStateToProps)(BlogShowImpl));
-
-export {BlogShow};
+// tslint:disable variable-name
+export const BlogShow: React.ComponentClass<IBlogShowProps> =
+        withRouter(connect<{}, {}, IBlogShowProps>(mapStateToProps)(BlogShowImpl));
 
 const blogShowPadding: CSS = {
     paddingTop: '30px',

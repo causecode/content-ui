@@ -36,6 +36,7 @@ describe('Test cases for Form', () => {
 
     hasAnyRole = jest.fn();
     let blogCreate: ShallowWrapper<IFormProps, IFormState> = shallow<IFormProps, IFormState>(
+            // tslint:disable trailing-comma
             <FormImpl
                     handleSubmit={handleSubmit}
                     instance={blogModelInstance}
@@ -43,9 +44,11 @@ describe('Test cases for Form', () => {
                     isCreatePage={true}
                     history={{push: push}}
             />
+            // tslint:enable trailing-comma
     );
 
     let blogEdit: ShallowWrapper<IFormProps, IFormState> = shallow<IFormProps, IFormState>(
+            // tslint:disable trailing-comma
             <FormImpl
                     handleDelete={handleSubmit}
                     handleSubmit={handleSubmit}
@@ -54,14 +57,15 @@ describe('Test cases for Form', () => {
                     saveData={saveData}
                     history={{push: push}}
             />
+            // tslint:enable trailing-comma
     );
 
     [blogCreate, blogEdit].forEach((parentComponent: ShallowWrapper<IFormProps, IFormState>, index: number): void => {
         let component: string = index === 0 ? 'BlogCreatePage' : 'BlogEditPage';
 
         unroll(`${component} should render #count #elementName`, (
-            done: () => void,
-            args: {elementName: string, element: React.ComponentClass<any>, count: number}
+                done: () => void,
+                args: {elementName: string, element: React.ComponentClass<any>, count: number},
         ): void => {
             expect(parentComponent.find(args.element).length).toBe(args.count);
             done();
@@ -78,8 +82,8 @@ describe('Test cases for Form', () => {
     });
 
     unroll('should render #editorName when editor type is #editorType', (
-        done: () => void,
-        args: {editorName: string, editorType: string, component: React.ComponentClass<any>}
+            done: () => void,
+            args: {editorName: string, editorType: string, component: React.ComponentClass<any>},
     ): void => {
         blogInstance.type = args.editorType;
         blogCreate.setProps({blogInstance: blogInstance, instance: blogModelInstance});
@@ -118,8 +122,8 @@ describe('Test cases for Form', () => {
         });
 
         unroll('should call showAlert function on #result', (
-            done: () => void,
-            args: {alertType: string, result: string}
+                done: () => void,
+                args: {alertType: string, result: string},
         ): void => {
             BlogModel.uploadImage('123')
                 .then((): void => {
@@ -149,8 +153,8 @@ describe('Test cases for Form', () => {
     });
 
     unroll('should save #stateKey data in state when image is uploaded', (
-        done: () => void,
-        args: {stateKey: string, value: string}
+            done: () => void,
+            args: {stateKey: string, value: string},
     ): void => {
         expect(blogEdit.state(args.stateKey)).toEqual(null);
         blogEdit.instance()[`saveUploadedImageData`](args.stateKey, args.value);
@@ -177,6 +181,7 @@ describe('Test cases for Form', () => {
                 });
             });
 
+        // tslint:disable no-shadowed-variable trailing-comma
         let blogEdit: ReactWrapper<IFormProps, IFormState> = mount<IFormProps, IFormState>(
                 <MemoryRouter>
                     <StyleRoot>

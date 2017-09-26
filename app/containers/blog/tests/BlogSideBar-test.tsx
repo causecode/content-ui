@@ -12,6 +12,7 @@ import {configureStore} from 'react-hero';
 
 describe('Test cases for BlogSideBar', (): void => {
     let blogSideBarImpl: ShallowWrapper<IBlogSideBarProps, void> = shallow<IBlogSideBarProps, void>(
+            // tslint:disable trailing-comma
             <BlogSideBarImpl />
     );
 
@@ -27,14 +28,14 @@ describe('Test cases for BlogSideBar', (): void => {
         data: {
             blogList: {
                 instanceList: [{
-                    properties: { 
+                    properties: {
                     monthFilterList: ['2013-04', '2016-07'],
                         tagList: [[1, 'grails'], [2, 'javascript'],
                     ]},
                 }],
             },
         }});
-        
+
         let blogSideBar: ShallowWrapper<IBlogSideBarProps, void> = shallow<IBlogSideBarProps, void>(
                 <BlogSideBar store={mutableStore}/>
         );
@@ -79,5 +80,5 @@ describe('Test cases for BlogSideBar', (): void => {
         expect(blogSideBar.prop('tagList').length).toBe(2);
     });
 
-    
+
 });

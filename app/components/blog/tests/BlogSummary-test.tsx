@@ -8,7 +8,9 @@ import {blogInstance} from '../../../tests/BlogTestData';
 describe('Test cases for BlogSumamry', (): void => {
 
     let blogSummary: ShallowWrapper<IBlogSummaryProps, void> = shallow<IBlogSummaryProps, void>(
+            // tslint:disable trailing-comma
             <BlogSummary instanceData={blogInstance} />
+            // tslint:enable trailing-comma
     );
 
     it('should render all the fields', (): void => {

@@ -1,1 +1,1 @@
-# Static content UI (v0.0.4)
+# Static content UI (v0.0.5)

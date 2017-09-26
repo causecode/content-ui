@@ -15,7 +15,7 @@ export class BlogAction extends React.Component<IBlogActionProps, void> {
 
     render(): JSX.Element {
         const {instance, deleteBlog} = this.props;
-        
+
         if (instance) {
             return (
                 <span>
@@ -26,7 +26,7 @@ export class BlogAction extends React.Component<IBlogActionProps, void> {
                         <FontAwesomeRadium name="location-arrow" />
                     </Link>
                     <a
-                            onClick={() => {deleteBlog(instance.id);}}
+                            onClick={() => {deleteBlog(instance.id); }}
                             style={trashIconStyle}
                             id={`${instance.id}`}>
                         <FontAwesomeRadium name="trash" />

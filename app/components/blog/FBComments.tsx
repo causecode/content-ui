@@ -80,15 +80,17 @@ static defaultProps = {
         const {colorScheme, href, mobile, numPosts, orderBy, width} = this.props;
         const mobileParam = mobile ? {'data-mobile': mobile} : {};
         const widthParam = width ? {'data-width': width} : {};
+
         return (
             <span>
                 <div className="fb-comments"
-                    data-href={href}
-                    data-colorscheme={colorScheme}
-                    data-numposts={numPosts}
-                    data-order-by={orderBy}
-                    {...mobileParam}
-                    {...widthParam}></div>
+                        data-href={href}
+                        data-colorscheme={colorScheme}
+                        data-numposts={numPosts}
+                        data-order-by={orderBy}
+                        {...mobileParam}
+                        {...widthParam}
+                />
             </span>
         );
     }

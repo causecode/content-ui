@@ -3,6 +3,7 @@ import {IDispatch} from 'react-hero';
 import {connect, MapDispatchToPropsFunction, MapStateToProps} from 'react-redux';
 import {IDispatchProps, CSS} from '../../interfaces';
 const {actions} = require<any>('react-redux-form');
+// tslint:disable variable-name
 const TinyMCE = require<any>('react-tinymce-input');
 
 export interface ITinyMCEStateProps {
@@ -26,7 +27,7 @@ class TinyMCEWrapperImpl extends React.Component<ITinyMCEProps, void> {
                 <TinyMCE
                         value={this.props.value}
                         tinymceConfig={{
-                            plugins:[
+                            plugins: [
                                 'advlist autolink lists link image charmap print',
                                 'preview hr anchor pagebreak searchreplace wordcount visualblocks',
                                 'insertdatetime media nonbreaking save table contextmenu directionality',
