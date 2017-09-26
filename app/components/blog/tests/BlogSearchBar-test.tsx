@@ -10,7 +10,9 @@ describe('Test cases for BlogSearchBar', (): void => {
     let push: jest.Mock<void> = jest.fn<void>();
 
     let blogSearchBar: ShallowWrapper<void, IBlogSearchState> = shallow<void, IBlogSearchState>(
+            // tslint:disable trailing-comma
             <BlogSearchBarImpl history={{push: push}}/>
+            // tslint:enable trailing-comma
     );
 
     it('should render search box and search button', (): void => {

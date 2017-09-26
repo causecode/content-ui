@@ -7,13 +7,13 @@ export const TEST_FAIL_MESSAGE = 'Operation unsuccessful';
 export const handleSubmitSuccess: jest.Mock<void> = jest.fn<void> (
         (instance: any, successCallBack : any): void => {
             successCallBack(getSuccessResponse());
-        }
+        },
 );
 
 export const  handleSubmitFailure: jest.Mock<void> = jest.fn<void> (
         (instance: any, successCallBack : any, failureCallBack: any): void => {
             failureCallBack(getFailureResponse());
-        }
+        },
 );
 
 export function getSuccessResponse (): IAxiosResponse {
@@ -35,6 +35,6 @@ export function mockStore (type: string, instance: any): {forms: {rhForms: any}}
             forms: {rhForms: {[type]: {properties: instance.properties}}},
         };
     });
-    
+
     return null;
 }

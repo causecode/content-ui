@@ -35,7 +35,7 @@ export class ImageUploader extends React.Component<IImageUploaderProps, IImageUp
         }
     }
 
-    handleChange = (event: React.FormEvent): void => {
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         event.preventDefault();
         let reader = new FileReader();
         let file = event.target[`files`][0];
@@ -56,7 +56,7 @@ export class ImageUploader extends React.Component<IImageUploaderProps, IImageUp
         reader.readAsDataURL(file);
     }
 
-    clearOldSelectedImage = (event: React.FormEvent): void => {
+    clearOldSelectedImage = (event: React.FormEvent<HTMLInputElement>): void => {
         event.target[`value`] = null;
     }
 

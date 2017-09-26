@@ -67,8 +67,7 @@ export class FBCommentsCount extends React.Component<IFBCommentsCount, void> {
         const {href} = this.props;
         return (
         <span>
-            <span className="fb-comments-count"
-            data-href={href}></span>
+            <span className="fb-comments-count" data-href={href} />
         </span>
         );
     }

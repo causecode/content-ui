@@ -56,27 +56,28 @@ export class BlogSummary extends React.Component<IBlogSummaryProps, void> {
                         <span style={summary}>
                          {/* TODO Figure out the way to apply style using objects. */}
                             <Radium.Style
-                                scopeSelector=".summaryContent"
-                                rules={{
-                                    p: {
-                                        fontFamily: 'Lato,arial,sans-serif',
-                                        color: defaultTextColor,
-                                        fontSize: '16px',
-                                    },
-                                    a: {
-                                        color: blogLinksOrange,
-                                        fontSize: '16px',
-                                        fontFamily: 'Lato, arial, sans-serif',
-                                    },
-                                    'a:hover': {
-                                        transition: '0.4s all ease-in-out',
-                                        textDecoration: 'none',
-                                        color: causecodeOrange,
-                                    },
-                                    span: {
-                                        color: defaultTextColor,
-                                    },
-                                }}/>
+                                    scopeSelector=".summaryContent"
+                                    rules={{
+                                        p: {
+                                            fontFamily: 'Lato,arial,sans-serif',
+                                            color: defaultTextColor,
+                                            fontSize: '16px',
+                                        },
+                                        a: {
+                                            color: blogLinksOrange,
+                                            fontSize: '16px',
+                                            fontFamily: 'Lato, arial, sans-serif',
+                                        },
+                                        'a:hover': {
+                                            transition: '0.4s all ease-in-out',
+                                            textDecoration: 'none',
+                                            color: causecodeOrange,
+                                        },
+                                        span: {
+                                            color: defaultTextColor,
+                                        },
+                                    }}
+                            />
                             <span className="summaryContent"
                                     dangerouslySetInnerHTML={htmlToText(this.props.instanceData.body)} /> ...
                         </span>

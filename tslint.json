@@ -1,5 +1,12 @@
 {
+  "rulesDirectory": ["./node_modules/ts-rules/public"],
   "rules": {
+    "new-line-indent": [true,"spaces", 4, 2],
+    "no-index-import": true,
+    "no-import-spaces": true,
+    "empty-line-before-return": true,
+    "no-anchor-href": { "severity": "warning" },
+    "model-resource-name": true,
     "class-name": true,
     "comment-format": [true, "check-space"],
     "curly": true,

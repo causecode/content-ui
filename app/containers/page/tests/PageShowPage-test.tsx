@@ -32,14 +32,16 @@ describe('Page show test cases', (): void => {
     describe('When the instance is valid.', (): void => {
 
         let pageInstance: PageModel = new PageModel(properties);
-        
+
         let componentTree: ShallowWrapper<IInstancePageProps, void> = shallow<IInstancePageProps, void>(
+                // tslint:disable trailing-comma
                 <PageShowPage instance={pageInstance} />
+                // tslint:enable trailing-comma
         );
 
         unroll('It should render the #elementName correctly.', (
                 done: () => void,
-                args: {elementName: string, element: string | React.ComponentClass<any>, count: number}
+                args: {elementName: string, element: string | React.ComponentClass<any>, count: number},
             ): void => {
             expect(componentTree.find(args.element).length).toBe(args.count);
             done();
@@ -56,7 +58,7 @@ describe('Page show test cases', (): void => {
 
         unroll('It should not purify the string when #title.', (
                 done: () => void,
-                args: {title: string, properries: IPage}
+                args: {title: string, properries: IPage},
         ): void => {
             shallow<IInstancePageProps, void>(<PageShowPage instance={new PageModel(args.properries)} />);
             expect(DOMPurify.sanitize).not.toBeCalled();
@@ -70,7 +72,9 @@ describe('Page show test cases', (): void => {
 
     describe('When the instance is not present.', (): void => {
         let componentTree: ShallowWrapper<IInstancePageProps, void> = shallow<IInstancePageProps, void>(
+                // tslint:disable trailing-comma
                 <PageShowPage />
+                // tslint:enable trailing-comma
         );
 
         it('should not render the elements.', (): void => {

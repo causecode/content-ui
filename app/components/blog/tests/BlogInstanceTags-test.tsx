@@ -9,6 +9,7 @@ describe('Test cases for BlogInstanceTags', (): void => {
 
     let tagList: string[] = blogInstance.blogInstanceTags;
     let blogInstanceTags: ShallowWrapper<IBlogInstanceTagsProps, void> = shallow<IBlogInstanceTagsProps, void>(
+            // tslint:disable trailing-comma
             <BlogInstanceTags blogInstanceTagList={tagList} />
     );
 

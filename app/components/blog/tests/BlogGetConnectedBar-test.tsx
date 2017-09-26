@@ -8,7 +8,9 @@ import {ShallowWrapper, shallow} from 'enzyme';
 describe('Test cases for BlogConnectedBar', (): void => {
 
     let blogGetConnectedBar: ShallowWrapper<void, void> = shallow<void, void>(
+        // tslint:disable trailing-comma
         <BlogGetConnectedBar />
+        // tslint:enable trailing-comma
     );
 
     it(' should render all social media link in BlogGectConnectedBar', (): void => {

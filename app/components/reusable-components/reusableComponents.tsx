@@ -1,6 +1,8 @@
 import * as Bootstrap from 'react-bootstrap';
 import * as Radium from 'radium';
 import * as Router from 'react-router-dom';
+
+// tslint:disable variable-name
 const FontAwesome = require<any>('react-fontawesome');
 
 // Bootstrap components

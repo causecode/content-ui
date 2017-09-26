@@ -20,13 +20,13 @@ export interface IBlogPaginationProps {
 }
 
 @Radium
-export class BlogPaginationImpl extends React.Component<IBlogPaginationProps & RouteComponentProps<IBlogRouteParams>, 
+export class BlogPaginationImpl extends React.Component<IBlogPaginationProps & RouteComponentProps<IBlogRouteParams>,
 IBlogPaginationState> {
     constructor() {
         super();
         this.state = {activePage: 1, size: 0};
     }
-   
+
     componentWillReceiveProps = (newProps): void => {
         let newPropFilter: string = newProps.match.params.filter;
         let ownPropFilter: string = this.props.match.params.filter;
@@ -82,72 +82,73 @@ IBlogPaginationState> {
         return (
             <div style={paginationContainer}>
                 <Pagination
-                    prev={true}
-                    next={true}
-                    first={true}
-                    last={true}
-                    style={paginationStyle}
-                    ellipsis={true} 
-                    boundaryLinks={true}
-                    items={this.state.size}
-                    maxButtons={5}
-                    activePage={this.state.activePage} 
-                    onSelect={this.getPage} 
+                        prev={true}
+                        next={true}
+                        first={true}
+                        last={true}
+                        style={paginationStyle}
+                        ellipsis={true}
+                        boundaryLinks={true}
+                        items={this.state.size}
+                        maxButtons={5}
+                        activePage={this.state.activePage}
+                        onSelect={this.getPage}
                 />
                 <Radium.Style
-                    scopeSelector=".pagination>.active"
-                    rules={{
-                        span: {
-                            backgroundColor: blogLinksOrange,
-                            borderColor: blogLinksOrange,
-                        },
-                        a: {
-                            backgroundColor: blogLinksOrange,
-                            borderColor: blogLinksOrange,
-                        },
-                        'a:hover': {
-                            backgroundColor: causecodeOrange,
-                            borderColor: causecodeOrange,
-                        },
-                        'a:focus': {
-                            backgroundColor: causecodeOrange,
-                            borderColor: causecodeOrange,
-                        },
-                        'span:focus': {
-                            backgroundColor: causecodeOrange,
-                            borderColor: causecodeOrange,
-                        },
-                        'span:hover': {
-                            backgroundColor: causecodeOrange,
-                            borderColor: causecodeOrange,
-                        },
-                    }}
+                        scopeSelector=".pagination>.active"
+                        rules={{
+                            span: {
+                                backgroundColor: blogLinksOrange,
+                                borderColor: blogLinksOrange,
+                            },
+                            a: {
+                                backgroundColor: blogLinksOrange,
+                                borderColor: blogLinksOrange,
+                            },
+                            'a:hover': {
+                                backgroundColor: causecodeOrange,
+                                borderColor: causecodeOrange,
+                            },
+                            'a:focus': {
+                                backgroundColor: causecodeOrange,
+                                borderColor: causecodeOrange,
+                            },
+                            'span:focus': {
+                                backgroundColor: causecodeOrange,
+                                borderColor: causecodeOrange,
+                            },
+                            'span:hover': {
+                                backgroundColor: causecodeOrange,
+                                borderColor: causecodeOrange,
+                            },
+                        }}
                 />
                 <Radium.Style
-                    scopeSelector=".pagination>li"
-                    rules={{
-                        a: {
-                            color: blogLinksOrange,
-                        },
-                        'a:hover': {
-                            color: causecodeOrange,
-                        },
-                        span: {
-                            color: blogLinksOrange,
-                        },
-                        'span:hover': {
-                            color: causecodeOrange,
-                        },
-                        'span:focus': {
-                            color: causecodeOrange,
-                        },
-                    }}
+                        scopeSelector=".pagination>li"
+                        rules={{
+                            a: {
+                                color: blogLinksOrange,
+                            },
+                            'a:hover': {
+                                color: causecodeOrange,
+                            },
+                            span: {
+                                color: blogLinksOrange,
+                            },
+                            'span:hover': {
+                                color: causecodeOrange,
+                            },
+                            'span:focus': {
+                                color: causecodeOrange,
+                            },
+                        }}
                 />
             </div>
         );
     }
 }
 
+// tslint:disable variable-name
 export const BlogPagination: React.ComponentClass<IBlogPaginationProps> = withRouter(BlogPaginationImpl);
 
 const paginationContainer: CSS = {

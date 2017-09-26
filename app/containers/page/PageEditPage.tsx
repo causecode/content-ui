@@ -39,7 +39,7 @@ export class PageEditPage extends React.Component<IPageEditPageProps & RouteComp
         return instance;
     }
 
-    handleSubmit = (e: React.FormEvent): void => {
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         // Not using connect here to avoid rerendering of component on change of instance properties.
         this.props.handleSubmit(

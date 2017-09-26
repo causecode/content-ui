@@ -25,7 +25,7 @@ export class ReactHelmet extends React.Component<IReactHelmetProps, void> {
         const keywordsContent: string = removeExtraSpacesFromString(keywords);
 
         return (
-             <Helmet
+            <Helmet
                     defaultTitle="CauseCode Technologies Pvt. Ltd."
                     title={pageTitle}
                     meta={[

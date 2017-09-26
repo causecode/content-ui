@@ -22,6 +22,7 @@ describe('Test cases for BlogCommentCount', (): void => {
     };
 
     let blogCommentCount: ShallowWrapper<IBlogCommentCountProps, void> = shallow<IBlogCommentCountProps, void>(
+            // tslint:disable trailing-comma
             <BlogCommentCount blogInstance={blogInstance} />
     );
 

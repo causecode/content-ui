@@ -12,14 +12,16 @@ unroll.use(it);
 describe('Page List test cases', (): void => {
 
     Radium.TestMode.enable();
-    
+
     let componentTree: ShallowWrapper<void, void> = shallow<void, void>(
+            // tslint:disable trailing-comma
             <PageListPage />
+            // tslint:enable trailing-comma
     );
 
     unroll('It should render the #elementName correctly.', (
             done: () => void,
-            args: {elementName: string, element: string | React.ComponentClass<any>, count: number}
+            args: {elementName: string, element: string | React.ComponentClass<any>, count: number},
         ): void => {
         expect(componentTree.find(args.element).length).toBe(args.count);
         done();
