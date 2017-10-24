@@ -57,12 +57,17 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     }
 
     renderEditLink = (id: number, title: string): JSX.Element => {
-        return isLoggedIn() ?
-                <FontAwesomeLink
-                        style={[linkStyle, {fontSize: '20px'}]}
-                        to={`/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
-                        iconName="edit" />
-                : null;
+        if (!isLoggedIn()) {
+            return null;
+        }
+
+        return (
+            <FontAwesomeLink
+                    style={[linkStyle, {fontSize: '20px'}]}
+                    to={`/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
+                    iconName="edit"
+            />
+        );
     }
 
     render(): JSX.Element {
