@@ -18,7 +18,7 @@ export interface IBlogRouteParams {
     value: string;
 }
 
-export interface IBlogListProps extends RouteComponentProps<IBlogRouteParams> {
+export interface IBlogListProps {
     blogList?: IInstanceList;
     fetched?: boolean;
     appId: string;
@@ -28,7 +28,7 @@ export interface IBlogListState {
     filters: {queryFilter: string, monthFilter: string, tag: string};
 }
 
-class BlogListImpl extends React.Component<IBlogListProps, IBlogListState> {
+class BlogListImpl extends React.Component<IBlogListProps & RouteComponentProps<IBlogRouteParams>, IBlogListState> {
     constructor() {
         super();
         this.state = {filters: {queryFilter: '', monthFilter: '', tag: ''}};
@@ -51,7 +51,7 @@ class BlogListImpl extends React.Component<IBlogListProps, IBlogListState> {
     handler = (): void => {
         if (window.location.href.indexOf('blogs') !== -1) {
             this.fetchBlogList();
-            return;    
+            return;
         }
     }
 
@@ -96,7 +96,7 @@ class BlogListImpl extends React.Component<IBlogListProps, IBlogListState> {
                         />
                         <BlogPagination
                                 currentPage={
-                                    this.props.match.params.filter && this.props.match.params.filter === 'page' 
+                                    this.props.match.params.filter && this.props.match.params.filter === 'page'
                                     ? Number(this.props.match.params.value) : 1
                                 }
                                 total={this.props.blogList.totalCount}
@@ -114,16 +114,15 @@ class BlogListImpl extends React.Component<IBlogListProps, IBlogListState> {
 
 const mapStateToProps: MapStateToProps<{}, {}> = (state) =>  {
     const mutableState = state.data.toJS ? state.data.toJS() : state.data;
-    
+
     return {
         blogList: mutableState.blogList ? mutableState.blogList : [],
         fetched: mutableState.blogList ? !mutableState.blogList.isLoading : false,
     };
 };
-
-let BlogList = withRouter(connect<{}, {}, IBlogListProps>(mapStateToProps)(BlogListImpl));
-
-export {BlogList};
+// tslint:disable variable-name
+export const BlogList: React.ComponentClass<IBlogListProps> =
+        withRouter(connect<{}, {}, IBlogListProps>(mapStateToProps)(BlogListImpl));
 
 const title: CSS = {
     fontFamily: 'Montserrat,sans-serif',

@@ -35,13 +35,13 @@ const mapStateToProps: MapStateToProps<{}, IBlogSideBarProps> =
         monthList = mutableState.blogList.instanceList[0].properties.monthFilterList;
         tagList = mutableState.blogList.instanceList[0].properties.tagList;
     }
-    
+
     return {
         monthList: monthList || [],
         tagList: tagList || [],
     };
-}
+};
 
-let BlogSideBar = connect<{}, {}, {}>(mapStateToProps)(BlogSideBarImpl);
-
-export {BlogSideBar};
+// tslint:disable variable-name
+export const BlogSideBar: React.ComponentClass<IBlogSideBarProps> =
+        connect<{}, {}, {}>(mapStateToProps)(BlogSideBarImpl);

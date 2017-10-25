@@ -19,7 +19,9 @@ describe('Test cases for BlogListInner', (): void => {
     };
 
     let blogListInner: ShallowWrapper<IBlogListInnerProps, void> = shallow<IBlogListInnerProps, void>(
+            // tslint:disable trailing-comma
             <BlogListInner />
+            // tslint:enable trailing-comma
     );
 
 

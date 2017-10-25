@@ -55,18 +55,17 @@ describe('Test cases for Blog Instance', (): void => {
                     blog,
                 ],
             },
-        },
-    });
+        }});
 
-    const blogInstaceFull: ReactWrapper<IBlogInstanceFullProps, void> = mount<IBlogInstanceFullProps, void>(
-        <Provider store={mutableStore}>
-            <BlogInstanceFull id={1} />
-        </Provider>
+    let blogInstaceFull: ShallowWrapper<IBlogInstanceFullProps, void> = shallow<IBlogInstanceFullProps, void>(
+            // tslint:disable trailing-comma
+            <BlogInstanceFullImpl id={1} blogInstance={blog} metaTags={[]} />
+            // tslint:enable trailing-comma
     );
 
-    unroll('it should render #count #element', (
-        done: () => void,
-        args: {element: string, selector: React.ComponentClass<any>, count: number}
+    unroll('sohould render #count #element', (
+            done: () => void,
+            args: {element: string, selector: React.ComponentClass<any>, count: number},
     ): void => {
         expect(blogInstaceFull.find(args.selector).length).toBe(args.count);
         done();

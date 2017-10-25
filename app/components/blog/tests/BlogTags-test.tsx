@@ -9,7 +9,9 @@ describe('Test cases for BlogSumamry', (): void => {
     let push: jest.Mock<void> = jest.fn<void>();
     let tagList: (number | string)[][] = [[1, 'algorithms'], [2, 'competitive programming']];
     let blogTags: ShallowWrapper<IBlogTagsProps, void> = shallow<IBlogTagsProps, void>(
+            // tslint:disable trailing-comma
             <BlogTagsImpl tagList={tagList} history={{push: push}} />
+            // tslint:enable trailing-comma
     );
 
     BlogModel.list = jest.fn();
@@ -20,7 +22,7 @@ describe('Test cases for BlogSumamry', (): void => {
 
     it('should load correct blogs when clicked on any blogs', (): void => {
         blogTags.find('Link').map((tag, index) => {
-            if (index != 0) {
+            if (index !== 0) {
                 tag.simulate('click');
                 expect(BlogModel.list).toHaveBeenCalledWith({max: 10, offset: 0, tag: tagList[index - 1][1]});
                 expect(tag.prop('children')).toBe(tagList[index - 1][1]);

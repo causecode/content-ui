@@ -11,6 +11,7 @@ unroll.use(it);
 describe('Test cases for BlogComments', (): void => {
 
     let blogComment: ShallowWrapper<void, void> = shallow<void, void>(
+            // tslint:disable trailing-comma
             <BlogComment blogInstance={blogInstance} />
     );
 

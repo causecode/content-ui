@@ -38,25 +38,27 @@ describe('Page edit test cases', (): void => {
     let handleSubmit: jest.Mock<void> = jest.fn<void>((
             instance: PageModel,
             success: () => true,
-            failure: () => false
+            failure: () => false,
     ): void => {
         failure();
     }).mockImplementationOnce((
-        instance: PageModel,
-        success: () => true,
-        failure: () => false
+            instance: PageModel,
+            success: () => true,
+            failure: () => false,
     ): void => {
         success();
     });
 
     describe('When the edit page is rendered.', (): void => {
         let componentTree: ShallowWrapper<void, void> = shallow<void, void>(
+                // tslint:disable trailing-comma
                 <PageEditPage
                         handleSubmit={handleSubmit}
                         instance={pageInstance}
                         isCreatePage={false}
-                        history={{push:push}}
+                        history={{push: push}}
                 />
+                // tslint:enable trailing-comma
         );
 
         it('should hide the alert before the component is mounted.', (): void => {
@@ -65,7 +67,7 @@ describe('Page edit test cases', (): void => {
 
         unroll('It should render the #elementName correctly.', (
                 done: () => void,
-                args: {elementName: string, element: React.ComponentClass<any>, count: number}
+                args: {elementName: string, element: React.ComponentClass<any>, count: number},
             ): void => {
             expect(componentTree.find(args.element).length).toBe(args.count);
             done();
@@ -81,7 +83,7 @@ describe('Page edit test cases', (): void => {
 
         unroll('It should call the #type when the form is submitted', (
                 done: () => void,
-                args: {functionName: (() => void)[], type: string}
+                args: {functionName: (() => void)[], type: string},
         ): void => {
             componentTree.find('form').simulate('submit', {preventDefault: (): void => {}});
             args.functionName.forEach((item: () => void) => {
@@ -97,11 +99,13 @@ describe('Page edit test cases', (): void => {
 
     describe('When the create page is rendered.', (): void => {
         let componentTree: ShallowWrapper<void, void> = shallow<void, void>(
+                // tslint:disable trailing-comma
                 <PageEditPage
                         handleSubmit={handleSubmit}
                         instance={new PageModel({})}
                         isCreatePage={true}
                 />
+                // tslint:enable trailing-comma
         );
 
         it('should render the correct title.', (): void => {
