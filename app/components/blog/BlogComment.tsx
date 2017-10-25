@@ -27,7 +27,7 @@ export class BlogComment extends React.Component<IBlogCommentProps, void> {
     render(): JSX.Element {
         const blogCommentUrl: {
             url: string,
-            title: string
+            title: string,
         } = this.createBlogCommentCountUrl();
 
         return (
@@ -43,4 +43,4 @@ export class BlogComment extends React.Component<IBlogCommentProps, void> {
             </div>
         );
     }
-};
+}

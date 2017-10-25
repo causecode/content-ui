@@ -1,3 +1,4 @@
+import {CSSWideKeyword} from 'react';
 import {CSS, IHelmetMeta, IEditorTypeInterface} from '../interfaces';
 
 export const listContainer: CSS = {
@@ -21,7 +22,8 @@ export const fontSize = (normalSize: number, mobileSize?: number): CSS => {
     };
 };
 
-export const fontWeight = (size: number = 400): CSS => {
+export const fontWeight = (size: CSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' |
+            100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 = 400): CSS => {
     return {fontWeight: size};
 };
 

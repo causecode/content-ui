@@ -20,12 +20,14 @@ export let pageInstance: IPage = {
 describe('PageAction page test cases', (): void => {
 
     let componentTree: ShallowWrapper<IPageActionProps, void> = shallow<IPageActionProps, void>(
+            // tslint:disable trailing-comma
             <PageAction instance={pageInstance} />
+            // tslint:enable trailing-comma
     );
 
     unroll('It should render the #elementName correctly.', (
             done: () => void,
-            args: {elementName: string, element: React.ComponentClass<any>, count: number}
+            args: {elementName: string, element: React.ComponentClass<any>, count: number},
         ): void => {
         expect(componentTree.find(args.element).length).toBe(args.count);
         done();

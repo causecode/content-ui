@@ -39,6 +39,7 @@ export class BlogListPage extends React.Component<void, void> {
         if (!modalClosed) {
             this.deleteBlogId = id;
             showModal();
+
             return;
         }
 
@@ -86,7 +87,7 @@ export class BlogListPage extends React.Component<void, void> {
                 </div>
                 <ConfirmationModal
                         modalBody={'Are you sure want to delete this blog?'}
-                        onConfirm={() => {this.deleteBlog(this.deleteBlogId, true);}}
+                        onConfirm={(): void => {this.deleteBlog(this.deleteBlogId, true); }}
                         onHide={hideModal}
                 />
             </div>

@@ -1,10 +1,11 @@
 jest.unmock('../BlogListInner');
 
 import * as React from 'react';
-import {BlogListInner, IBlogListInnerProps} from '../BlogListInner';
 import {ShallowWrapper, shallow} from 'enzyme';
+import {BlogListInner, IBlogListInnerProps} from '../BlogListInner';
 import {blogInstance} from '../../../tests/BlogTestData';
-import {IInstanceList} from '../../../interfaces/blogInterfaces';
+import {IInstanceList} from '../../../interfaces';
+import {Spinner} from '../../common/Spinner';
 
 describe('Test cases for BlogListInner', (): void => {
 
@@ -16,15 +17,22 @@ describe('Test cases for BlogListInner', (): void => {
         ],
         totalCount: 1,
     };
-    
+
     let blogListInner: ShallowWrapper<IBlogListInnerProps, void> = shallow<IBlogListInnerProps, void>(
+            // tslint:disable trailing-comma
             <BlogListInner />
+            // tslint:enable trailing-comma
     );
 
-    
+
     it('should render components', (): void => {
         blogListInner.setProps({blogList: blogList, fetched: true});
         expect(blogListInner.find('BlogSummary').length).toBe(1);
+    });
+
+    it('should render spinner', (): void => {
+        blogListInner.setProps({blogList: '', fetched: false});
+        expect(blogListInner.find(Spinner).length).toBe(1);
     });
 
     it('should render nothing if blogCount is 0', (): void => {

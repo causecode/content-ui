@@ -20,7 +20,7 @@ export interface IBlog {
     publish?: boolean;
     blogInstanceTags?: string[];
     metaList?: {type: string, value: string}[];
-};
+}
 
 export class BlogModel extends BaseModel {
 
@@ -77,6 +77,7 @@ export class BlogModel extends BaseModel {
     static uploadImage(image: any): Axios.IPromise<Axios.AxiosXHR<IFileUploadResponse>> {
         let data: FormData = new FormData();
         data.append('file', image);
+
         return HTTP.postRequest('temporary-upload/action/index', {'content-type': 'multipart/form-data;'}, data);
     }
 

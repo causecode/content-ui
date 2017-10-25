@@ -15,18 +15,18 @@ export class BlogAction extends React.Component<IBlogActionProps, void> {
 
     render(): JSX.Element {
         const {instance, deleteBlog} = this.props;
-        
+
         if (instance) {
             return (
                 <span>
-                    <Link to={`/admin/blog/edit/${instance.id}/${convertToFriendlyUrl(instance.title)}`}>
+                    <Link to={`/blog/edit/${instance.id}/${convertToFriendlyUrl(instance.title)}`}>
                         <FontAwesomeRadium name="pencil" />
                     </Link>
                     <Link to={`/blog/${instance.id}/${convertToFriendlyUrl(instance.title)}`}>
                         <FontAwesomeRadium name="location-arrow" />
                     </Link>
                     <a
-                            onClick={() => {deleteBlog(instance.id);}}
+                            onClick={() => {deleteBlog(instance.id); }}
                             style={trashIconStyle}
                             id={`${instance.id}`}>
                         <FontAwesomeRadium name="trash" />

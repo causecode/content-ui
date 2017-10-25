@@ -2,7 +2,7 @@ jest.unmock('../BlogMetaTags');
 
 import * as React from 'react';
 import {ShallowWrapper, shallow, EnzymePropSelector} from 'enzyme';
-import { BlogMetaTagsImpl, IBlogMetaTagProps, IBlogMetaTagsState } from '../BlogMetaTags';
+import {BlogMetaTagsImpl, IBlogMetaTagProps, IBlogMetaTagsState} from '../BlogMetaTags';
 import {Grid, FormControl, HelpBlock} from '../../reusable-components/reusableComponents';
 const unroll = require<any>('unroll');
 
@@ -11,12 +11,14 @@ unroll.use(it);
 describe('Tests for BlogMetaTags', (): void => {
     let blogMetaTagsImpl: ShallowWrapper<IBlogMetaTagProps, IBlogMetaTagsState> =
             shallow<IBlogMetaTagProps, IBlogMetaTagsState>(
+                    // tslint:disable trailing-comma
                     <BlogMetaTagsImpl metaTypeList={['keywords', 'title']} />
+                    // tslint:enable trailing-comma
             );
 
     unroll('should render #count #component', (
-        done: () => void,
-        args: {component: EnzymePropSelector, count: number}
+            done: () => void,
+            args: {component: EnzymePropSelector, count: number},
     ): void => {
         expect(blogMetaTagsImpl.find(args.component).length).toBe(args.count);
         done();

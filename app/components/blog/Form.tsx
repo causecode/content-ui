@@ -3,14 +3,6 @@ import * as Axios from 'axios';
 import * as Radium from 'radium';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {connect, MapStateToProps, MapDispatchToPropsFunction} from 'react-redux';
-import {store} from '../../store';
-import {BlogMetaTags} from '../../components/blog/BlogMetaTags';
-import {ImageUploader} from '../../components/common/ImageUploader';
-import {BlogModel, IBlog} from '../../models/BlogModel';
-import {TinyMCEWrapper} from '../../containers/common/TinyMCEWrapper';
-import {MarkdownWrapper, RawContentWrapper} from 'react-hero';
-import {Link, Col, Button, Grid, Row, ControlLabel} from '../../components/reusable-components/reusableComponents';
-import {IFileUploadResponse, IAxiosResponse, IDispatchProps, IAxiosError, CSS} from '../../interfaces';
 import {
     showAlert,
     FormInput,
@@ -18,7 +10,17 @@ import {
     AlertDismissable,
     IInstancePageProps,
     initializeFormWithInstance,
+    MarkdownWrapper,
+    RawContentWrapper,
 } from 'react-hero';
+import {Spinner} from '../common/Spinner';
+import {store} from '../../store';
+import {BlogMetaTags} from '../../components/blog/BlogMetaTags';
+import {ImageUploader} from '../../components/common/ImageUploader';
+import {BlogModel, IBlog} from '../../models/BlogModel';
+import {TinyMCEWrapper} from '../../containers/common/TinyMCEWrapper';
+import {Link, Col, Button, Grid, Row, ControlLabel} from '../../components/reusable-components/reusableComponents';
+import {IFileUploadResponse, IAxiosResponse, IDispatchProps, IAxiosError, CSS} from '../../interfaces';
 import {
     header,
     editorTypes,
@@ -31,15 +33,16 @@ import {
     ALERT_DANGER,
     IMAGE_SIZE_GT_LIMIT,
 } from '../../constants';
-const {actions} = require<any>('react-redux-form');
+import FontAwesome = require('react-fontawesome');
 const getFormValues = require<any>('redux-form').getFormValues;
+const {actions} = require<any>('react-redux-form');
 
 export interface IFormStateProps {
     blogInstance?: IBlog;
     instanceList?: BlogModel[];
 }
 
-export interface IFormProps extends IInstancePageProps, IFormStateProps, IDispatchProps, RouteComponentProps<void> {
+export interface IFormProps extends IInstancePageProps, IFormStateProps, IDispatchProps {
     handleSubmit?: (
         instance: BlogModel,
         successCallBack?: ((args: any) => void),
@@ -74,7 +77,7 @@ export interface IState {
 }
 
 @Radium
-export class FormImpl extends React.Component<IFormProps, IFormState> {
+export class FormImpl extends React.Component<IFormProps & RouteComponentProps<void>, IFormState> {
 
     static resourceName: string = 'blog';
     private modelKey: string;
@@ -153,6 +156,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
         if (store.getState() && store.getState().forms && store.getState().forms[`rhForms`][this.modelKey]) {
             instance.properties = store.getState().forms[`rhForms`][this.modelKey].properties;
         }
+
         return instance;
     }
 
@@ -166,7 +170,7 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
         showAlert(ALERT_DANGER, error.response && error.response.data.message || DEFAULT_ERROR_MESSAGE);
     }
 
-    handleSubmit = (e: React.FormEvent): void => {
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
         if (this.state.blogImage) {
@@ -214,6 +218,9 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
 
     render(): JSX.Element {
         this.generateModelKey();
+        if (!this.props.blogInstance) {
+            return <Spinner/> ;
+        }
         return (
             <div>
                 <AlertDismissable alertStyle={alertStyle}/>
@@ -304,9 +311,8 @@ export class FormImpl extends React.Component<IFormProps, IFormState> {
 
 let mapStateToProps: MapStateToProps<IFormStateProps, IFormProps> =
         (state: IState, ownProps: IFormProps): IFormStateProps => {
-
     let rhForms: {blogCreate?: {properties: BlogModel}, blogEdit?: {properties: BlogModel}} =
-            state.forms && state.forms.rhForms;
+        state.forms && state.forms.rhForms;
     let modelKey: string = ownProps.isCreatePage ? 'blogCreate' : 'blogEdit';
     let blogInstance: IBlog;
 
@@ -328,23 +334,29 @@ let mapDispatchToProps: MapDispatchToPropsFunction<IDispatchProps, IFormProps> =
     };
 };
 
-export const Form = withRouter(connect(mapStateToProps, mapDispatchToProps)(FormImpl));
+// tslint:disable variable-name
+export const Form: React.ComponentClass<IFormProps> =
+        withRouter(connect(mapStateToProps, mapDispatchToProps)(FormImpl));
 
 const rowStyle : CSS = {
     margin: '0px',
 };
+
 const rowStyleBottom : CSS = {
     margin: '0px',
     padding: '15px',
 };
+
 const contentGrid : CSS = {
     '@media (maxWidth: 767px)': {
         padding: '0px',
     },
 };
+
 const btnStyle: CSS = {
     margin: '10px 10px 10px 0px',
 };
+
 const alertStyle: CSS = {
     margin: '65px 0px 0px 0px',
     position: 'fixed',

@@ -23,6 +23,7 @@ import {blogModelInstance, blogInstance} from '../../../tests/BlogTestData';
 import {ALERT_INFO, ALERT_DANGER, ALERT_SUCCESS} from '../../../constants';
 import {IFormProps, IFormState, FormImpl, Form} from '../Form';
 import {mockStore, handleSubmitSuccess, getSuccessResponse} from '../../../tests/testUtils';
+import {Spinner} from '../../common/Spinner';
 
 const unroll: any = require<any>('unroll');
 
@@ -36,6 +37,7 @@ describe('Test cases for Form', () => {
 
     hasAnyRole = jest.fn();
     let blogCreate: ShallowWrapper<IFormProps, IFormState> = shallow<IFormProps, IFormState>(
+            // tslint:disable trailing-comma
             <FormImpl
                     handleSubmit={handleSubmit}
                     instance={blogModelInstance}
@@ -43,9 +45,11 @@ describe('Test cases for Form', () => {
                     isCreatePage={true}
                     history={{push: push}}
             />
+            // tslint:enable trailing-comma
     );
 
     let blogEdit: ShallowWrapper<IFormProps, IFormState> = shallow<IFormProps, IFormState>(
+            // tslint:disable trailing-comma
             <FormImpl
                     handleDelete={handleSubmit}
                     handleSubmit={handleSubmit}
@@ -54,15 +58,18 @@ describe('Test cases for Form', () => {
                     saveData={saveData}
                     history={{push: push}}
             />
+            // tslint:enable trailing-comma
     );
 
     [blogCreate, blogEdit].forEach((parentComponent: ShallowWrapper<IFormProps, IFormState>, index: number): void => {
         let component: string = index === 0 ? 'BlogCreatePage' : 'BlogEditPage';
 
         unroll(`${component} should render #count #elementName`, (
-            done: () => void,
-            args: {elementName: string, element: React.ComponentClass<any>, count: number}
+                done: () => void,
+                args: {elementName: string, element: React.ComponentClass<any>, count: number},
         ): void => {
+            const blogInstanceMock = jest.fn();
+            blogEdit.setProps({blogInstance: blogInstanceMock});
             expect(parentComponent.find(args.element).length).toBe(args.count);
             done();
         }, [
@@ -77,9 +84,15 @@ describe('Test cases for Form', () => {
         ]);
     });
 
+    it('should render spinner when blogInstance is empty', (): void => {
+        const blogInstanceMock = jest.fn();
+        blogEdit.setProps({blogInstance: ''});
+        expect(blogEdit.find(Spinner).length).toBe(1);
+    });
+
     unroll('should render #editorName when editor type is #editorType', (
-        done: () => void,
-        args: {editorName: string, editorType: string, component: React.ComponentClass<any>}
+            done: () => void,
+            args: {editorName: string, editorType: string, component: React.ComponentClass<any>},
     ): void => {
         blogInstance.type = args.editorType;
         blogCreate.setProps({blogInstance: blogInstance, instance: blogModelInstance});
@@ -118,8 +131,8 @@ describe('Test cases for Form', () => {
         });
 
         unroll('should call showAlert function on #result', (
-            done: () => void,
-            args: {alertType: string, result: string}
+                done: () => void,
+                args: {alertType: string, result: string},
         ): void => {
             BlogModel.uploadImage('123')
                 .then((): void => {
@@ -149,8 +162,8 @@ describe('Test cases for Form', () => {
     });
 
     unroll('should save #stateKey data in state when image is uploaded', (
-        done: () => void,
-        args: {stateKey: string, value: string}
+            done: () => void,
+            args: {stateKey: string, value: string},
     ): void => {
         expect(blogEdit.state(args.stateKey)).toEqual(null);
         blogEdit.instance()[`saveUploadedImageData`](args.stateKey, args.value);
@@ -177,6 +190,7 @@ describe('Test cases for Form', () => {
                 });
             });
 
+        // tslint:disable no-shadowed-variable trailing-comma
         let blogEdit: ReactWrapper<IFormProps, IFormState> = mount<IFormProps, IFormState>(
                 <MemoryRouter>
                     <StyleRoot>
@@ -198,5 +212,6 @@ describe('Test cases for Form', () => {
         it('should fetch metaTypeList when component mounts', (): void => {
             expect(BlogModel.fetchMetaTypeList).toBeCalled();
         });
+
     });
 });

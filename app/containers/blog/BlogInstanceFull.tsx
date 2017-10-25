@@ -2,11 +2,11 @@ import * as React from 'react';
 import * as Radium from 'radium';
 import * as DOMPurify from 'dompurify';
 const moment = require<any>('moment');
-import { connect, MapStateToProps } from 'react-redux';
+import {connect, MapStateToProps} from 'react-redux';
 import {BlogComment} from '../../components/blog/BlogComment';
 import {BlogCommentCount} from '../../components/blog/BlogCommentCount';
 import {BlogInstanceTags} from '../../components/blog/BlogInstanceTags';
-import {IBlog} from '../../models/BlogModel';
+import {BlogModel, IBlog} from '../../models/BlogModel';
 import {isLoggedIn, convertToFriendlyUrl} from '../../utils';
 import {FontAwesomeLink} from '../../components/layout/FontAwesomeLink';
 import {CSS} from '../../interfaces';
@@ -27,6 +27,10 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
     private twitterUrl: string = 'https://twitter.com/intent/tweet?text=';
     private linkedinUrl: string = 'https://www.linkedin.com/shareArticle?url=';
 
+    componentDidMount = (): void => {
+        scroll(0, 0);
+    }
+
     htmlToText = (html: string): {__html : string} => {
         return {__html: DOMPurify.sanitize(html)};
     }
@@ -36,6 +40,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
         let left: number = (screen.width / 2) - (width / 2);
         let top: number = (screen.height / 2) - (height / 2);
         window.open(url, 'Share', `height=${height},width=${width},top=${top},left=${left}`);
+
         return false;
     }
 
@@ -51,17 +56,28 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
         return `${this.linkedinUrl}${encodeURIComponent(window.location.href)}`;
     }
 
-    renderEditButton = (id: number, title: string): JSX.Element => {
-        return isLoggedIn() ? <FontAwesomeLink 
-                                style={[linkStyle, {fontSize: '20px'}]}
-                                to={`/admin/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
-                                iconName="edit" /> : null;
+    renderEditLink = (id: number, title: string): JSX.Element => {
+        if (!isLoggedIn()) {
+            return null;
+        }
+
+        return (
+            <FontAwesomeLink
+                    style={[linkStyle, {fontSize: '20px'}]}
+                    to={`/blog/edit/${id}/${convertToFriendlyUrl(title)}`}
+                    iconName="edit"
+            />
+        );
     }
 
     render(): JSX.Element {
-        let blog: IBlog = this.props.blogInstance;
+        const blog: IBlog = this.props.blogInstance;
+        if (!blog) {
+            return <h4>Not Found</h4>;
+        }
         let keywords: string = (this.props.metaTags && this.props.metaTags[0] &&
                 this.props.metaTags[0].content) || 'CauseCode, Blog';
+
         return (
             <section style={blogInstanceFullStyle}>
                 <ReactHelmet
@@ -70,7 +86,7 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
                 />
                 <section>
                     <h1 style={title}>{blog ? blog.title : 'Loading...'}</h1>
-                    {this.renderEditButton(blog.id, blog.title)}
+                    {isLoggedIn() && this.renderEditLink(blog.id, blog.title)}
                     <div>
                         <ul style={metaList} className="list-inline">
                             <li>{blog ? moment(blog.publishedDate).format('MMM D, YYYY') : 'Loading...'}</li>
@@ -110,62 +126,62 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
                 <section>
                     {/* TODO Figure out the way to apply style using objects. */}
                     <Radium.Style
-                        scopeSelector=".divContent"
-                        rules={{
-                            p: {
-                                fontFamily: 'Lato,arial,sans-serif',
-                                color: defaultTextColor,
-                                fontSize: '16px',
-                            },
-                            pre: {
-                                display: 'block',
-                                padding: '9.5px',
-                                margin: '0px 0px 10px',
-                                fontSize: '13px',
-                                lineHeight: '1.42857143',
-                                color: '#333',
-                                wordBreak: 'break-all',
-                                wordWrap: 'break-word',
-                                backgroundColor: '#f5f5f5',
-                                border: '1px solid #ccc',
-                                borderRadius: '4px',
-                            },
-                            code: {
-                                adding: '2px 4px',
-                                fontSize: '90%',
-                                color: '#c7254e',
-                                backgroundColor: '#f9f2f4',
-                                whiteSpace: 'nowrap',
-                                borderRadius: '4px',
-                            },
-                            img: {
-                                width: 'auto',
-                                height: 'auto',
-                                maxWidth: '100%',
-                            },
-                            h2: {
-                                fontWeight: 'bold',
-                                fontSize: '28px',
-                                marginBottom: '15px',
-                                color: defaultTextColor,
-                            },
-                            h3: {
-                                fontWeight: 'bold',
-                                fontSize: '24px',
-                                margin: '20px 0px 10px 0px',
-                                color: defaultTextColor,
-                            },
-                            a: {
-                                color: blogLinksOrange,
-                                fontSize: '16px',
-                                fontFamily: 'Lato, arial, sans-serif',
-                            },
-                            'a:hover': {
-                                transition: '0.4s all ease-in-out',
-                                textDecoration: 'none',
-                                color: causecodeOrange,
-                            },
-                        }}
+                            scopeSelector=".divContent"
+                            rules={{
+                                p: {
+                                    fontFamily: 'Lato,arial,sans-serif',
+                                    color: defaultTextColor,
+                                    fontSize: '16px',
+                                },
+                                pre: {
+                                    display: 'block',
+                                    padding: '9.5px',
+                                    margin: '0px 0px 10px',
+                                    fontSize: '13px',
+                                    lineHeight: '1.42857143',
+                                    color: '#333',
+                                    wordBreak: 'break-all',
+                                    wordWrap: 'break-word',
+                                    backgroundColor: '#f5f5f5',
+                                    border: '1px solid #ccc',
+                                    borderRadius: '4px',
+                                },
+                                code: {
+                                    adding: '2px 4px',
+                                    fontSize: '90%',
+                                    color: '#c7254e',
+                                    backgroundColor: '#f9f2f4',
+                                    whiteSpace: 'nowrap',
+                                    borderRadius: '4px',
+                                },
+                                img: {
+                                    width: 'auto',
+                                    height: 'auto',
+                                    maxWidth: '100%',
+                                },
+                                h2: {
+                                    fontWeight: 'bold',
+                                    fontSize: '28px',
+                                    marginBottom: '15px',
+                                    color: defaultTextColor,
+                                },
+                                h3: {
+                                    fontWeight: 'bold',
+                                    fontSize: '24px',
+                                    margin: '20px 0px 10px 0px',
+                                    color: defaultTextColor,
+                                },
+                                a: {
+                                    color: blogLinksOrange,
+                                    fontSize: '16px',
+                                    fontFamily: 'Lato, arial, sans-serif',
+                                },
+                                'a:hover': {
+                                    transition: '0.4s all ease-in-out',
+                                    textDecoration: 'none',
+                                    color: causecodeOrange,
+                                },
+                            }}
                     />
                     <div
                             className="divContent"
@@ -183,32 +199,21 @@ export class BlogInstanceFullImpl extends React.Component<IBlogInstanceFullProps
         );
     }
 }
+
 const mapStateToProps: MapStateToProps<{}, IBlogInstanceFullProps> =
     (store, ownProps : IBlogInstanceFullProps) : {blogInstance : IBlog, metaTags: any} => {
-    const mutableState = store.data.toJS ? store.data.toJS() : store.data;
-    let instanceData: IBlog;
-    let metaList: string[];
-    if (mutableState.blogList && mutableState.blogList.instanceList) {
-        mutableState.blogList.instanceList.every((instance, i) => {
-            let properties = instance[`properties`];
-            if (properties.id == ownProps.id) {
-                instanceData = instance.properties;
-                metaList = instance.properties.metaList;
-                return false;
-            }
 
-            return true;
-        });
-    }
+    const blogInstance = BlogModel.get(ownProps.id, true);
 
     return {
-        blogInstance: instanceData ? instanceData : [],
-        metaTags: metaList ? metaList : [],
+        blogInstance: (blogInstance && blogInstance.properties) || null,
+        metaTags: (blogInstance && blogInstance.properties.metaList) || null,
     };
-}
-let BlogInstanceFull = connect<{}, {}, IBlogInstanceFullProps>(mapStateToProps)(BlogInstanceFullImpl);
+};
 
-export {BlogInstanceFull};
+// tslint:disable variable-name
+export const BlogInstanceFull: React.ComponentClass<IBlogInstanceFullProps> =
+        connect<{}, {}, IBlogInstanceFullProps>(mapStateToProps)(BlogInstanceFullImpl);
 
 const blogInstanceFullStyle: CSS = {
     marginBottom: '60px',

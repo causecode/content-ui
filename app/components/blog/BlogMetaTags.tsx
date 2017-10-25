@@ -1,9 +1,12 @@
 import * as React from 'react';
 import * as Radium from 'radium';
+import {FormControlProps} from 'react-bootstrap';
 import {store} from '../../store';
 import {CSS} from '../../interfaces';
 import {textAlignRight, centerStyle, firstThemeColor} from '../../constants';
 import {FormControl, Row, Col, FontAwesomeRadium, Grid, HelpBlock} from '../reusable-components/reusableComponents';
+
+// tslint:disable variable-name
 const ReduxForm: any = require<any>('redux-form');
 
 export interface IBlogMetaTagProps {
@@ -33,9 +36,11 @@ export class BlogMetaTagsImpl extends React.Component<IBlogMetaTagProps, IBlogMe
 
             this.props.metaTypeList.forEach((item: string, index: number): void => {
                 options.push(
+                    // tslint:disable trailing-comma
                     <option key={index} value={item}>{item}</option>
                 );
             });
+
             return options;
         }
     }
@@ -89,7 +94,7 @@ export class BlogMetaTagsImpl extends React.Component<IBlogMetaTagProps, IBlogMe
         }
     }
 
-    resetField = (event: React.FormEvent): void => {
+    resetField = (event: React.FormEvent<HTMLLinkElement>): void => {
 
         let index: number;
         this.state.metaTagFields.every((item: JSX.Element, itemIndex: number): boolean => {
@@ -97,6 +102,7 @@ export class BlogMetaTagsImpl extends React.Component<IBlogMetaTagProps, IBlogMe
                 index = itemIndex;
                 return false;
             }
+
             return true;
         });
 
@@ -110,7 +116,7 @@ export class BlogMetaTagsImpl extends React.Component<IBlogMetaTagProps, IBlogMe
         store.dispatch(ReduxForm.change('blogMetaTags', event.target[`id`], ''));
     }
 
-    handleChange = (event: React.FormEvent): void => {
+    handleChange = (event: React.ChangeEvent<FormControlProps>): void => {
         this.selectedValue = event.target[`value`];
     }
 

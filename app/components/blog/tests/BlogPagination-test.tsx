@@ -16,9 +16,11 @@ describe('Test cases for BlogPagination', (): void => {
         currentPage: 1,
     };
 
-    let blogPagination: ShallowWrapper<IBlogPaginationProps, IBlogPaginationState> = 
+    let blogPagination: ShallowWrapper<IBlogPaginationProps, IBlogPaginationState> =
         shallow<IBlogPaginationProps, IBlogPaginationState>(
-            <BlogPaginationImpl history={{push:push}} show={true} match={{params: {}}} />
+            // tslint:disable trailing-comma
+            <BlogPaginationImpl history={{push: push}} show={true} match={{params: {}}} />
+            // tslint:enable trailing-comma
     );
 
     blogPagination.setState({ activePage: 1, size: 4});

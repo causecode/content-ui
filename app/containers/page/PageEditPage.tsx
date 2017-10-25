@@ -10,8 +10,8 @@ import {Row, Panel, Link} from '../../components/reusable-components/reusableCom
 
 export interface IPageEditPageProps extends IInstancePageProps {
     handleSubmit: (
-        instance: PageModel, 
-        successCallBack?: (response?: Axios.AxiosXHR<{message?: string}>) => void, 
+        instance: PageModel,
+        successCallBack?: (response?: Axios.AxiosXHR<{message?: string}>) => void,
         failureCallBack?: () => void,
     ) => void;
     instance: PageModel;
@@ -19,7 +19,6 @@ export interface IPageEditPageProps extends IInstancePageProps {
 }
 
 export class PageEditPage extends React.Component<IPageEditPageProps & RouteComponentProps<void>, void> {
-
     static resourceName: string = 'page';
 
     componentWillMount = (): void => {
@@ -36,11 +35,11 @@ export class PageEditPage extends React.Component<IPageEditPageProps & RouteComp
         if (store.getState() && store.getState().forms) {
             instance.properties = store.getState().forms[`rhForms`][instanceKey].properties;
         }
-        
+
         return instance;
     }
 
-    handleSubmit = (e: React.FormEvent): void => {
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         // Not using connect here to avoid rerendering of component on change of instance properties.
         this.props.handleSubmit(
@@ -51,7 +50,7 @@ export class PageEditPage extends React.Component<IPageEditPageProps & RouteComp
                 },
                 (): void => {
                     showAlert('warning', 'Something went wrong while saving the data.');
-                }
+                },
         );
     }
 
@@ -81,22 +80,22 @@ export class PageEditPage extends React.Component<IPageEditPageProps & RouteComp
                                 {isCreatePage ? 'New page form' : ''}
                             </h1>
                         </Row>
-                        <FormInput 
-                                type="text" 
+                        <FormInput
+                                type="text"
                                 propertyName="Title"
                                 model={`${modelInstanceKey}.title`}
                                 fieldSize={5}
                                 labelSize={1}
                         />
-                        <FormInput 
-                                type="text" 
+                        <FormInput
+                                type="text"
                                 propertyName="Subtitle"
                                 model={`${modelInstanceKey}.subTitle`}
                                 fieldSize={5}
                                 labelSize={1}
                         />
-                        <FormInput 
-                                type="boolean" 
+                        <FormInput
+                                type="boolean"
                                 propertyName="Publish"
                                 model={`${modelInstanceKey}.publish`}
                                 fieldSize={5}
@@ -104,11 +103,11 @@ export class PageEditPage extends React.Component<IPageEditPageProps & RouteComp
                         />
                         <Row>
                             <Panel
-                                    header={<strong>{`${isCreatePage ? 'Add' : 'Update'}`} the page content:</strong>} 
+                                    header={<strong>{`${isCreatePage ? 'Add' : 'Update'}`} the page content:</strong>}
                                     style={setMargin('15px 13px 15px 54px')}>
                                 <ul style={[{color: '#444'}, defaultFont]}>
                                     <li>
-                                        Please {`${isCreatePage ? 'add' : 'update'}`} the content 
+                                        Please {`${isCreatePage ? 'add' : 'update'}`} the content
                                         of the {`${isCreatePage ? 'new' : ''}`} page in the field provided below.
                                     </li>
                                     <li>
@@ -121,7 +120,7 @@ export class PageEditPage extends React.Component<IPageEditPageProps & RouteComp
                         <TinyMCEWrapper
                                 model={`${modelInstanceKey}.body`}
                                 config={{
-                                    plugins:[
+                                    plugins: [
                                         'advlist autolink lists link image charmap print',
                                         'preview hr anchor pagebreak searchreplace wordcount visualblocks',
                                         'insertdatetime media nonbreaking save table contextmenu directionality',
@@ -148,6 +147,6 @@ export class PageEditPage extends React.Component<IPageEditPageProps & RouteComp
                     </Grid>
                 </form>
             </div>
-        );    
+        );
     }
-};
+}
